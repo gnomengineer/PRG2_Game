@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>60</x>
+      <y>40</y>
+      <w>370</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>*AP*
+/GUI design/
+--
+Responsible = Martin
+--
+Implementation des UI inkl. Funktionalität der GUI Elemente
+style=wordwrap
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>60</x>
+      <y>150</y>
+      <w>370</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>*AP*
+/Network Connectivity/
+--
+Responsible = Daniel
+--
+Umsetzen der Netwerkverbindung für Host (Server) und Player (Client)
+style=wordwrap
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>60</x>
+      <y>570</y>
+      <w>370</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>*AP*
+/Game Ablauf/
+--
+Responsible = André
+--
+Die verschiednen Aspekte (Logik,Netzwerk und UI) miteinander verbinden.
+style=wordwrap
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>60</x>
+      <y>290</y>
+      <w>370</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>*AP*
+/GameLogic/
+--
+Responsible = André
+--
+Implementierung der Game Logik. Berechnen valider Spielzüge und
+style=wordwrap
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>60</x>
+      <y>430</y>
+      <w>370</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>*AP*
+/Computerspieler/
+--
+Responsible = Samuel
+--
+Entwickeln eines computerspieler als Ersatz für den Netzwerkgegner.
+style=wordwrap
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
