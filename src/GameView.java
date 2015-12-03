@@ -1,6 +1,7 @@
 
 import Interfaces.GameViewInterface;
 import Interfaces.MessageTypeEnum;
+import java.awt.event.ActionListener;
 
 
 /**
@@ -16,6 +17,7 @@ public class GameView implements GameViewInterface {
     @Override
     public void startOptionView() {
         // die optionview anzeigen
+        new GameOptionsView();
     }
 
     @Override
@@ -41,12 +43,22 @@ public class GameView implements GameViewInterface {
     }
 
     @Override
-    public void getIPAddress() {
+    public String getIPAddress() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void getPortNumber() {
+    public String getPortNumber() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getLastDrawnLine() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void registerOptionActionListener(ActionListener actionListener) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

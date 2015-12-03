@@ -1,5 +1,7 @@
 package Interfaces;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author Andre
@@ -7,14 +9,28 @@ package Interfaces;
 public interface GameViewInterface {
 
     /**
-     * Die IP-Adresse des Gegners
+     * Die gestzte Linie 
+     * @return 
      */
-    void getIPAddress();
+    String getLastDrawnLine();
+    
+    /**
+     * Die IP-Adresse des Gegners
+     * @return 
+     */
+    String getIPAddress();
 
     /**
      * Die Portnummer, welche definiert wurde
+     * @return 
      */
-    void getPortNumber();
+    String getPortNumber();
+    
+    /**
+     * ActionListener registieren
+     * @param actionListener 
+     */
+    void registerOptionActionListener(ActionListener actionListener);
     
     /**
      * Spiel anhand Information aufbauen
