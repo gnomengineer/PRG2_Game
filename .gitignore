@@ -7,3 +7,4 @@ doc/*.pdf
 doc/*.synctex.gz
 doc/*.toc
 /nbproject/private/
+/dist/
