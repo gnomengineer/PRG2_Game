@@ -3,7 +3,7 @@ package Interfaces;
 import GameObjects.Line;
 /**
  *
- * @author Andre
+ * @author Andre, Daniel
  */
 public interface OpponentInterface 
 {

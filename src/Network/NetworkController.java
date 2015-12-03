@@ -1,5 +1,4 @@
-
-import GameObjects.Line;
+package Network;
 import Interfaces.OpponentInterface;
 
 /**
