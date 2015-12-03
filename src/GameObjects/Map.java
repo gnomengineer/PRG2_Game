@@ -85,7 +85,7 @@ public class Map
                 if(!lines.contains(square.getBotLine()))
                 {
                     lines.add(square.getBotLine());
-                }
+}
                 
                 if(!lines.contains(square.getLeftLine()))
                 {

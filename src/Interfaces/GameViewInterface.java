@@ -1,5 +1,7 @@
 package Interfaces;
 
+import Enums.MessageTypeEnum;
+import Enums.GameModeEnum;
 import java.awt.event.ActionListener;
 
 /**
@@ -27,10 +29,34 @@ public interface GameViewInterface {
     String getPortNumber();
     
     /**
+     * Feldbreite für die Initialisierung
+     * @return 
+     */
+    int getFieldWidth();
+    
+    /**
+     * Feldhöhe für die Initialisierung
+     * @return 
+     */
+    int getFieldHeight();
+    
+    /**
+     * Spielermode für die Initialisierung
+     * @return 
+     */
+    GameModeEnum getGameMode();
+    
+    /**
      * ActionListener registieren
      * @param actionListener 
      */
     void registerOptionActionListener(ActionListener actionListener);
+    
+     /**
+     * ActionListener registieren
+     * @param actionListener 
+     */
+    void registerLineActionListener(ActionListener actionListener);
     
     /**
      * Spiel anhand Information aufbauen

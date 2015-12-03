@@ -1,4 +1,5 @@
 
+import Enums.GameModeEnum;
 import Interfaces.GameViewInterface;
 import Interfaces.MessageTypeEnum;
 import java.awt.event.ActionListener;
@@ -62,6 +63,24 @@ public class GameView implements GameViewInterface {
     public void registerOptionActionListener(ActionListener actionListener) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
+
+    @Override
+    public int getFieldWidth() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getFieldHeight() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public GameModeEnum getGameMode() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void registerLineActionListener(ActionListener actionListener) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
