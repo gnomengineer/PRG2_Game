@@ -22,9 +22,11 @@ import static javax.swing.JFrame.*;
 public class GameOptionsView {
 
     JFrame jframeOptions;
+    
     JPanel jPanelOptions;
     JPanel jPanelGameMode;
     JPanel jPanelField;
+    JPanel jPanelSubmit;
     JLabel jLabelGameMode;
     JLabel jLabelFieldSize;
     JLabel jLabelx;
@@ -34,13 +36,9 @@ public class GameOptionsView {
     JRadioButton jRadioMulti;
     JSlider jSliderX;
     JSlider jSliderY;
-    JButton jBtnSubmit;
-    
-    
+    JButton jBtnSubmit; 
       
     private static final Dimension size= new Dimension(400,200);
-    
-    
     
     
     public GameOptionsView(){
@@ -56,10 +54,9 @@ public class GameOptionsView {
         jSliderX = new JSlider(0, 20, 10);
         jSliderY = new JSlider(0,20,10);
         jBtnSubmit = new  JButton("Submit");
+        jPanelSubmit = new JPanel();
         
                 
-        
-        
         setup();
     }
     public void setup(){
@@ -67,45 +64,39 @@ public class GameOptionsView {
         jframeOptions.setPreferredSize(size);
         jPanelOptions = new JPanel();
         jframeOptions.add(jPanelOptions);
-        jframeOptions.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        jframeOptions.setVisible(true);
+        jframeOptions.setDefaultCloseOperation(EXIT_ON_CLOSE);   
         
-        //JSlider
-        
-        
-        //jPanel
+        //jPanel Options
         jPanelOptions.setLayout(new BorderLayout());
         jPanelOptions.add(jPanelField, BorderLayout.EAST);
         jPanelOptions.add(jPanelGameMode, BorderLayout.CENTER);
-        jPanelOptions.add(jBtnSubmit, BorderLayout.SOUTH);
-  
-       
+        jPanelOptions.add(jPanelSubmit, BorderLayout.SOUTH);
+        
+        //Setup JPanel Submit
+        jPanelSubmit.add(jBtnSubmit);
                
         //Radio Buttons
         bgrpRadioButtons.add(jRadioSingle);
         bgrpRadioButtons.add(jRadioMulti);
         
-        //Setup JPanel
+        //Setup JPanel GameMode
         jPanelGameMode.setLayout(new GridLayout(3,0));
-        jPanelField.setLayout(new GridLayout(3,0));
-        
-        //Fill Panells
         jPanelGameMode.add(jLabelGameMode);
         jPanelGameMode.add(jRadioSingle);
         jPanelGameMode.add(jRadioMulti);
-        
+         
+        //Setup JPanel Field
+        jPanelField.setLayout(new GridLayout(3,0));
         jPanelField.add(jLabelFieldSize);
         jPanelField.add(jSliderX);
         jPanelField.add(jSliderY);
         
-        
-        
-        
+       
+        jframeOptions.setVisible(true);
         
         
     }
-    /* Es ist nun via Starter / Controller Klasse erledigt !
     public static void main(String[] args){
         GameOptionsView optionView1 = new GameOptionsView();
-    }*/
+    }
 }
