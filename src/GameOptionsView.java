@@ -96,7 +96,4 @@ public class GameOptionsView {
         
         
     }
-    public static void main(String[] args){
-        GameOptionsView optionView1 = new GameOptionsView();
-    }
 }
