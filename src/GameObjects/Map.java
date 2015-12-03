@@ -1,6 +1,7 @@
 package GameObjects;
 
 import java.awt.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -69,5 +70,42 @@ public class Map
                 s.setBotLine(botLine);
             }
         }
+    }
+
+    public Line getLine(Point startPoint, Point endPoint) {
+        ArrayList<Line> lines = new ArrayList<Line>();
+        Square square = null;
+        Line returnLine = null;
+        
+        for (int x = 0; x < this.squares.length; x++) {
+            for (int y = 0; y < this.squares.length; y++) {
+               
+                square = this.squares[x][y];
+                
+                if(!lines.contains(square.getBotLine()))
+                {
+                    lines.add(square.getBotLine());
+                }
+                
+                if(!lines.contains(square.getLeftLine()))
+                {
+                    lines.add(square.getLeftLine());
+                }
+                  
+                if(!lines.contains(square.getRightLine()))
+                {
+                    lines.add(square.getRightLine());
+                }
+                    
+                if(!lines.contains(square.getTopLine()))
+                {
+                    lines.add(square.getTopLine());
+                }
+            }
+        }
+        
+        //line = lines.stream().filter(f => f.)
+        
+        return null;
     }
 }
