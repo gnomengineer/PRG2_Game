@@ -3,8 +3,9 @@ import Enums.GameModeEnum;
 import Enums.MessageTypeEnum;
 import Interfaces.GameViewInterface;
 import Enums.MessageTypeEnum;
+import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
+import javax.swing.*;
 
 
 /**
@@ -12,6 +13,32 @@ import javax.swing.JFrame;
  * @author Andre
  */
 public class GameView implements GameViewInterface {
+    
+    JFrame jFrameGameView;
+    JPanel jPanelGameView;
+    JMenuBar jMenuBarGameView;
+    
+    public GameView(){
+        jMenuBarGameView= new JMenuBar();      
+        jFrameGameView = new JFrame("Dots and Boxes");
+        jPanelGameView = new JPanel();
+        
+        setup();
+        
+        jFrameGameView.setVisible(true);
+    }
+    
+    private void setup(){
+        jFrameGameView.add(jPanelGameView);
+        jPanelGameView.setLayout(new BorderLayout());
+        
+        //Menubar
+        jFrameGameView.setJMenuBar(jMenuBarGameView);
+        
+    }
+    
+    
+    
     @Override
     public void startGameView(int width, int height) {
         // hier grafikobjekte aufbaufbauen, welche du auch zuordnen kannst.

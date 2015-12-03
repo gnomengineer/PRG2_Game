@@ -11,7 +11,6 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -80,6 +79,7 @@ public class GameOptionsView implements ActionListener {
         
         //jPanel Options
         jPanelOptions.setLayout(new BorderLayout());
+        jPanelOptions.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         jPanelOptions.add(jPanelField, BorderLayout.EAST);
         jPanelOptions.add(jPanelGameMode, BorderLayout.CENTER);
         jPanelOptions.add(jPanelSubmit, BorderLayout.SOUTH);
@@ -144,6 +144,7 @@ public class GameOptionsView implements ActionListener {
         System.out.println(singleplayer);
         System.out.println(xSize);
         System.out.println(ySize);
+        new GameView();
     }
     
 }
