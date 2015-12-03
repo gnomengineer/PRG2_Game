@@ -39,6 +39,16 @@ public class GameView implements GameViewInterface {
         // warning und information als MessageBox anzeigen, restart und end kannst du das spielfeld zurücksetzen
         // jedoch noch nicht ganz klar, was... evtl. restart heisst, das das Spiel von vorne beginnt, alle grafikobjekte reseten
     }
+
+    @Override
+    public void getIPAddress() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void getPortNumber() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }
