@@ -24,7 +24,7 @@ public class Map
     private void generateMap()
     {
         boolean top = true;
-        boolean left = true;        
+        boolean left = true;
        
         Line topLine;
         Line leftLine;
@@ -39,7 +39,7 @@ public class Map
                 Point pTopLeft = new Point(x,y);
                 Point pTopRight = new Point(x,y+1);
                 Point pBotLeft = new Point(x+1,y);
-                Point pBotRight = new Point(x,y+1);
+                Point pBotRight = new Point(x+1,y+1);
                 
                 Square s = new Square();                
                 
