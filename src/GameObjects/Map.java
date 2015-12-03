@@ -22,52 +22,35 @@ public class Map
     }
 
     private void generateMap()
-    {
-        boolean top = true;
-        boolean left = true;
-       
-        Line topLine;
-        Line leftLine;
-        Line botLine;
-        Line rightLine;
-                       
-        for(int x = 0; x<rows;x++)
+    {                              
+        for(int x = 0; x < rows; x++)
         {
-            left = true;
-            for(int y = 0; y<columns;y++)
+            for(int y = 0; y < columns; y++)
             {
                 Point pTopLeft = new Point(x,y);
                 Point pTopRight = new Point(x,y+1);
                 Point pBotLeft = new Point(x+1,y);
-                Point pBotRight = new Point(x+1,y+1);
-                
-                Square s = new Square();                
-                
-                if(top)
+                Point pBotRight = new Point(x+1,y+1);                
+                Square s = new Square();
+                if(x == 0)
                 {
-                    topLine = new Line(pTopLeft,pTopRight);
-                    top = false;
+                    s.setTopLine(new Line(pTopLeft,pTopRight));
                 }
                 else
                 {
-                    topLine = squares[x-1][y].getBotLine();
+                    s.setTopLine(squares[x-1][y].getBotLine());
                 }
-                if(left)
+                if(y == 0)
                 {
-                    leftLine = new Line(pTopLeft,pBotLeft);
-                    left = false;
+                    s.setLeftLine(new Line(pTopLeft,pBotLeft));
                 }
                 else
                 {
-                    leftLine = squares[x][y-1].getRightLine();
+                    s.setLeftLine(squares[x][y-1].getRightLine());
                 }
-                rightLine = new Line(pTopRight,pBotRight);
-                botLine = new Line(pBotLeft,pBotRight);
-                
-                s.setTopLine(topLine);
-                s.setLeftLine(leftLine);
-                s.setRightLine(rightLine);
-                s.setBotLine(botLine);
+                s.setRightLine(new Line(pTopRight,pBotRight));
+                s.setBotLine(new Line(pBotLeft,pBotRight));
+                squares[x][y] = s;
             }
         }
     }
@@ -85,7 +68,7 @@ public class Map
                 if(!lines.contains(square.getBotLine()))
                 {
                     lines.add(square.getBotLine());
-}
+                }
                 
                 if(!lines.contains(square.getLeftLine()))
                 {
