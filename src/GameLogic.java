@@ -1,4 +1,5 @@
 
+import GameObjects.Map;
 import Interfaces.LogicInterface;
 
 /**
