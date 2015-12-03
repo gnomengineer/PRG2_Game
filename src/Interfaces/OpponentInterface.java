@@ -2,7 +2,7 @@ package Interfaces;
 
 /**
  *
- * @author Andre
+ * @author Andre, Daniel
  */
 public interface OpponentInterface {
     

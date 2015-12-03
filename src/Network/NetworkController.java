@@ -1,4 +1,4 @@
-
+package Network;
 import Interfaces.OpponentInterface;
 
 /**
