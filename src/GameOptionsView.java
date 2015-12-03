@@ -104,7 +104,8 @@ public class GameOptionsView {
         
         
     }
+    /* Es ist nun via Starter / Controller Klasse erledigt !
     public static void main(String[] args){
         GameOptionsView optionView1 = new GameOptionsView();
-    }
+    }*/
 }

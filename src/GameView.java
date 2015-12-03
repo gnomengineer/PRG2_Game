@@ -2,6 +2,7 @@
 import Interfaces.GameViewInterface;
 import Interfaces.MessageTypeEnum;
 import java.awt.event.ActionListener;
+import javax.swing.JFrame;
 
 
 /**

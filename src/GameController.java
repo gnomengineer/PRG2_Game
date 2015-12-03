@@ -16,12 +16,12 @@ public class GameController {
 
     
     public GameController(GameViewInterface gameView, LogicInterface gameLogic){
-        gameView = gameView;
-        gameLogic = gameLogic;
+        this.gameView = gameView;
+        this.gameLogic = gameLogic;
     }
     
     public void StartControlling(){
-        initializeListener();
+        /*initializeListener();*/
         
         gameView.startOptionView();
     }
