@@ -32,7 +32,7 @@ public class GameOptionsView {
         jPanelOptions = new JPanel();
         jframeOptions.add(jPanelOptions);
         jframeOptions.setVisible(true);
-        jframeOptions.
+        //jframeOptions.
         
         
     }
