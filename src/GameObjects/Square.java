@@ -21,9 +21,19 @@ public class Square
         this.topLine = line;
     }
     
+    public Line getTopLine()
+    {
+        return this.topLine;
+    }
+    
     public void setBotLine(Line line)
     {
         this.botLine = line;
+    }
+    
+    public Line getBotLine()
+    {
+        return this.botLine;
     }
     
     public void setLeftLine(Line line)
@@ -31,8 +41,18 @@ public class Square
         this.leftLine = line;
     }
     
-    public void setRigthLine(Line line)
+    public Line getLeftLine()
+    {
+        return this.leftLine;
+    }
+    
+    public void setRightLine(Line line)
     {
         this.rightLine = line;
+    }
+    
+    public Line getRightLine()
+    {
+        return this.rightLine;
     }
 }

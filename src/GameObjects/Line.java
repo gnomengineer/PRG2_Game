@@ -24,12 +24,22 @@ public class Line
     
     public Point getStartPoint()
     {
-        return startPoint;
+        return this.startPoint;
     }
     
     public Point getEndPoint()
     {
-        return endPoint;
+        return this.endPoint;
+    }
+    
+    public void setOwner(Figur figur)
+    {
+        this.owner = figur;
+    }
+    
+    public Figur getOwner()
+    {
+        return this.owner;
     }
     
     @Override
