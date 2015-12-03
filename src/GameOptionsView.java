@@ -10,6 +10,7 @@
  */
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import javax.swing.*;
 import static javax.swing.JFrame.*;
@@ -33,9 +34,11 @@ public class GameOptionsView {
     JRadioButton jRadioMulti;
     JSlider jSliderX;
     JSlider jSliderY;
+    JButton jBtnSubmit;
+    
     
       
-    private static final Dimension size= new Dimension(800,200);
+    private static final Dimension size= new Dimension(400,200);
     
     
     
@@ -50,6 +53,12 @@ public class GameOptionsView {
         jRadioMulti= new JRadioButton("MultiPlayer");
         jPanelGameMode = new JPanel();
         jPanelField = new JPanel();
+        jSliderX = new JSlider(0, 20, 10);
+        jSliderY = new JSlider(0,20,10);
+        jBtnSubmit = new  JButton("Submit");
+        
+                
+        
         
         setup();
     }
@@ -65,22 +74,29 @@ public class GameOptionsView {
         
         
         //jPanel
-        jPanelOptions.setLayout(new GridLayout(1,2));
-        
+        jPanelOptions.setLayout(new BorderLayout());
+        jPanelOptions.add(jPanelField, BorderLayout.EAST);
+        jPanelOptions.add(jPanelGameMode, BorderLayout.CENTER);
+        jPanelOptions.add(jBtnSubmit, BorderLayout.SOUTH);
+  
+       
+               
         //Radio Buttons
         bgrpRadioButtons.add(jRadioSingle);
         bgrpRadioButtons.add(jRadioMulti);
         
         //Setup JPanel
-        jPanelOptions.add(jPanelGameMode);
-        jPanelOptions.add(jPanelField);
-        jPanelGameMode.setLayout(new GridLayout(0,1));
-        jPanelField.setLayout(new GridLayout(0,1));
+        jPanelGameMode.setLayout(new GridLayout(3,0));
+        jPanelField.setLayout(new GridLayout(3,0));
         
         //Fill Panells
+        jPanelGameMode.add(jLabelGameMode);
         jPanelGameMode.add(jRadioSingle);
         jPanelGameMode.add(jRadioMulti);
         
+        jPanelField.add(jLabelFieldSize);
+        jPanelField.add(jSliderX);
+        jPanelField.add(jSliderY);
         
         
         

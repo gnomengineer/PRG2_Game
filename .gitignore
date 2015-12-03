@@ -8,3 +8,4 @@ doc/*.synctex.gz
 doc/*.toc
 /nbproject/private/
 /dist/
+/build/
