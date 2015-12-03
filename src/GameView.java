@@ -16,13 +16,25 @@ public class GameView implements GameViewInterface {
     
     JFrame jFrameGameView;
     JPanel jPanelGameView;
-    JMenuBar jMenuBarGameView;
+    JMenuBar jMBGameView;
+    JMenu jMGame;
+    JMenu jMHelp;
+    JMenuItem jMIRules;
+    JMenuItem jMIAbout;
+    JMenuItem jMISave;
+    JMenuItem jMIClose;
+    
     
     public GameView(){
-        jMenuBarGameView= new JMenuBar();      
+        jMBGameView= new JMenuBar();      
         jFrameGameView = new JFrame("Dots and Boxes");
         jPanelGameView = new JPanel();
-        
+        jMGame = new JMenu("Game");
+        jMHelp = new JMenu("Help");
+        jMIRules= new JMenuItem("Rules");
+        jMIAbout = new JMenuItem("About");
+        jMISave = new JMenuItem("Save");
+        jMIClose = new JMenuItem("Close");
         setup();
         
         jFrameGameView.setVisible(true);
@@ -33,7 +45,15 @@ public class GameView implements GameViewInterface {
         jPanelGameView.setLayout(new BorderLayout());
         
         //Menubar
-        jFrameGameView.setJMenuBar(jMenuBarGameView);
+        jFrameGameView.setJMenuBar(jMBGameView);
+        jMBGameView.add(jMGame);
+        jMBGameView.add(jMHelp);
+        
+        //Menu
+        jMGame.add(jMISave);
+        jMGame.add(jMIClose);
+        jMHelp.add(jMIRules);
+        jMHelp.add(jMIAbout);
         
     }
     
