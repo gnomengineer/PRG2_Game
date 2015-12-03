@@ -8,7 +8,6 @@ import Interfaces.MessageTypeEnum;
  * @author Andre
  */
 public class GameView implements GameViewInterface {
-
     @Override
     public void startGameView(int width, int height) {
         // hier grafikobjekte aufbaufbauen, welche du auch zuordnen kannst.
@@ -40,4 +39,6 @@ public class GameView implements GameViewInterface {
         // warning und information als MessageBox anzeigen, restart und end kannst du das spielfeld zurücksetzen
         // jedoch noch nicht ganz klar, was... evtl. restart heisst, das das Spiel von vorne beginnt, alle grafikobjekte reseten
     }
+    
+    
 }
