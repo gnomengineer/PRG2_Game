@@ -10,8 +10,11 @@
  */
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import static javax.swing.JFrame.*;
 
@@ -19,10 +22,10 @@ import static javax.swing.JFrame.*;
  *
  * @author metterlin
  */
-public class GameOptionsView {
+public class GameOptionsView implements ActionListener {
 
+    private static final Dimension size= new Dimension(400,200);
     JFrame jframeOptions;
-    
     JPanel jPanelOptions;
     JPanel jPanelGameMode;
     JPanel jPanelField;
@@ -37,8 +40,14 @@ public class GameOptionsView {
     JSlider jSliderX;
     JSlider jSliderY;
     JButton jBtnSubmit; 
-      
-    private static final Dimension size= new Dimension(400,200);
+    Font font;
+    
+    
+    //Important Game Variables
+    private boolean singleplayer;
+    private int xSize;
+    private int ySize;
+    
     
     
     public GameOptionsView(){
@@ -55,14 +64,17 @@ public class GameOptionsView {
         jSliderY = new JSlider(0,20,10);
         jBtnSubmit = new  JButton("Submit");
         jPanelSubmit = new JPanel();
+        font = new Font("Serif", Font.ITALIC,10);
+        
         
                 
         setup();
     }
     public void setup(){
+        
+        //jFrame
         jframeOptions.setSize(size);
         jframeOptions.setPreferredSize(size);
-        jPanelOptions = new JPanel();
         jframeOptions.add(jPanelOptions);
         jframeOptions.setDefaultCloseOperation(EXIT_ON_CLOSE);   
         
@@ -79,13 +91,33 @@ public class GameOptionsView {
         bgrpRadioButtons.add(jRadioSingle);
         bgrpRadioButtons.add(jRadioMulti);
         
-        //Setup JPanel GameMode
+        //jBtnSubmit
+        jBtnSubmit.addActionListener(this);
+        
+        
+        //Slider X
+        jSliderX.setMajorTickSpacing(5);
+        jSliderX.setMinorTickSpacing(1);
+        jSliderX.setPaintTicks(true);
+        jSliderX.setPaintLabels(true);
+        jSliderX.setFont(font);
+        jSliderX.setSnapToTicks(true);
+        
+        //Slider Y
+        jSliderY.setMajorTickSpacing(5);
+        jSliderY.setMinorTickSpacing(1);
+        jSliderY.setPaintTicks(true);
+        jSliderY.setPaintLabels(true);
+        jSliderY.setFont(font);
+        jSliderY.setSnapToTicks(true);
+        
+        //JPanel GameMode
         jPanelGameMode.setLayout(new GridLayout(3,0));
         jPanelGameMode.add(jLabelGameMode);
         jPanelGameMode.add(jRadioSingle);
         jPanelGameMode.add(jRadioMulti);
          
-        //Setup JPanel Field
+        //JPanel Field
         jPanelField.setLayout(new GridLayout(3,0));
         jPanelField.add(jLabelFieldSize);
         jPanelField.add(jSliderX);
@@ -95,5 +127,23 @@ public class GameOptionsView {
         jframeOptions.setVisible(true);
         
         
+        
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(jRadioSingle.isSelected()){
+            singleplayer=true;
+        }
+        else{
+            singleplayer=false;
+        }
+        
+        xSize= jSliderX.getValue();
+        ySize= jSliderY.getValue();
+        System.out.println(singleplayer);
+        System.out.println(xSize);
+        System.out.println(ySize);
+    }
+    
 }
