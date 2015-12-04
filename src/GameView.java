@@ -4,6 +4,8 @@ import Enums.MessageTypeEnum;
 import Interfaces.GameViewInterface;
 import Enums.MessageTypeEnum;
 import GameObjects.Line;
+import Interfaces.ObserverInterface;
+import Interfaces.SubjectInterface;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -13,7 +15,7 @@ import javax.swing.*;
  *
  * @author Andre
  */
-public class GameView implements GameViewInterface {
+public class GameView implements GameViewInterface, SubjectInterface {
     //Frame
     JFrame jFrameGameView;
     JPanel jPanelGameView;
@@ -102,6 +104,16 @@ public class GameView implements GameViewInterface {
 
     @Override
     public void drawLine(Line line, boolean isOpponent) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void registerObserver(ObserverInterface observer) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void notifyObserver() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
