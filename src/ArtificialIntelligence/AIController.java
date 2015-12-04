@@ -1,3 +1,5 @@
+package ArtificialIntelligence;
+
 import Enums.MessageTypeEnum;
 import GameObjects.Line;
 import GameObjects.Map;
@@ -12,6 +14,10 @@ import Interfaces.SubjectInterface;
 public class AIController implements OpponentInterface,SubjectInterface
 {
     private Map map;
+    
+    public AIController(){
+        
+    }
     
     public AIController(Map map)
     {

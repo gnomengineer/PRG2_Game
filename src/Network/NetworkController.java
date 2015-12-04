@@ -11,7 +11,7 @@ import Interfaces.SubjectInterface;
  */
 public class NetworkController implements OpponentInterface,SubjectInterface{
 
-    public NetworkController() {
+    public NetworkController(){
         
     }
     
