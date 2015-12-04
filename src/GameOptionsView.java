@@ -185,7 +185,8 @@ public class GameOptionsView implements GameOptionsViewInterface {
             return GameModeEnum.AIMode;
         }
         else {
-            return GameModeEnum.MultiplayerMode;
+            //@TODO differ between client and server mode
+            return GameModeEnum.MultiplayerClientMode;
         }
     }
 
