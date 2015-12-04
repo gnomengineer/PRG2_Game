@@ -41,7 +41,7 @@ public class GameView implements GameViewInterface {
         size = new Dimension(300, 200);
         setup();
         
-        jFrameGameView.setVisible(true);
+        
     }
     
     private void setup(){
@@ -65,7 +65,7 @@ public class GameView implements GameViewInterface {
     
     @Override
     public void startGameView(int width, int height) {
-        // hier grafikobjekte aufbaufbauen, welche du auch zuordnen kannst.
+        jFrameGameView.setVisible(true);
     }
 
     @Override
