@@ -22,6 +22,8 @@ public class MapView extends JPanel {
    
     Graphics2D g2d;
     Rectangle2D.Double[][] points;
+    Line2D.Double[][] linesHorizontal;
+    Line2D.Double[][] linesVertical;
    
     /**
      * Create MapView with specified size
@@ -44,6 +46,10 @@ public class MapView extends JPanel {
         g2d = (Graphics2D) g.create();
         initPoints();
         drawPoints();
+        initLinesHorizontal();
+        drawLinesHorizontal();
+        initLinesVertical();
+        drawLinesVertical();
     }
     
     /**
@@ -80,11 +86,68 @@ public class MapView extends JPanel {
         int pointx = point.getX();
         int pointy = point.getY();
         int coordinatesx = pointx *30;
+        int coodrinatesy = pointy *30;
         return null;
     }
     
     public void drawLine(GameObjects.Line line){
         
+    }
+    
+    public void drawLinesHorizontal(){
+        for(int i=0; i<mHeight;i++){
+            for(int y=0; y<mWidth-1; y++){
+                g2d.draw(linesHorizontal[i][y]);
+                
+            }
+        } 
+    }
+    
+    public void drawLinesVertical(){
+     for(int i=0; i<mHeight-1;i++){
+            for(int y=0; y<mWidth; y++){
+                g2d.draw(linesVertical[i][y]);
+                
+            }
+        } 
+    }
+    
+    public void initLinesHorizontal(){
+        int ycoordinatesP1=0;
+        int xcoordinatesP1=0;
+        int xcoodrinatesP2=30;
+        int ycoordinatesP2=0;
+        linesHorizontal= new Line2D.Double[mWidth][mHeight];
+        for(int i=0; i<mHeight;i++){
+            for(int y=0; y<mWidth-1; y++){
+                linesHorizontal[i][y]= new Line2D.Double(xcoordinatesP1, ycoordinatesP1, xcoodrinatesP2, ycoordinatesP2);
+                xcoordinatesP1=xcoordinatesP1+space;
+                xcoodrinatesP2=xcoodrinatesP2+space;
+            }
+            xcoordinatesP1=0;
+            xcoodrinatesP2=30;
+            ycoordinatesP1 =ycoordinatesP1+space;
+            ycoordinatesP2 =ycoordinatesP2+space;
+        } 
+    }
+    
+    public void initLinesVertical(){
+        int ycoordinatesP1=0;
+        int xcoordinatesP1=0;
+        int xcoodrinatesP2=0;
+        int ycoordinatesP2=30;
+        linesVertical= new Line2D.Double[mWidth][mHeight];
+        for(int i=0; i<mHeight-1;i++){
+            for(int y=0; y<mWidth; y++){
+                linesVertical[i][y]= new Line2D.Double(xcoordinatesP1, ycoordinatesP1, xcoodrinatesP2, ycoordinatesP2);
+                xcoordinatesP1=xcoordinatesP1+space;
+                xcoodrinatesP2=xcoodrinatesP2+space;
+            }
+            ycoordinatesP1=ycoordinatesP1+space;
+            ycoordinatesP2=ycoordinatesP2+space;
+            xcoordinatesP1 =0;
+            xcoodrinatesP2 =0;
+        } 
     }
     
 }
