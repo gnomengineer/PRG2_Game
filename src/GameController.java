@@ -13,8 +13,7 @@ public class GameController implements ObserverInterface {
     private GameViewInterface gameView;
     private GameOptionsViewInterface gameOptionsView;
     private LogicInterface gameLogic;
-    private ActionListener submitActionListener;
-    
+
     public GameController(GameOptionsViewInterface gameOptionsView, GameViewInterface gameView, LogicInterface gameLogic){
         this.gameView = gameView;
         this.gameLogic = gameLogic;
