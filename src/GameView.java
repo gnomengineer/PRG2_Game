@@ -18,7 +18,6 @@ import javax.swing.*;
 public class GameView implements GameViewInterface, SubjectInterface {
     //Frame
     JFrame jFrameGameView;
-    JPanel jPanelGameView;
     JMenuBar jMBGameView;
     JMenu jMGame;
     JMenu jMHelp;
@@ -28,12 +27,10 @@ public class GameView implements GameViewInterface, SubjectInterface {
     JMenuItem jMIClose;
     Dimension size;
     MapView map1;
-    ObserverInterface observer;
   
     public GameView(){
         jMBGameView= new JMenuBar();      
         jFrameGameView = new JFrame("Dots and Boxes");
-        jPanelGameView= new JPanel();
         jMGame = new JMenu("Game");
         jMHelp = new JMenu("Help");
         jMIRules= new JMenuItem("Rules");
@@ -49,10 +46,14 @@ public class GameView implements GameViewInterface, SubjectInterface {
     
     private void setup(){
         
-        jFrameGameView.add(map1);
-        jPanelGameView.setLayout(new BorderLayout());
+        
+        
         jFrameGameView.setSize(size);
         jFrameGameView.setPreferredSize(size);
+        jFrameGameView.setLayout(new BorderLayout());
+        jFrameGameView.add(map1,BorderLayout.CENTER);
+        
+  
         
         //Menubar
         jFrameGameView.setJMenuBar(jMBGameView);
@@ -74,6 +75,7 @@ public class GameView implements GameViewInterface, SubjectInterface {
     @Override
     public void startGameView(int width, int height) {
         jFrameGameView.setVisible(true);
+       
     }
 
     @Override
@@ -110,13 +112,10 @@ public class GameView implements GameViewInterface, SubjectInterface {
 
     @Override
     public void registerObserver(ObserverInterface observer) {
-       this.observer = observer;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public void notifyObserver() {
-        
-    }
-
-    
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 }
