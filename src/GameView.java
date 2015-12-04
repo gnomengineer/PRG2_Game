@@ -4,6 +4,7 @@ import Enums.MessageTypeEnum;
 import Interfaces.GameViewInterface;
 import Enums.MessageTypeEnum;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
@@ -23,6 +24,7 @@ public class GameView implements GameViewInterface {
     JMenuItem jMIAbout;
     JMenuItem jMISave;
     JMenuItem jMIClose;
+    Dimension size;
     
     
     public GameView(){
@@ -35,6 +37,7 @@ public class GameView implements GameViewInterface {
         jMIAbout = new JMenuItem("About");
         jMISave = new JMenuItem("Save");
         jMIClose = new JMenuItem("Close");
+        size = new Dimension(300, 200);
         setup();
         
         jFrameGameView.setVisible(true);
@@ -43,6 +46,8 @@ public class GameView implements GameViewInterface {
     private void setup(){
         jFrameGameView.add(jPanelGameView);
         jPanelGameView.setLayout(new BorderLayout());
+        jFrameGameView.setSize(size);
+        jFrameGameView.setPreferredSize(size);
         
         //Menubar
         jFrameGameView.setJMenuBar(jMBGameView);
