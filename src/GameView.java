@@ -9,6 +9,7 @@ import Interfaces.SubjectInterface;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import static javax.swing.JFrame.*;
 
 
 /**
@@ -49,6 +50,7 @@ public class GameView implements GameViewInterface, SubjectInterface {
         jFrameGameView.setPreferredSize(size);
         jFrameGameView.setLayout(new BorderLayout());
         jFrameGameView.add(map1,BorderLayout.CENTER);
+        jFrameGameView.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
   
         
