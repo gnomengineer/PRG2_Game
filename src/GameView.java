@@ -3,6 +3,7 @@ import Enums.GameModeEnum;
 import Enums.MessageTypeEnum;
 import Interfaces.GameViewInterface;
 import Enums.MessageTypeEnum;
+import GameObjects.Line;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
@@ -68,11 +69,6 @@ public class GameView implements GameViewInterface {
     }
 
     @Override
-    public void drawLine(int startX, int startY, int endX, int endY, boolean isOpponent) {
-        // anhand isOppenent eine am anfang festgelegte Farbe verwenden
-    }
-
-    @Override
     public void updatePlayerState(int points) {
         // das TextControl updaten
     }
@@ -96,6 +92,11 @@ public class GameView implements GameViewInterface {
 
     @Override
     public String getLastDrawnLine() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void drawLine(Line line, boolean isOpponent) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
