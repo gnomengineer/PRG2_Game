@@ -1,11 +1,13 @@
 package Interfaces;
 
 import GameObjects.Line;
+import Enums.MessageTypeEnum;
 /**
  *
  * @author Andre, Daniel
  */
 public interface OpponentInterface 
 {
-    public Line makeAMove();    
+    void sendGameInfo(Line selectedLine);
+    void sendGameInfo(MessageTypeEnum msg);
 }
