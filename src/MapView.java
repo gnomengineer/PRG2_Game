@@ -18,14 +18,19 @@ public class MapView extends JPanel {
     private int angle = 0;
     private int mWidth;
     private int mHeight;
+   
     Graphics2D g2d;
     Rectangle2D.Double[][] points;
    
+    /**
+     * Create MapView with specified size
+     * @param mWidth
+     * @param mHeight 
+     */
     public MapView(int mWidth, int mHeight){
-        //setBackground(Color.red);
-        add(new JButton("test"));
         this.mWidth = mWidth;
         this.mHeight= mHeight;
+        
         
     }
     
@@ -39,21 +44,27 @@ public class MapView extends JPanel {
         initPoints();
         drawPoints();
     }
+    
+    /**
+     * Initialising all Points and save it into an Array
+     */
     private void initPoints(){
-        int ycoordinates=10;
-        int xcoordinates=10;
+        int ycoordinates=0;
+        int xcoordinates=0;
         points= new Rectangle2D.Double[mWidth+1][mHeight+1];
         for(int i=0; i<=mHeight;i++){
             for(int y=0; y<=mWidth; y++){
                 points[i][y]= new Rectangle2D.Double(xcoordinates-0.5, ycoordinates-0.5, 0.5, 0.5);
                 xcoordinates=xcoordinates+30;
             }
-            xcoordinates=10;
+            xcoordinates=0;
             ycoordinates =ycoordinates+30;
-        }
-        
+        } 
     }
     
+    /**
+     * Draw Points
+     */
     private void drawPoints(){
         for(int i=0; i<=mHeight;i++){
             for(int y=0; y<=mWidth; y++){
@@ -61,4 +72,16 @@ public class MapView extends JPanel {
             }
         }
     }
+    
+    public GameObjects.Point translateCoordinates(GameObjects.Point point){
+        int pointx = point.getX();
+        int pointy = point.getY();
+        int coordinatesx = pointx *30;
+        return null;
+    }
+    
+    public void drawLine(GameObjects.Line line){
+        
+    }
+    
 }

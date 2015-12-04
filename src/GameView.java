@@ -38,8 +38,8 @@ public class GameView implements GameViewInterface, SubjectInterface {
         jMIAbout = new JMenuItem("About");
         jMISave = new JMenuItem("Save");
         jMIClose = new JMenuItem("Close");
-        size = new Dimension(300, 200);
-        map1= new MapView();       
+        size = new Dimension(600, 600);
+              
         
         setup();
         
@@ -49,7 +49,6 @@ public class GameView implements GameViewInterface, SubjectInterface {
         jFrameGameView.setSize(size);
         jFrameGameView.setPreferredSize(size);
         jFrameGameView.setLayout(new BorderLayout());
-        jFrameGameView.add(map1,BorderLayout.CENTER);
         jFrameGameView.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
   
@@ -73,7 +72,12 @@ public class GameView implements GameViewInterface, SubjectInterface {
     
     @Override
     public void startGameView(int width, int height) {
+        map1= new MapView(width, height); 
+        
+        jFrameGameView.add(map1,BorderLayout.CENTER);
+        
         jFrameGameView.setVisible(true);
+        
        
     }
 
