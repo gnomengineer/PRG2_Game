@@ -90,6 +90,7 @@ public class GameOptionsView implements ActionListener, GameOptionsViewInterface
         jPanelSubmit.add(jBtnSubmit);
                
         //Radio Buttons
+        jRadioSingle.setSelected(true);
         bgrpRadioButtons.add(jRadioSingle);
         bgrpRadioButtons.add(jRadioMulti);
         
@@ -124,29 +125,16 @@ public class GameOptionsView implements ActionListener, GameOptionsViewInterface
         jPanelField.add(jLabelFieldSize);
         jPanelField.add(jSliderX);
         jPanelField.add(jSliderY);
-        
-       
-        jframeOptions.setVisible(true);
-        
-        
-        
+             
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(jRadioSingle.isSelected()){
-            singleplayer=true;
-        }
-        else{
-            singleplayer=false;
-        }
+
         
-        xSize= jSliderX.getValue();
-        ySize= jSliderY.getValue();
         System.out.println(singleplayer);
         System.out.println(xSize);
         System.out.println(ySize);
-        new GameView();
     }
 
     @Override
@@ -166,22 +154,27 @@ public class GameOptionsView implements ActionListener, GameOptionsViewInterface
 
     @Override
     public int getFieldWidth() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return jSliderX.getValue();
     }
 
     @Override
     public int getFieldHeight() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return jSliderY.getValue();
     }
 
     @Override
     public GameModeEnum getGameMode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(jRadioSingle.isSelected()){
+            return GameModeEnum.AIMode;
+        }
+        else {
+            return GameModeEnum.MultiplayerMode;
+        }
     }
 
     @Override
     public void startOptionsView() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        jframeOptions.setVisible(true);
     }
     
 }
