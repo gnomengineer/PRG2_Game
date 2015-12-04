@@ -11,7 +11,10 @@ import Interfaces.SubjectInterface;
  */
 public class NetworkController implements OpponentInterface,SubjectInterface{
 
-
+    public NetworkController() {
+        
+    }
+    
     @Override
     public void sendGameInfo(Line selectedLine) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
