@@ -42,6 +42,8 @@ public class GameController {
     }
     
     private void startGamePreparation() {
+        //Temp for Chief of Gui for testing
+        gameView.startGameView(20, 30);
         // do something if needed
         //gameLogic.initializeGame(gameOptionsView.getFieldHeight(), gameOptionsView.getFieldWidth());
     }

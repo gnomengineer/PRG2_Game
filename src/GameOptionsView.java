@@ -18,15 +18,18 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import static javax.swing.JFrame.*;
 import Interfaces.GameOptionsViewInterface;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
 
 /**
  *
  * @author metterlin
  */
-public class GameOptionsView implements ActionListener, GameOptionsViewInterface {
+public class GameOptionsView implements GameOptionsViewInterface {
 
     private static final Dimension size= new Dimension(400,200);
-    JFrame jframeOptions;
+    JFrame jFrameOptions;
     JPanel jPanelOptions;
     JPanel jPanelGameMode;
     JPanel jPanelField;
@@ -35,49 +38,50 @@ public class GameOptionsView implements ActionListener, GameOptionsViewInterface
     JLabel jLabelFieldSize;
     JLabel jLabelx;
     JLabel jLabely;
-    ButtonGroup bgrpRadioButtons;
+    ButtonGroup bGrpRadioButtons;
     JRadioButton jRadioSingle;
-    JRadioButton jRadioMulti;
-    JSlider jSliderX;
-    JSlider jSliderY;
+    JRadioButton jRadioMultiClient;
+    JRadioButton jRadioMultiServer;
+    JSlider jSliderWidth;
+    JSlider jSliderHeight;
     JButton jBtnSubmit; 
+    JTextField jTxtIpAddress;
+    JTextField jTxtPort;
     Font font;
     
-    
-    //Important Game Variables
-    private boolean singleplayer;
-    private int xSize;
-    private int ySize;
-    
+  
     
     
     public GameOptionsView(){
-        jframeOptions=new JFrame("Options Dots and Boxes");
+        jFrameOptions=new JFrame("Options Dots and Boxes");
         jPanelOptions= new JPanel();
         jLabelGameMode = new JLabel("Game Mode");
         jLabelFieldSize= new JLabel("Field Size");
-        bgrpRadioButtons = new ButtonGroup();
+        bGrpRadioButtons = new ButtonGroup();
         jRadioSingle = new JRadioButton("SinglePlayer");
-        jRadioMulti= new JRadioButton("MultiPlayer");
+        jRadioMultiClient= new JRadioButton("MultiPlayer Client");
+        jRadioMultiServer = new JRadioButton("Multiplayer Server");
         jPanelGameMode = new JPanel();
         jPanelField = new JPanel();
-        jSliderX = new JSlider(0, 20, 10);
-        jSliderY = new JSlider(0,20,10);
+        jSliderWidth = new JSlider(0, 20, 10);
+        jSliderHeight = new JSlider(0,20,10);
         jBtnSubmit = new  JButton("Submit");
         jPanelSubmit = new JPanel();
+        jTxtIpAddress= new JTextField("IP Address");
+        jTxtPort = new JTextField("Port");
         font = new Font("Serif", Font.ITALIC,10);
-        
-        
-                
+     
         setup();
     }
-    public void setup(){
+ 
+    private void setup(){
         
         //jFrame
-        jframeOptions.setSize(size);
-        jframeOptions.setPreferredSize(size);
-        jframeOptions.add(jPanelOptions);
-          
+        jFrameOptions.setSize(size);
+        jFrameOptions.setPreferredSize(size);
+        jFrameOptions.add(jPanelOptions);
+        jFrameOptions.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
         
         //jPanel Options
         jPanelOptions.setLayout(new BorderLayout());
@@ -90,64 +94,65 @@ public class GameOptionsView implements ActionListener, GameOptionsViewInterface
         jPanelSubmit.add(jBtnSubmit);
                
         //Radio Buttons
-        bgrpRadioButtons.add(jRadioSingle);
-        bgrpRadioButtons.add(jRadioMulti);
+        jRadioSingle.setSelected(true);
+        jRadioMultiServer.addItemListener(new ItemListener() {
+
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if(jRadioMultiServer.isSelected()){
+                    jTxtIpAddress.setEditable(true); 
+                    jTxtPort.setEditable(true);
+                }
+                else{
+                    jTxtIpAddress.setEditable(false);
+                    jTxtPort.setEditable(false);
+                }
+            }
+        });
         
-        //jBtnSubmit
-        jBtnSubmit.addActionListener(this);
+        //Radio Buttons Group
+        bGrpRadioButtons.add(jRadioSingle);
+        bGrpRadioButtons.add(jRadioMultiClient);
+        bGrpRadioButtons.add(jRadioMultiServer);
+        
+        //TxtFields
+        jTxtIpAddress.setEditable(false);
+        jTxtPort.setEditable(false);
         
         
         //Slider X
-        jSliderX.setMajorTickSpacing(5);
-        jSliderX.setMinorTickSpacing(1);
-        jSliderX.setPaintTicks(true);
-        jSliderX.setPaintLabels(true);
-        jSliderX.setFont(font);
-        jSliderX.setSnapToTicks(true);
+        jSliderWidth.setMajorTickSpacing(5);
+        jSliderWidth.setMinorTickSpacing(1);
+        jSliderWidth.setPaintTicks(true);
+        jSliderWidth.setPaintLabels(true);
+        jSliderWidth.setFont(font);
+        jSliderWidth.setSnapToTicks(true);
         
         //Slider Y
-        jSliderY.setMajorTickSpacing(5);
-        jSliderY.setMinorTickSpacing(1);
-        jSliderY.setPaintTicks(true);
-        jSliderY.setPaintLabels(true);
-        jSliderY.setFont(font);
-        jSliderY.setSnapToTicks(true);
+        jSliderHeight.setMajorTickSpacing(5);
+        jSliderHeight.setMinorTickSpacing(1);
+        jSliderHeight.setPaintTicks(true);
+        jSliderHeight.setPaintLabels(true);
+        jSliderHeight.setFont(font);
+        jSliderHeight.setSnapToTicks(true);
         
         //JPanel GameMode
-        jPanelGameMode.setLayout(new GridLayout(3,0));
+        jPanelGameMode.setLayout(new GridLayout(0,1));
         jPanelGameMode.add(jLabelGameMode);
         jPanelGameMode.add(jRadioSingle);
-        jPanelGameMode.add(jRadioMulti);
+        jPanelGameMode.add(jRadioMultiClient);
+        jPanelGameMode.add(jRadioMultiServer);
+        jPanelGameMode.add(jTxtIpAddress);
+        jPanelGameMode.add(jTxtPort);
          
         //JPanel Field
         jPanelField.setLayout(new GridLayout(3,0));
         jPanelField.add(jLabelFieldSize);
-        jPanelField.add(jSliderX);
-        jPanelField.add(jSliderY);
-        
-       
-        jframeOptions.setVisible(true);
-        
-        
-        
+        jPanelField.add(jSliderWidth);
+        jPanelField.add(jSliderHeight);
+             
     }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(jRadioSingle.isSelected()){
-            singleplayer=true;
-        }
-        else{
-            singleplayer=false;
-        }
-        
-        xSize= jSliderX.getValue();
-        ySize= jSliderY.getValue();
-        System.out.println(singleplayer);
-        System.out.println(xSize);
-        System.out.println(ySize);
-        new GameView();
-    }
+    
 
     @Override
     public void registerOptionActionListener(ActionListener actionListener) {
@@ -156,32 +161,37 @@ public class GameOptionsView implements ActionListener, GameOptionsViewInterface
 
     @Override
     public String getIPAddress() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return jTxtIpAddress.getText();
     }
 
     @Override
     public String getPortNumber() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return jTxtPort.getText();
     }
 
     @Override
     public int getFieldWidth() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return jSliderWidth.getValue();
     }
 
     @Override
     public int getFieldHeight() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return jSliderHeight.getValue();
     }
 
     @Override
     public GameModeEnum getGameMode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(jRadioSingle.isSelected()){
+            return GameModeEnum.AIMode;
+        }
+        else {
+            return GameModeEnum.MultiplayerMode;
+        }
     }
 
     @Override
     public void startOptionsView() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        jFrameOptions.setVisible(true);
     }
     
 }
