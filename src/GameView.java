@@ -28,6 +28,7 @@ public class GameView implements GameViewInterface, SubjectInterface {
     JMenuItem jMIClose;
     Dimension size;
     MapView map1;
+    ObserverInterface observer;
   
     public GameView(){
         jMBGameView= new JMenuBar();      
@@ -109,12 +110,12 @@ public class GameView implements GameViewInterface, SubjectInterface {
 
     @Override
     public void registerObserver(ObserverInterface observer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       this.observer = observer;
     }
 
     @Override
     public void notifyObserver() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     

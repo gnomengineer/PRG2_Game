@@ -22,9 +22,8 @@ public class GameController implements ObserverInterface {
     }
     
     public void StartControlling(){
-        ((SubjectInterface)gameView).registerObserver(this);
+        ((SubjectInterface)gameOptionsView).registerObserver(this);
         
-        gameOptionsView.registerOptionActionListener(submitActionListener);
         gameOptionsView.startOptionsView();
     }
     
