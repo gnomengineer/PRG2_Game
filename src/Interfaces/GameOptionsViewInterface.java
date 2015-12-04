@@ -10,12 +10,6 @@ import java.awt.event.ActionListener;
 public interface GameOptionsViewInterface {
     
     /**
-     * ActionListener registieren
-     * @param actionListener 
-     */
-    void registerOptionActionListener(ActionListener actionListener); 
-    
-    /**
      * Die IP-Adresse des Gegners
      * @return 
      */
