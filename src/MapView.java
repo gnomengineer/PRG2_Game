@@ -18,6 +18,7 @@ public class MapView extends JPanel {
     private int angle = 0;
     private int mWidth;
     private int mHeight;
+    private int space=30;
    
     Graphics2D g2d;
     Rectangle2D.Double[][] points;
@@ -30,7 +31,7 @@ public class MapView extends JPanel {
     public MapView(int mWidth, int mHeight){
         this.mWidth = mWidth;
         this.mHeight= mHeight;
-        
+        setPreferredSize(new Dimension(mHeight*space, mWidth*space));
         
     }
     
@@ -54,12 +55,13 @@ public class MapView extends JPanel {
         points= new Rectangle2D.Double[mWidth+1][mHeight+1];
         for(int i=0; i<=mHeight;i++){
             for(int y=0; y<=mWidth; y++){
-                points[i][y]= new Rectangle2D.Double(xcoordinates-0.5, ycoordinates-0.5, 0.5, 0.5);
-                xcoordinates=xcoordinates+30;
+                points[i][y]= new Rectangle2D.Double(xcoordinates, ycoordinates, 2, 2);
+                xcoordinates=xcoordinates+space;
             }
             xcoordinates=0;
-            ycoordinates =ycoordinates+30;
+            ycoordinates =ycoordinates+space;
         } 
+        
     }
     
     /**
@@ -71,6 +73,7 @@ public class MapView extends JPanel {
                 g2d.draw(points[i][y]);
             }
         }
+        
     }
     
     public GameObjects.Point translateCoordinates(GameObjects.Point point){

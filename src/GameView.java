@@ -28,6 +28,8 @@ public class GameView implements GameViewInterface, SubjectInterface {
     JMenuItem jMIClose;
     Dimension size;
     MapView map1;
+    
+    JPanel testpanel=new JPanel();
   
     public GameView(){
         jMBGameView= new JMenuBar();      
@@ -39,7 +41,8 @@ public class GameView implements GameViewInterface, SubjectInterface {
         jMISave = new JMenuItem("Save");
         jMIClose = new JMenuItem("Close");
         size = new Dimension(600, 600);
-              
+        
+            
         
         setup();
         
@@ -50,7 +53,7 @@ public class GameView implements GameViewInterface, SubjectInterface {
         jFrameGameView.setPreferredSize(size);
         jFrameGameView.setLayout(new BorderLayout());
         jFrameGameView.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
+        jFrameGameView.add(testpanel,BorderLayout.CENTER); 
   
         
         //Menubar
@@ -73,9 +76,15 @@ public class GameView implements GameViewInterface, SubjectInterface {
     @Override
     public void startGameView(int width, int height) {
         map1= new MapView(width, height); 
+        testpanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        testpanel.setLayout(new FlowLayout() );
         
-        jFrameGameView.add(map1,BorderLayout.CENTER);
         
+        
+       
+        testpanel.add(map1);
+        
+       
         jFrameGameView.setVisible(true);
         
        
