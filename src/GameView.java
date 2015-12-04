@@ -4,8 +4,7 @@ import Enums.MessageTypeEnum;
 import Interfaces.GameViewInterface;
 import Enums.MessageTypeEnum;
 import GameObjects.Line;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
@@ -15,7 +14,7 @@ import javax.swing.*;
  * @author Andre
  */
 public class GameView implements GameViewInterface {
-    
+    //Frame
     JFrame jFrameGameView;
     JPanel jPanelGameView;
     JMenuBar jMBGameView;
@@ -26,12 +25,11 @@ public class GameView implements GameViewInterface {
     JMenuItem jMISave;
     JMenuItem jMIClose;
     Dimension size;
-    
-    
+    MapView map1;
+  
     public GameView(){
         jMBGameView= new JMenuBar();      
         jFrameGameView = new JFrame("Dots and Boxes");
-        jPanelGameView = new JPanel();
         jMGame = new JMenu("Game");
         jMHelp = new JMenu("Help");
         jMIRules= new JMenuItem("Rules");
@@ -39,14 +37,15 @@ public class GameView implements GameViewInterface {
         jMISave = new JMenuItem("Save");
         jMIClose = new JMenuItem("Close");
         size = new Dimension(300, 200);
-        setup();
+        map1= new MapView();       
         
+        setup();
         
     }
     
     private void setup(){
         
-        jFrameGameView.add(jPanelGameView);
+        jFrameGameView.add(map1);
         jPanelGameView.setLayout(new BorderLayout());
         jFrameGameView.setSize(size);
         jFrameGameView.setPreferredSize(size);
@@ -62,6 +61,10 @@ public class GameView implements GameViewInterface {
         jMHelp.add(jMIRules);
         jMHelp.add(jMIAbout);
         
+    }
+    
+    private void setupMap() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     @Override
@@ -100,4 +103,6 @@ public class GameView implements GameViewInterface {
     public void drawLine(Line line, boolean isOpponent) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
 }
