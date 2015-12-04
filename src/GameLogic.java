@@ -27,8 +27,6 @@ public class GameLogic implements LogicInterface {
         
         //setOwner;
         if(line.getOwner() == null){
-            
-            
         }
         
         

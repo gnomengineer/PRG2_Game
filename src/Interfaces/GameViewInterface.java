@@ -2,6 +2,7 @@ package Interfaces;
 
 import Enums.MessageTypeEnum;
 import Enums.GameModeEnum;
+import GameObjects.Line;
 import java.awt.event.ActionListener;
 
 /**
@@ -29,17 +30,12 @@ public interface GameViewInterface {
      */
     void startGameView(int width, int height);
     
-   
-    
     /**
      * Linie zeichnen
-     * @param startX
-     * @param startY
-     * @param endX
-     * @param endY
+     * @param line
      * @param isOpponent 
      */
-    void drawLine(int startX, int startY, int endX, int endY, boolean isOpponent);
+    void drawLine(Line line, boolean isOpponent);
     
     /**
      * Spielstatus aktualisieren
