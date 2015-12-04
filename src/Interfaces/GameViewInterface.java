@@ -15,43 +15,7 @@ public interface GameViewInterface {
      * @return 
      */
     String getLastDrawnLine();
-    
-    /**
-     * Die IP-Adresse des Gegners
-     * @return 
-     */
-    String getIPAddress();
-
-    /**
-     * Die Portnummer, welche definiert wurde
-     * @return 
-     */
-    String getPortNumber();
-    
-    /**
-     * Feldbreite für die Initialisierung
-     * @return 
-     */
-    int getFieldWidth();
-    
-    /**
-     * Feldhöhe für die Initialisierung
-     * @return 
-     */
-    int getFieldHeight();
-    
-    /**
-     * Spielermode für die Initialisierung
-     * @return 
-     */
-    GameModeEnum getGameMode();
-    
-    /**
-     * ActionListener registieren
-     * @param actionListener 
-     */
-    void registerOptionActionListener(ActionListener actionListener);
-    
+        
      /**
      * ActionListener registieren
      * @param actionListener 
@@ -65,10 +29,7 @@ public interface GameViewInterface {
      */
     void startGameView(int width, int height);
     
-    /**
-     * Die OptionView anzeigen
-     */
-    void startOptionView();
+   
     
     /**
      * Linie zeichnen

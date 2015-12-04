@@ -8,6 +8,7 @@
  *
  * @author metterlin
  */
+import Enums.GameModeEnum;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -16,12 +17,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import static javax.swing.JFrame.*;
+import Interfaces.GameOptionsViewInterface;
 
 /**
  *
  * @author metterlin
  */
-public class GameOptionsView implements ActionListener {
+public class GameOptionsView implements ActionListener, GameOptionsViewInterface {
 
     private static final Dimension size= new Dimension(400,200);
     JFrame jframeOptions;
@@ -75,7 +77,7 @@ public class GameOptionsView implements ActionListener {
         jframeOptions.setSize(size);
         jframeOptions.setPreferredSize(size);
         jframeOptions.add(jPanelOptions);
-        jframeOptions.setDefaultCloseOperation(EXIT_ON_CLOSE);   
+          
         
         //jPanel Options
         jPanelOptions.setLayout(new BorderLayout());
@@ -145,6 +147,41 @@ public class GameOptionsView implements ActionListener {
         System.out.println(xSize);
         System.out.println(ySize);
         new GameView();
+    }
+
+    @Override
+    public void registerOptionActionListener(ActionListener actionListener) {
+        jBtnSubmit.addActionListener(actionListener);
+    }
+
+    @Override
+    public String getIPAddress() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getPortNumber() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getFieldWidth() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getFieldHeight() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public GameModeEnum getGameMode() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void startOptionsView() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
