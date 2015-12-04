@@ -51,9 +51,6 @@ public class GameOptionsView implements GameOptionsViewInterface, SubjectInterfa
     JTextField jTxtPort;
     Font font;
     ObserverInterface observer;
-
-  
-    
     
     public GameOptionsView(){
         jFrameOptions=new JFrame("Options Dots and Boxes");
@@ -79,12 +76,10 @@ public class GameOptionsView implements GameOptionsViewInterface, SubjectInterfa
  
     private void setup(){
         //jButton
-        /**
         jBtnSubmit.addActionListener(event ->
         { 
             observer.submitOptions();
         });
-        */
         
         //jFrame
         jFrameOptions.setSize(size);

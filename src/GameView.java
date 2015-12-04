@@ -45,9 +45,6 @@ public class GameView implements GameViewInterface, SubjectInterface {
     }
     
     private void setup(){
-        
-        
-        
         jFrameGameView.setSize(size);
         jFrameGameView.setPreferredSize(size);
         jFrameGameView.setLayout(new BorderLayout());
