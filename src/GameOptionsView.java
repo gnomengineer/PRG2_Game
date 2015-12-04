@@ -75,7 +75,7 @@ public class GameOptionsView implements ActionListener {
         jframeOptions.setSize(size);
         jframeOptions.setPreferredSize(size);
         jframeOptions.add(jPanelOptions);
-        jframeOptions.setDefaultCloseOperation(EXIT_ON_CLOSE);   
+          
         
         //jPanel Options
         jPanelOptions.setLayout(new BorderLayout());
