@@ -1,9 +1,8 @@
 
-import Interfaces.GameViewInterface;
-import Interfaces.LogicInterface;
 import java.awt.Event;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import Interfaces.*;
 
 /**
  *
@@ -11,27 +10,29 @@ import java.awt.event.ActionListener;
  */
 public class GameController {
     private GameViewInterface gameView;
+    private GameOptionsViewInterface gameOptionsView;
     private LogicInterface gameLogic;
     private ActionListener actionListener;
 
     
-    public GameController(GameViewInterface gameView, LogicInterface gameLogic){
+    public GameController(GameOptionsViewInterface gameOptionsView, GameViewInterface gameView, LogicInterface gameLogic){
         this.gameView = gameView;
         this.gameLogic = gameLogic;
+        this.gameOptionsView = gameOptionsView;
     }
     
     public void StartControlling(){
-        /*initializeListener();*/
+        initializeListener();
         
-        gameView.startOptionView();
+        gameOptionsView.registerOptionActionListener(actionListener);
+        gameOptionsView.startOptionsView();
+        
     }
     
     private void startGameSession()
     {
         gameView.startGameView(10,10);
     }
-    
-    
     
     public void initializeListener(){
         actionListener = new ActionListener(){

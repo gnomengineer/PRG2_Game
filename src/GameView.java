@@ -57,17 +57,9 @@ public class GameView implements GameViewInterface {
         
     }
     
-    
-    
     @Override
     public void startGameView(int width, int height) {
         // hier grafikobjekte aufbaufbauen, welche du auch zuordnen kannst.
-    }
-
-    @Override
-    public void startOptionView() {
-        // die optionview anzeigen
-        new GameOptionsView();
     }
 
     @Override
@@ -93,12 +85,7 @@ public class GameView implements GameViewInterface {
     }
 
     @Override
-    public String getIPAddress() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String getPortNumber() {
+    public void registerLineActionListener(ActionListener actionListener) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -106,31 +93,4 @@ public class GameView implements GameViewInterface {
     public String getLastDrawnLine() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public void registerOptionActionListener(ActionListener actionListener) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int getFieldWidth() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int getFieldHeight() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public GameModeEnum getGameMode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void registerLineActionListener(ActionListener actionListener) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-   
 }

@@ -9,9 +9,8 @@ public class Starter{
     {
         System.out.println("Start Application");
                                         
-        GameController controller = new GameController(new GameView(), new GameLogic());
+        GameController controller = new GameController(new GameOptionsView(), new GameView(), new GameLogic());
+        
         controller.StartControlling();
-        
-        
     }
 }
