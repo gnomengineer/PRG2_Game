@@ -3,8 +3,9 @@ import Enums.GameModeEnum;
 import Enums.MessageTypeEnum;
 import Interfaces.GameViewInterface;
 import Enums.MessageTypeEnum;
+import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
+import javax.swing.*;
 
 
 /**
@@ -12,6 +13,52 @@ import javax.swing.JFrame;
  * @author Andre
  */
 public class GameView implements GameViewInterface {
+    
+    JFrame jFrameGameView;
+    JPanel jPanelGameView;
+    JMenuBar jMBGameView;
+    JMenu jMGame;
+    JMenu jMHelp;
+    JMenuItem jMIRules;
+    JMenuItem jMIAbout;
+    JMenuItem jMISave;
+    JMenuItem jMIClose;
+    
+    
+    public GameView(){
+        jMBGameView= new JMenuBar();      
+        jFrameGameView = new JFrame("Dots and Boxes");
+        jPanelGameView = new JPanel();
+        jMGame = new JMenu("Game");
+        jMHelp = new JMenu("Help");
+        jMIRules= new JMenuItem("Rules");
+        jMIAbout = new JMenuItem("About");
+        jMISave = new JMenuItem("Save");
+        jMIClose = new JMenuItem("Close");
+        setup();
+        
+        jFrameGameView.setVisible(true);
+    }
+    
+    private void setup(){
+        jFrameGameView.add(jPanelGameView);
+        jPanelGameView.setLayout(new BorderLayout());
+        
+        //Menubar
+        jFrameGameView.setJMenuBar(jMBGameView);
+        jMBGameView.add(jMGame);
+        jMBGameView.add(jMHelp);
+        
+        //Menu
+        jMGame.add(jMISave);
+        jMGame.add(jMIClose);
+        jMHelp.add(jMIRules);
+        jMHelp.add(jMIAbout);
+        
+    }
+    
+    
+    
     @Override
     public void startGameView(int width, int height) {
         // hier grafikobjekte aufbaufbauen, welche du auch zuordnen kannst.
@@ -85,5 +132,5 @@ public class GameView implements GameViewInterface {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
+   
 }

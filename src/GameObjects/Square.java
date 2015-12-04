@@ -10,10 +10,10 @@ public class Square
     private Line botLine;
     private Line leftLine;
     private Line rightLine;
+    private Figur owner;
     
     public Square()
-    {
-        
+    {      
     }
     
     public void setTopLine(Line line)    
@@ -54,5 +54,59 @@ public class Square
     public Line getRightLine()
     {
         return this.rightLine;
+    }
+    
+    public boolean setOwnerRight(Figur figur)
+    {
+        this.rightLine.setOwner(figur);
+        if(isComplete())
+        {
+            this.owner = figur;
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean setOwnerLeft(Figur figur)
+    {
+        this.leftLine.setOwner(figur);
+        if(isComplete())
+        {
+            this.owner = figur;
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean setOwnerTop(Figur figur)
+    {
+        this.topLine.setOwner(figur);
+        if(isComplete())
+        {
+            this.owner = figur;
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean setOwnerBottom(Figur figur)
+    {
+        this.botLine.setOwner(figur);
+        if(isComplete())
+        {
+            this.owner = figur;
+            return true;
+        }
+        return false;
+    }
+    
+    public Figur getOwner()
+    {
+        return this.owner;
+    }
+
+    private boolean isComplete()
+    {
+        return leftLine.getOwner() != null && topLine.getOwner() != null && rightLine.getOwner() != null && botLine.getOwner() != null;
     }
 }
