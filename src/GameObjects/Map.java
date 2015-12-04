@@ -54,6 +54,21 @@ public class Map
             }
         }
     }
+    
+    public int getWidth()
+    {
+        return this.columns;
+    }
+    
+    public int getHeight()
+    {
+        return this.rows;
+    }
+    
+    public Square[][] getSquares()
+    {
+        return this.squares;
+    }
 
     public Line getLine(Point startPoint, Point endPoint) {
         ArrayList<Line> lines = new ArrayList<Line>();
@@ -85,10 +100,7 @@ public class Map
                     lines.add(square.getTopLine());
                 }
             }
-        }
-        
-        
-        
+        }        
         //line = lines.stream().filter(f => f.)
         
         return null;
