@@ -12,8 +12,7 @@ public class GameController {
     private GameViewInterface gameView;
     private GameOptionsViewInterface gameOptionsView;
     private LogicInterface gameLogic;
-    private ActionListener actionListener;
-
+    private ActionListener submitActionListener;
     
     public GameController(GameOptionsViewInterface gameOptionsView, GameViewInterface gameView, LogicInterface gameLogic){
         this.gameView = gameView;
@@ -24,7 +23,7 @@ public class GameController {
     public void StartControlling(){
         initializeListener();
         
-        gameOptionsView.registerOptionActionListener(actionListener);
+        gameOptionsView.registerOptionActionListener(submitActionListener);
         gameOptionsView.startOptionsView();
         
     }
@@ -35,14 +34,15 @@ public class GameController {
     }
     
     public void initializeListener(){
-        actionListener = new ActionListener(){
+        submitActionListener = new ActionListener(){
             public void actionPerformed(ActionEvent actionEvent){               
-                doSomething();
+                startGamePreparation();
             }           
         };
     }
     
-    private void doSomething() {
+    private void startGamePreparation() {
         // do something if needed
+        //gameLogic.initializeGame(gameOptionsView.getFieldHeight(), gameOptionsView.getFieldWidth());
     }
 }
