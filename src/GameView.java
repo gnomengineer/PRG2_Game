@@ -119,3 +119,4 @@ public class GameView implements GameViewInterface, SubjectInterface {
     public void notifyObserver() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 }
+}
