@@ -4,19 +4,21 @@ import Enums.MessageTypeEnum;
 import Interfaces.GameViewInterface;
 import Enums.MessageTypeEnum;
 import GameObjects.Line;
+import Interfaces.ObserverInterface;
+import Interfaces.SubjectInterface;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import static javax.swing.JFrame.*;
 
 
 /**
  *
  * @author Andre
  */
-public class GameView implements GameViewInterface {
+public class GameView implements GameViewInterface, SubjectInterface {
     //Frame
     JFrame jFrameGameView;
-    JPanel jPanelGameView;
     JMenuBar jMBGameView;
     JMenu jMGame;
     JMenu jMHelp;
@@ -36,19 +38,20 @@ public class GameView implements GameViewInterface {
         jMIAbout = new JMenuItem("About");
         jMISave = new JMenuItem("Save");
         jMIClose = new JMenuItem("Close");
-        size = new Dimension(300, 200);
-        map1= new MapView();       
+        size = new Dimension(600, 600);
+              
         
         setup();
         
     }
     
     private void setup(){
-        
-        jFrameGameView.add(map1);
-        jPanelGameView.setLayout(new BorderLayout());
         jFrameGameView.setSize(size);
         jFrameGameView.setPreferredSize(size);
+        jFrameGameView.setLayout(new BorderLayout());
+        jFrameGameView.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
+  
         
         //Menubar
         jFrameGameView.setJMenuBar(jMBGameView);
@@ -69,7 +72,13 @@ public class GameView implements GameViewInterface {
     
     @Override
     public void startGameView(int width, int height) {
+        map1= new MapView(width, height); 
+        
+        jFrameGameView.add(map1,BorderLayout.CENTER);
+        
         jFrameGameView.setVisible(true);
+        
+       
     }
 
     @Override
@@ -104,5 +113,13 @@ public class GameView implements GameViewInterface {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public void registerObserver(ObserverInterface observer) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
+    @Override
+    public void notifyObserver() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

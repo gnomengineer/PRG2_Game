@@ -18,6 +18,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import static javax.swing.JFrame.*;
 import Interfaces.GameOptionsViewInterface;
+import Interfaces.ObserverInterface;
+import Interfaces.SubjectInterface;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
@@ -26,7 +28,7 @@ import java.awt.event.ItemListener;
  *
  * @author metterlin
  */
-public class GameOptionsView implements GameOptionsViewInterface {
+public class GameOptionsView implements GameOptionsViewInterface, SubjectInterface {
 
     private static final Dimension size= new Dimension(400,200);
     JFrame jFrameOptions;
@@ -48,9 +50,7 @@ public class GameOptionsView implements GameOptionsViewInterface {
     JTextField jTxtIpAddress;
     JTextField jTxtPort;
     Font font;
-    
-  
-    
+    ObserverInterface observer;
     
     public GameOptionsView(){
         jFrameOptions=new JFrame("Options Dots and Boxes");
@@ -75,6 +75,11 @@ public class GameOptionsView implements GameOptionsViewInterface {
     }
  
     private void setup(){
+        //jButton
+        jBtnSubmit.addActionListener(event ->
+        { 
+            observer.submitOptions();
+        });
         
         //jFrame
         jFrameOptions.setSize(size);
@@ -153,11 +158,11 @@ public class GameOptionsView implements GameOptionsViewInterface {
              
     }
     
-
+/** via observer.submitOption(); auslösen
     @Override
     public void registerOptionActionListener(ActionListener actionListener) {
         jBtnSubmit.addActionListener(actionListener);
-    }
+    }*/
 
     @Override
     public String getIPAddress() {
@@ -193,6 +198,16 @@ public class GameOptionsView implements GameOptionsViewInterface {
     @Override
     public void startOptionsView() {
         jFrameOptions.setVisible(true);
+    }
+
+    @Override
+    public void registerObserver(ObserverInterface observer) {
+        this.observer = observer;
+    }
+
+    @Override
+    public void notifyObserver() {
+        // nothing todo
     }
     
 }

@@ -1,4 +1,5 @@
 
+import GameObjects.Line;
 import java.awt.Event;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,12 +9,11 @@ import Interfaces.*;
  *
  * @author Andre
  */
-public class GameController {
+public class GameController implements ObserverInterface {
     private GameViewInterface gameView;
     private GameOptionsViewInterface gameOptionsView;
     private LogicInterface gameLogic;
-    private ActionListener submitActionListener;
-    
+
     public GameController(GameOptionsViewInterface gameOptionsView, GameViewInterface gameView, LogicInterface gameLogic){
         this.gameView = gameView;
         this.gameLogic = gameLogic;
@@ -21,11 +21,9 @@ public class GameController {
     }
     
     public void StartControlling(){
-        initializeListener();
+        ((SubjectInterface)gameOptionsView).registerObserver(this);
         
-        gameOptionsView.registerOptionActionListener(submitActionListener);
         gameOptionsView.startOptionsView();
-        
     }
     
     private void startGameSession()
@@ -33,18 +31,22 @@ public class GameController {
         gameView.startGameView(10,10);
     }
     
-    public void initializeListener(){
-        submitActionListener = new ActionListener(){
-            public void actionPerformed(ActionEvent actionEvent){               
-                startGamePreparation();
-            }           
-        };
-    }
-    
     private void startGamePreparation() {
         //Temp for Chief of Gui for testing
         gameView.startGameView(20, 30);
         // do something if needed
         //gameLogic.initializeGame(gameOptionsView.getFieldHeight(), gameOptionsView.getFieldWidth());
+    }
+
+    @Override
+    public void makeMove(Line selectedLine) {
+        //DO SOMETHING
+    }
+
+    @Override
+    public void submitOptions() {
+        //DO SOMETHING
+        
+        gameView.startGameView(10,10);
     }
 }
