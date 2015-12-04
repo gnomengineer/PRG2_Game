@@ -45,6 +45,7 @@ public class GameView implements GameViewInterface {
     }
     
     private void setup(){
+        
         jFrameGameView.add(jPanelGameView);
         jPanelGameView.setLayout(new BorderLayout());
         jFrameGameView.setSize(size);
