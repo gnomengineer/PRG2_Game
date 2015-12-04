@@ -30,6 +30,7 @@ public class GameView implements GameViewInterface {
     public GameView(){
         jMBGameView= new JMenuBar();      
         jFrameGameView = new JFrame("Dots and Boxes");
+        jPanelGameView= new JPanel();
         jMGame = new JMenu("Game");
         jMHelp = new JMenu("Help");
         jMIRules= new JMenuItem("Rules");
