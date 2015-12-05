@@ -21,9 +21,7 @@ public class MapView extends JPanel {
     private int space=30;
    
     Graphics2D g2d;
-    Rectangle2D.Double[][] points;
-    Line2D.Double[][] linesHorizontal;
-    Line2D.Double[][] linesVertical;
+    SquareView[][] squareviews;
    
     /**
      * Create MapView with specified size
@@ -33,116 +31,72 @@ public class MapView extends JPanel {
     public MapView(int mWidth, int mHeight){
         this.mWidth = mWidth;
         this.mHeight= mHeight;
+        this.squareviews = new SquareView[mHeight][mWidth];
         setPreferredSize(new Dimension(mHeight*space, mWidth*space));
         
     }
+    
+    public void generateField(){
+        for(int i = 0; i < mWidth; i++)
+        {
+            for(int y = 0; y < mHeight; y++)
+            {
+                
+                Point2D.Double pTopLeft = new Point2D.Double(i*10,y*10);
+                Point2D.Double pTopRight = new Point2D.Double(i*10,(y+1)*10);
+                Point2D.Double pBotLeft = new Point2D.Double((i+1)*10,y*10);
+                Point2D.Double pBotRight = new Point2D.Double((i+1)*10,(y+1)*10);                
+                SquareView s = new SquareView();
+                if(i == 0)
+                {
+                    s.setLineTop(new Line2D.Double(pTopLeft,pTopRight));
+                }
+                else
+                {
+                    s.setLineTop((squareviews[i-1][y]).getLineBot());
+                }
+                if(y == 0)
+                {
+                    s.setLineLeft(new Line2D.Double(pTopLeft,pBotLeft));
+                }
+                else
+                {
+                    s.setLineLeft(squareviews[i][y-1].getLineRight());
+                }
+                s.setLineRight(new Line2D.Double(pTopRight,pBotRight));
+                s.setLineBot(new Line2D.Double(pBotLeft,pBotRight));
+                squareviews[i][y] = s;
+            }
+        }
+    }
+        
+
+    
+    public void drawField(){
+        for(SquareView squarex[] : squareviews){
+            for(SquareView square : squarex){
+                g2d.draw(square.getLineBot());
+                g2d.draw(square.getLineLeft());
+                g2d.draw(square.getLineRight());
+                g2d.draw(square.getLineTop());
+            }
+        }
+        
+    }
+    
     
 
      @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g2d = (Graphics2D) g.create();
-        initPoints();
-        drawPoints();
-        initLinesHorizontal();
-        drawLinesHorizontal();
-        initLinesVertical();
-        drawLinesVertical();
+        generateField();
+        drawField();
     }
     
     /**
      * Initialising all Points and save it into an Array
      */
-    private void initPoints(){
-        int ycoordinates=0;
-        int xcoordinates=0;
-        points= new Rectangle2D.Double[mWidth+1][mHeight+1];
-        for(int i=0; i<=mHeight;i++){
-            for(int y=0; y<=mWidth; y++){
-                points[i][y]= new Rectangle2D.Double(xcoordinates, ycoordinates, 2, 2);
-                xcoordinates=xcoordinates+space;
-            }
-            xcoordinates=0;
-            ycoordinates =ycoordinates+space;
-        } 
-        
-    }
-    
-    /**
-     * Draw Points
-     */
-    private void drawPoints(){
-        for(int i=0; i<=mHeight;i++){
-            for(int y=0; y<=mWidth; y++){
-                g2d.draw(points[i][y]);
-            }
-        }
-        
-    }
-    
-    public GameObjects.Point translateCoordinates(GameObjects.Point point){
-        int pointx = point.getX();
-        int pointy = point.getY();
-        int coordinatesx = pointx *30;
-        int coodrinatesy = pointy *30;
-        return null;
-    }
-     
-    public void initLinesHorizontal(){
-        int ycoordinatesP1=0;
-        int xcoordinatesP1=0;
-        int xcoodrinatesP2=30;
-        int ycoordinatesP2=0;
-        linesHorizontal= new Line2D.Double[mWidth][mHeight];
-        for(int i=0; i<mHeight;i++){
-            for(int y=0; y<mWidth-1; y++){
-                linesHorizontal[i][y]= new Line2D.Double(xcoordinatesP1, ycoordinatesP1, xcoodrinatesP2, ycoordinatesP2);
-                xcoordinatesP1=xcoordinatesP1+space;
-                xcoodrinatesP2=xcoodrinatesP2+space;
-            }
-            xcoordinatesP1=0;
-            xcoodrinatesP2=30;
-            ycoordinatesP1 =ycoordinatesP1+space;
-            ycoordinatesP2 =ycoordinatesP2+space;
-        } 
-    }
-    
-     public void drawLinesHorizontal(){
-        for(int i=0; i<mHeight;i++){
-            for(int y=0; y<mWidth-1; y++){
-                g2d.draw(linesHorizontal[i][y]);
-                
-            }
-        } 
-    }
-    
-    
-    public void initLinesVertical(){
-        int ycoordinatesP1=0;
-        int xcoordinatesP1=0;
-        int xcoodrinatesP2=0;
-        int ycoordinatesP2=30;
-        linesVertical= new Line2D.Double[mWidth][mHeight];
-        for(int i=0; i<mHeight-1;i++){
-            for(int y=0; y<mWidth; y++){
-                linesVertical[i][y]= new Line2D.Double(xcoordinatesP1, ycoordinatesP1, xcoodrinatesP2, ycoordinatesP2);
-                xcoordinatesP1=xcoordinatesP1+space;
-                xcoodrinatesP2=xcoodrinatesP2+space;
-            }
-            ycoordinatesP1=ycoordinatesP1+space;
-            ycoordinatesP2=ycoordinatesP2+space;
-            xcoordinatesP1 =0;
-            xcoodrinatesP2 =0;
-        } 
-    }
-    
-    public void drawLinesVertical(){
-     for(int i=0; i<mHeight-1;i++){
-            for(int y=0; y<mWidth; y++){
-                g2d.draw(linesVertical[i][y]);
-                
-            }
-        } 
-    }
+  
     
 }
