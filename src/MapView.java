@@ -37,9 +37,7 @@ public class MapView extends JPanel {
         
     }
     
-    public void setVisible(){
-        setVisible(true);
-    }
+
      @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -89,29 +87,7 @@ public class MapView extends JPanel {
         int coodrinatesy = pointy *30;
         return null;
     }
-    
-    public void drawLine(GameObjects.Line line){
-        
-    }
-    
-    public void drawLinesHorizontal(){
-        for(int i=0; i<mHeight;i++){
-            for(int y=0; y<mWidth-1; y++){
-                g2d.draw(linesHorizontal[i][y]);
-                
-            }
-        } 
-    }
-    
-    public void drawLinesVertical(){
-     for(int i=0; i<mHeight-1;i++){
-            for(int y=0; y<mWidth; y++){
-                g2d.draw(linesVertical[i][y]);
-                
-            }
-        } 
-    }
-    
+     
     public void initLinesHorizontal(){
         int ycoordinatesP1=0;
         int xcoordinatesP1=0;
@@ -131,6 +107,16 @@ public class MapView extends JPanel {
         } 
     }
     
+     public void drawLinesHorizontal(){
+        for(int i=0; i<mHeight;i++){
+            for(int y=0; y<mWidth-1; y++){
+                g2d.draw(linesHorizontal[i][y]);
+                
+            }
+        } 
+    }
+    
+    
     public void initLinesVertical(){
         int ycoordinatesP1=0;
         int xcoordinatesP1=0;
@@ -147,6 +133,15 @@ public class MapView extends JPanel {
             ycoordinatesP2=ycoordinatesP2+space;
             xcoordinatesP1 =0;
             xcoodrinatesP2 =0;
+        } 
+    }
+    
+    public void drawLinesVertical(){
+     for(int i=0; i<mHeight-1;i++){
+            for(int y=0; y<mWidth; y++){
+                g2d.draw(linesVertical[i][y]);
+                
+            }
         } 
     }
     

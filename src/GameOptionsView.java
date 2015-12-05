@@ -101,7 +101,6 @@ public class GameOptionsView implements GameOptionsViewInterface, SubjectInterfa
         //Radio Buttons
         jRadioSingle.setSelected(true);
         jRadioMultiServer.addItemListener(new ItemListener() {
-
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if(jRadioMultiServer.isSelected()){

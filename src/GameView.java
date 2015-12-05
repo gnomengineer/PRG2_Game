@@ -29,7 +29,16 @@ public class GameView implements GameViewInterface, SubjectInterface {
     Dimension size;
     MapView map1;
     
-    JPanel testpanel=new JPanel();
+    JPanel jPanelCenter;
+    JPanel jPanelScoreView;
+    JPanel jPanelWest;
+    
+    JLabel jLabelScore;
+    JLabel jLabelScoreOwn;
+    JLabel jLabelScoreOpponent;
+    JLabel jLabelScoreOwnPoints;
+    JLabel jLabelScoreOpponentPoints;
+    
   
     public GameView(){
         jMBGameView= new JMenuBar();      
@@ -41,6 +50,14 @@ public class GameView implements GameViewInterface, SubjectInterface {
         jMISave = new JMenuItem("Save");
         jMIClose = new JMenuItem("Close");
         size = new Dimension(600, 600);
+        jPanelCenter=new JPanel();
+        jPanelScoreView=new JPanel();
+        jPanelWest = new JPanel();
+        jLabelScore=new JLabel("Score");
+        jLabelScoreOwn = new JLabel("Your Points:");
+        jLabelScoreOpponent = new JLabel ("Opponent Points:  ");
+        jLabelScoreOwnPoints = new JLabel("0");
+        jLabelScoreOpponentPoints = new JLabel("0");
         
             
         
@@ -53,8 +70,9 @@ public class GameView implements GameViewInterface, SubjectInterface {
         jFrameGameView.setPreferredSize(size);
         jFrameGameView.setLayout(new BorderLayout());
         jFrameGameView.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        jFrameGameView.add(testpanel,BorderLayout.CENTER); 
-  
+        jFrameGameView.add(jPanelCenter,BorderLayout.CENTER); 
+        jFrameGameView.add(jPanelWest, BorderLayout.WEST);
+        
         
         //Menubar
         jFrameGameView.setJMenuBar(jMBGameView);
@@ -67,6 +85,23 @@ public class GameView implements GameViewInterface, SubjectInterface {
         jMHelp.add(jMIRules);
         jMHelp.add(jMIAbout);
         
+        //jPanelCenter
+        jPanelCenter.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        jPanelCenter.setLayout(new FlowLayout() );
+        
+        //jPanelWest
+        jPanelWest.setLayout(new FlowLayout());
+        jPanelWest.add(jPanelScoreView);
+        jPanelWest.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        
+        //jPanelScoreView
+        jPanelScoreView.setLayout(new GridLayout(2,2));
+        jPanelScoreView.add(jLabelScoreOwn);
+        jPanelScoreView.add(jLabelScoreOwnPoints);
+        jPanelScoreView.add(jLabelScoreOpponent);
+        jPanelScoreView.add(jLabelScoreOpponentPoints);
+        
+        
     }
     
     private void setupMap() {
@@ -75,19 +110,9 @@ public class GameView implements GameViewInterface, SubjectInterface {
     
     @Override
     public void startGameView(int width, int height) {
-        map1= new MapView(width, height); 
-        testpanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        testpanel.setLayout(new FlowLayout() );
-        
-        
-        
-       
-        testpanel.add(map1);
-        
-       
+        map1= new MapView(width, height);
+        jPanelCenter.add(map1);
         jFrameGameView.setVisible(true);
-        
-       
     }
 
     @Override
