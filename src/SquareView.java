@@ -15,40 +15,40 @@ import java.awt.geom.Rectangle2D;
 public class SquareView {
     
     
-    Line2D.Double lineTop;
-    Line2D.Double lineBot;
-    Line2D.Double lineLeft;
-    Line2D.Double lineRight;
+    LineView lineTop;
+    LineView lineBot;
+    LineView lineLeft;
+    LineView lineRight;
 
-    public Line2D.Double getLineTop() {
+    public LineView getLineTop() {
         return lineTop;
     }
 
-    public Line2D.Double getLineBot() {
+    public LineView getLineBot() {
         return lineBot;
     }
 
-    public Line2D.Double getLineLeft() {
+    public LineView getLineLeft() {
         return lineLeft;
     }
 
-    public Line2D.Double getLineRight() {
+    public LineView getLineRight() {
         return lineRight;
     }
 
-    public void setLineBot(Line2D.Double lineBot) {
+    public void setLineBot(LineView lineBot) {
         this.lineBot = lineBot;
     }
 
-    public void setLineLeft(Line2D.Double lineLeft) {
+    public void setLineLeft(LineView lineLeft) {
         this.lineLeft = lineLeft;
     }
 
-    public void setLineRight(Line2D.Double lineRight) {
+    public void setLineRight(LineView lineRight) {
         this.lineRight = lineRight;
     }
 
-    public void setLineTop(Line2D.Double lineTop) {
+    public void setLineTop(LineView lineTop) {
         this.lineTop = lineTop;
     }
     

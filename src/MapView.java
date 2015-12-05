@@ -44,7 +44,10 @@ public class MapView extends JPanel {
         lingraphics = (Graphics2D) g.create();
         pointgraphics =(Graphics2D) g.create();
         generateField();
-        drawField();
+        //drawField();
+        drawLine(new Line(1, 1, 1, 2));
+        drawLine(new Line(1, 1, 2, 1));
+        drawLine(new Line(8,8,9,8));
         initPoints();
         drawPoints();
     }
@@ -52,25 +55,33 @@ public class MapView extends JPanel {
     
     public void drawLine(Line line){
         
-        Line2D.Double line2d = new Line2D.Double(line.getStartPoint().getX(), line.getStartPoint().getY(), line.getEndPoint().getX(), line.getEndPoint().getY());
-        //getline(line2d);
-        
-    }
-    /*
-    public void getline(Line2D.Double line){
+        LineView line2d = new LineView(line.getStartPoint().getX()*space, line.getStartPoint().getY()*space, line.getEndPoint().getX()*space, line.getEndPoint().getY()*space);
         for(int i=0; i<squareviews.length; i++)
         {
-            for(int y=0; y<squareviews.length; i++){
+            for(int y=0; y<squareviews.length; y++){
                 SquareView square= squareviews[i][y];
                 
-               if((square.getLineTop().getX1() == line.getX1()) && (square.getLineTop().getY1() == line.getY1())){
-                   
+               if(square.getLineTop().equals(line2d)){
+                   lingraphics.draw(square.getLineTop());
                }
+               else if(square.getLineRight().equals(line2d)){
+                   lingraphics.draw(square.getLineRight());
+               }
+               else if(square.getLineBot().equals(line2d)){
+                   lingraphics.draw(square.getLineBot());
+               }
+               else if(square.getLineLeft().equals(line2d)){
+                   lingraphics.draw(square.getLineLeft());
+               }
+            
             
             }
         }
+        
     }
-    */
+    
+ 
+    
     
     public void generateField(){
         for(int i = 0; i < mWidth; i++)
@@ -85,7 +96,7 @@ public class MapView extends JPanel {
                 SquareView s = new SquareView();
                 if(i == 0)
                 {
-                    s.setLineTop(new Line2D.Double(pTopLeft,pTopRight));
+                    s.setLineTop(new LineView(pTopLeft,pTopRight));
                 }
                 else
                 {
@@ -93,19 +104,19 @@ public class MapView extends JPanel {
                 }
                 if(y == 0)
                 {
-                    s.setLineLeft(new Line2D.Double(pTopLeft,pBotLeft));
+                    s.setLineLeft(new LineView(pTopLeft,pBotLeft));
                 }
                 else
                 {
                     s.setLineLeft(squareviews[i][y-1].getLineRight());
                 }
-                s.setLineRight(new Line2D.Double(pTopRight,pBotRight));
-                s.setLineBot(new Line2D.Double(pBotLeft,pBotRight));
+                s.setLineRight(new LineView(pTopRight,pBotRight));
+                s.setLineBot(new LineView(pBotLeft,pBotRight));
                 squareviews[i][y] = s;
             }
         }
     }
-
+/*
     public void drawField(){
         for(SquareView squarex[] : squareviews){
             for(SquareView square : squarex){
@@ -116,7 +127,7 @@ public class MapView extends JPanel {
             }
         }
     }
-    
+*/
     private void initPoints(){
         int ycoordinates=0;
         int xcoordinates=0;
