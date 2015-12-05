@@ -49,7 +49,7 @@ public class GameView implements GameViewInterface, SubjectInterface {
         jMIAbout = new JMenuItem("About");
         jMISave = new JMenuItem("Save");
         jMIClose = new JMenuItem("Close");
-        size = new Dimension(600, 600);
+        size = new Dimension(800, 800);
         jPanelCenter=new JPanel();
         jPanelScoreView=new JPanel();
         jPanelWest = new JPanel();
@@ -144,7 +144,7 @@ public class GameView implements GameViewInterface, SubjectInterface {
 
     @Override
     public void drawLine(Line line, boolean isOpponent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
