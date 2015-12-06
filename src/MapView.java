@@ -19,13 +19,18 @@ public class MapView extends JPanel {
     private int angle = 0;
     private int mWidth;
     private int mHeight;
-    private int space=40;
+    private static int space=40;
+
+    public static int getSpace() {
+        return space;
+    }
     Rectangle2D.Double[][] points;
    
     Graphics2D graphicsOpponent;
     Graphics2D graphicsPlayer;
     Graphics2D graphicsPoints;
-    SquareView[][] squareviews;
+    Graphics2D graphicstest;
+    SquareView[][] squaresview;
    
     /**
      * Create MapView with specified size
@@ -35,7 +40,7 @@ public class MapView extends JPanel {
     public MapView(int mWidth, int mHeight){
         this.mWidth = mWidth;
         this.mHeight= mHeight;
-        this.squareviews = new SquareView[mHeight][mWidth];
+        this.squaresview = new SquareView[mHeight][mWidth];
         
         setup();
         
@@ -44,13 +49,15 @@ public class MapView extends JPanel {
     public void setup(){
         setPreferredSize(new Dimension(mHeight*space+5, mWidth*space+5));
         
-        //Create Mouselistener
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e){
-                System.out.println(e.getPoint());
+                drawLine(e.getX(), e.getY());
+                System.out.println("MousePressed on: "+ e.getX()+" : " + e.getY());
             }
         });
+        //Create Mouselistener
+        
     }
          @Override
     protected void paintComponent(Graphics g) {
@@ -67,16 +74,33 @@ public class MapView extends JPanel {
         drawLine(new Line(8,8,9,8),true);
         initPoints();
         drawPoints();
+        
+        
     }
     
-    
+    public void drawLine(int x, int y){
+        Point2D.Double point = new Point2D.Double(x,y);
+        for(int i=0; i<squaresview.length; i++)
+        {
+            for(int z=0; z<squaresview.length; z++){
+                SquareView square= squaresview[i][z];
+                if(square.contains(point)){
+                    Line2D.Double tmp = square.getLine(point);
+                    graphicsOpponent.draw(tmp);
+                    graphicsOpponent.drawRect(10, 10, 50, 50);
+                    graphicsOpponent.setBackground(Color.yellow);
+                    this.repaint();
+                }
+            }
+        }
+    }
     public void drawLine(Line line, Boolean isOpponent){
         
         LineView line2d = new LineView(line.getStartPoint().getX()*space, line.getStartPoint().getY()*space, line.getEndPoint().getX()*space, line.getEndPoint().getY()*space);
-        for(int i=0; i<squareviews.length; i++)
+        for(int i=0; i<squaresview.length; i++)
         {
-            for(int y=0; y<squareviews.length; y++){
-                SquareView square= squareviews[i][y];
+            for(int y=0; y<squaresview.length; y++){
+                SquareView square= squaresview[i][y];
                 
                if(square.getLineTop().equals(line2d)){
                    if(isOpponent){
@@ -135,7 +159,7 @@ public class MapView extends JPanel {
                 }
                 else
                 {
-                    s.setLineTop((squareviews[i-1][y]).getLineBot());
+                    s.setLineTop((squaresview[i-1][y]).getLineBot());
                 }
                 if(y == 0)
                 {
@@ -143,17 +167,17 @@ public class MapView extends JPanel {
                 }
                 else
                 {
-                    s.setLineLeft(squareviews[i][y-1].getLineRight());
+                    s.setLineLeft(squaresview[i][y-1].getLineRight());
                 }
                 s.setLineRight(new LineView(pTopRight,pBotRight));
                 s.setLineBot(new LineView(pBotLeft,pBotRight));
-                squareviews[i][y] = s;
+                squaresview[i][y] = s;
             }
         }
     }
 /*
     public void drawField(){
-        for(SquareView squarex[] : squareviews){
+        for(SquareView squarex[] : squaresview){
             for(SquareView square : squarex){
                 graphicsOpponent.draw(square.getLineBot());
                 graphicsOpponent.draw(square.getLineLeft());
