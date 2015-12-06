@@ -103,10 +103,7 @@ public class GameView implements GameViewInterface, SubjectInterface {
         
         
     }
-    
-    private void setupMap() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
     
     @Override
     public void startGameView(int width, int height) {
@@ -117,12 +114,12 @@ public class GameView implements GameViewInterface, SubjectInterface {
 
     @Override
     public void updatePlayerState(int points) {
-        // das TextControl updaten
+        jLabelScoreOwnPoints.setText(""+points);
     }
 
     @Override
     public void updateOpponentState(int points) {
-        // das TextControl updaten
+        jLabelScoreOpponentPoints.setText(""+points);
     }
 
     @Override
@@ -142,9 +139,9 @@ public class GameView implements GameViewInterface, SubjectInterface {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
+    @Override //Drawline wird nur von Opponent genutzt, Boolen also überflüssig?
     public void drawLine(Line line, boolean isOpponent) {
-        
+        map1.drawLine(line, isOpponent);
     }
 
     @Override
