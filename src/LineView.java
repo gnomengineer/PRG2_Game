@@ -14,6 +14,8 @@ import java.util.Objects;
  * @author Martin
  */
 public class LineView extends Line2D.Double{
+    
+
 
     public LineView() {
     }
