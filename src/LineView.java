@@ -52,4 +52,8 @@ public class LineView extends Line2D.Double{
         }
         return true;
     }
+    @Override
+    public String toString(){
+        return "Line X1: " + x1 + "\n" + "Y1: " + y1 + "\nX2: " + x2 +"\nY2: " +y2;
+    }
 }
