@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 /**
  *
  * @author Martin
@@ -20,6 +21,8 @@ public class MapView extends JPanel {
     private int mWidth;
     private int mHeight;
     private static int space=40;
+    private ArrayList<LineView> linesOpponent;
+    private ArrayList<LineView> linesPlayer;
 
     public static int getSpace() {
         return space;
@@ -43,7 +46,8 @@ public class MapView extends JPanel {
         this.mWidth = mWidth;
         this.mHeight= mHeight;
         this.squaresview = new SquareView[mHeight][mWidth];
-        
+        linesOpponent = new ArrayList<>();
+        linesPlayer = new ArrayList<>();
         setup();
         
     }
@@ -72,17 +76,14 @@ public class MapView extends JPanel {
         graphicsPlayer.setColor(Color.red);
         graphicsOpponent.setColor(Color.blue);
         
-        
-        
-        drawLine(new Line(1, 1, 1, 2), true);
-        drawLine(new Line(1, 1, 2, 1), false);
-        drawLine(new Line(8,8,9,8),true);
+        for(Line2D.Double line : linesPlayer){
+            graphicsPlayer.draw(line);
+        }
+        for(Line2D.Double line: linesOpponent){
+            graphicsPlayer.draw(line);
+        }        
+
         drawPoints();
-        //drawField();
-        
-        graphicsOpponent.draw(lineToDraw);
-        
-        
     }
     
     public void drawLine(int x, int y){
@@ -92,7 +93,7 @@ public class MapView extends JPanel {
             for(int z=0; z<squaresview.length; z++){
                 SquareView square= squaresview[i][z];
                 if(square.contains(point)){
-                    lineToDraw = square.getLine(point);
+                    linesPlayer.add(square.getLine(point));
                     this.repaint();
                 }
             }
@@ -108,34 +109,38 @@ public class MapView extends JPanel {
                 
                if(square.getLineTop().equals(line2d)){
                    if(isOpponent){
-                       graphicsOpponent.draw(square.getLineTop());
+                       linesOpponent.add(square.getLineTop());
+                       
                    }
                    else{
-                       graphicsPlayer.draw(square.getLineTop());
+                       linesPlayer.add(square.getLineTop());
+                      
                    }
                }
                else if(square.getLineRight().equals(line2d)){
                    if(isOpponent){
-                       graphicsOpponent.draw(square.getLineRight());
+                       linesOpponent.add(square.getLineRight());
+                       
                    }
                    else{
-                       graphicsPlayer.draw(square.getLineRight());
+                       linesPlayer.add(square.getLineRight());
+                       
                    }
                }
                else if(square.getLineBot().equals(line2d)){
                    if(isOpponent){
-                       graphicsOpponent.draw(square.getLineBot());
+                       linesOpponent.add(square.getLineBot());
                    }
                    else{
-                       graphicsPlayer.draw(square.getLineBot());
+                       linesPlayer.add(square.getLineBot());
                    }
                }
                else if(square.getLineLeft().equals(line2d)){
                    if(isOpponent){
-                       graphicsOpponent.draw(square.getLineLeft());
+                       linesOpponent.add(square.getLineLeft());
                    }
                    else{
-                       graphicsPlayer.draw(square.getLineLeft());
+                       linesPlayer.add(square.getLineLeft());
                    }
                    
                }
