@@ -12,13 +12,19 @@ public class Map
     private Square[][] squares;
     private final int columns;
     private final int rows;
+    private ArrayList<Line> uniquelines;
     
     public Map(int rows, int columns)
     {
+        this.uniquelines = new ArrayList<Line>();
+        
         this.rows = rows;
         this.columns = columns;
         this.squares = new Square[rows][columns];
         this.generateMap();
+        
+        //damit man einfacher nach bestimmen Lines suchen kann
+        prepareUniqueLines();
     }
 
     private void generateMap()
@@ -55,6 +61,37 @@ public class Map
         }
     }
     
+    private void prepareUniqueLines(){
+        Square square = null;
+
+        for (int x = 0; x < this.squares.length; x++) {
+            for (int y = 0; y < this.squares.length; y++) {
+               
+                square = this.squares[x][y];
+                
+                if(!uniquelines.contains(square.getBotLine()))
+                {
+                    uniquelines.add(square.getBotLine());
+                }
+                
+                if(!uniquelines.contains(square.getLeftLine()))
+                {
+                    uniquelines.add(square.getLeftLine());
+                }
+                  
+                if(!uniquelines.contains(square.getRightLine()))
+                {
+                    uniquelines.add(square.getRightLine());
+                }
+                    
+                if(!uniquelines.contains(square.getTopLine()))
+                {
+                    uniquelines.add(square.getTopLine());
+                }
+            }
+        }
+    }
+    
     public int getWidth()
     {
         return this.columns;
@@ -71,38 +108,10 @@ public class Map
     }
 
     public Line getLine(Point startPoint, Point endPoint) {
-        ArrayList<Line> lines = new ArrayList<Line>();
-        Square square = null;
-        Line returnLine = null;
+        Line preparedLine = new Line(startPoint, endPoint);
         
-        for (int x = 0; x < this.squares.length; x++) {
-            for (int y = 0; y < this.squares.length; y++) {
-               
-                square = this.squares[x][y];
-                
-                if(!lines.contains(square.getBotLine()))
-                {
-                    lines.add(square.getBotLine());
-                }
-                
-                if(!lines.contains(square.getLeftLine()))
-                {
-                    lines.add(square.getLeftLine());
-                }
-                  
-                if(!lines.contains(square.getRightLine()))
-                {
-                    lines.add(square.getRightLine());
-                }
-                    
-                if(!lines.contains(square.getTopLine()))
-                {
-                    lines.add(square.getTopLine());
-                }
-            }
-        }        
-        //line = lines.stream().filter(f => f.)
+        Line resultLine = uniquelines.stream().filter((line) -> line.equals(preparedLine)).findFirst().get();
         
-        return null;
+        return resultLine;
     }
 }

@@ -1,5 +1,7 @@
 
 import ArtificialIntelligence.AIController;
+import Enums.GameModeEnum;
+import FactorySet.OpponentFactory;
 import GameObjects.Line;
 import java.awt.Event;
 import java.awt.event.ActionEvent;
@@ -14,7 +16,7 @@ public class GameController implements ObserverInterface {
     private GameViewInterface gameView;
     private GameOptionsViewInterface gameOptionsView;
     private LogicInterface gameLogic;
-
+    
     public GameController(GameOptionsViewInterface gameOptionsView, GameViewInterface gameView, LogicInterface gameLogic){
         this.gameView = gameView;
         this.gameLogic = gameLogic;
@@ -29,21 +31,37 @@ public class GameController implements ObserverInterface {
     }
   
     private void startGamePreparation() {
-        int mapHeight = 10;
-        int mapWidth = 10;
+        OpponentFactory factory = new OpponentFactory();
+        GameModeEnum gameMode = GameModeEnum.AIMode;
+        int mapHeight = gameOptionsView.getFieldHeight();
+        int mapWidth = gameOptionsView.getFieldWidth();
         
-        gameLogic.initializeGame(mapHeight, mapWidth, new AIController());
-        gameView.startGameView(6, 6);
+        // damit default immer AI-Mode ist!!
+        if(gameOptionsView.getGameMode() != null)
+        {
+            gameMode= gameOptionsView.getGameMode();
+        }
         
-        //this.gameView.drawLine(new Line(1,1,1,2), true);
-        //this.gameView.drawLine(new Line(3,3,4,3), false);
-
+        // via Factory erstellen, da ich als Controller den konkretten Opponent nicht kennen will!!
+        OpponentInterface opponent =  factory.createOpponent(gameMode);
+        
+        // damit Controller zu den Spielzügen informiert wird!!
+        ((SubjectInterface)opponent).registerObserver(this);
+        
+        // Logic & View initiieren!!        
+        gameLogic.initializeGame(mapHeight, mapWidth, opponent);
+        gameView.startGameView(mapWidth, mapWidth);
     }
 
     @Override
     public void makeMove(Line selectedLine, boolean isOpponent) {
         //DO SOMETHING
-        gameView.drawLine(selectedLine, isOpponent);
+        boolean validMove = gameLogic.isValidLine(selectedLine, isOpponent);
+        
+        if(validMove){
+            //gameLogic.setLine(selectedLine, isOpponent);
+            gameView.drawLine(selectedLine, isOpponent);
+        }
     }
 
     @Override

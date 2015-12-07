@@ -59,11 +59,18 @@ public class Line
         {
             return false;
         }
-                
-        if(this.startPoint != ((Line)obj).getStartPoint() || this.endPoint != ((Line)obj).getEndPoint())
+         
+        // we: ich habe das gefühl, da muss man mit equals suchen, so dass 2 point instanzen gleich sind, solange x und y dem so ist!!
+        //if(this.startPoint != ((Line)obj).getStartPoint() || this.endPoint != ((Line)obj).getEndPoint())
+        //{
+         //   return false;
+        //}
+        
+        if(!this.startPoint.equals(((Line)obj).getStartPoint()) || !this.endPoint.equals(((Line)obj).getEndPoint()))
         {
             return false;
         }
+        
         return true;
     }
 }
