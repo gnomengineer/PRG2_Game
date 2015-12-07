@@ -62,7 +62,8 @@ public class MapView extends JPanel {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e){
-                drawLine(e.getX(), e.getY());
+                //ist nur zum testen
+                //drawLine(e.getX(), e.getY());
                 System.out.println("MousePressed on: "+ e.getX()+" : " + e.getY());
             }
         });
@@ -90,17 +91,31 @@ public class MapView extends JPanel {
     
     public void drawLine(int x, int y){
         Point2D.Double point = new Point2D.Double(x,y);
+        
+        LineView line = getLineViewByPoint(point);
+        linesPlayer.add(line);
+        
+        this.repaint();
+    }
+    
+    public LineView getLineViewByPoint(Point2D.Double point){
+        LineView line = null;
+        
         for(int i=0; i<squaresview.length; i++)
         {
             for(int z=0; z<squaresview.length; z++){
                 SquareView square= squaresview[i][z];
                 if(square.contains(point)){
-                    linesPlayer.add(square.getLine(point));
-                    this.repaint();
+                    
+                    line = square.getLine(point);
+                    
                 }
             }
         }
+        
+        return line;
     }
+    
     public void drawLine(Line line, Boolean isOpponent){
         
         LineView line2d = new LineView(line.getStartPoint().getX()*space, line.getStartPoint().getY()*space, line.getEndPoint().getX()*space, line.getEndPoint().getY()*space);
@@ -148,9 +163,8 @@ public class MapView extends JPanel {
                }
             }
         }
+        this.repaint();
     }
-    
- 
     
     
     public void generateField(){

@@ -23,6 +23,8 @@ public class GameController implements ObserverInterface {
     
     public void startControlling(){
         ((SubjectInterface)gameOptionsView).registerObserver(this);
+        ((SubjectInterface)gameView).registerObserver(this);
+
         gameOptionsView.startOptionsView();
     }
   
@@ -33,14 +35,15 @@ public class GameController implements ObserverInterface {
         gameLogic.initializeGame(mapHeight, mapWidth, new AIController());
         gameView.startGameView(6, 6);
         
-        this.gameView.drawLine(new Line(1,1,1,2), true);
-        this.gameView.drawLine(new Line(3,3,4,3), false);
+        //this.gameView.drawLine(new Line(1,1,1,2), true);
+        //this.gameView.drawLine(new Line(3,3,4,3), false);
 
     }
 
     @Override
-    public void makeMove(Line selectedLine) {
+    public void makeMove(Line selectedLine, boolean isOpponent) {
         //DO SOMETHING
+        gameView.drawLine(selectedLine, isOpponent);
     }
 
     @Override
