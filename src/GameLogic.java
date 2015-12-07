@@ -3,8 +3,10 @@ import GameObjects.Figur;
 import GameObjects.Line;
 import GameObjects.Map;
 import GameObjects.Point;
+import GameObjects.Square;
 import Interfaces.LogicInterface;
 import Interfaces.OpponentInterface;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,6 +18,8 @@ public class GameLogic implements LogicInterface {
     private OpponentInterface opponent;
     private Figur localFigur;
     private Figur opponentFigur;
+    private Figur nextFigur;
+    private boolean tempBoolAddedPoints;
     
     @Override
     public void initializeGame(int height, int width, OpponentInterface opponent) {
@@ -28,6 +32,8 @@ public class GameLogic implements LogicInterface {
 
     @Override
     public void setLine(Point startPoint, Point endPoint, boolean isOpponent) {
+        //Todo
+        tempBoolAddedPoints = false;
         
         Line line = this.map.getLine(startPoint, endPoint);
         
@@ -38,12 +44,55 @@ public class GameLogic implements LogicInterface {
             // bestimmem, wer am Zug ist!!
             // meine Squares suchen // höchstens 2 und prüfen, ob ich die letzte linie war
             // nun die Punkte setzten, falls es so war, und nun persistieren, dass ich nochmals am zug bin!!
+            ArrayList<Square> squares =  map.getSquaresBy(line);
             
+            squares.forEach(s ->{
+                if(s.isTaken() && !s.isOwned())
+                {
+                    setOwner(s, isOpponent);
+                    
+                    tempBoolAddedPoints = true;
+                }
+            });
             
-            // den Opponent informieren, dass er nun am zug ist !            
+            if(tempBoolAddedPoints)
+            {
+                //nochmals einen Zug, juhee 
+                if(nextFigur == opponentFigur)
+                {
+                    opponent.makeMove();
+                }
+            }
+            else
+            {
+                if(isOpponent)
+                {
+                    nextFigur = localFigur;
+                }
+                else
+                {
+                    nextFigur = opponentFigur;
+                    opponent.makeMove();
+                }
+            }
+                
         }
     }
     
+    private void setOwner(Square square, boolean isOpponent)
+    {
+        if(isOpponent)
+                    {
+                        square.setOwner(opponentFigur);
+                        opponentFigur.incresePoints(1);
+                    }
+                    else
+                    {
+                        square.setOwner(localFigur);
+                        localFigur.incresePoints(1);
+                    }
+        
+    }
     private void setOwner(Line line, boolean isOpponent){
         if(isOpponent)
         {
@@ -58,7 +107,7 @@ public class GameLogic implements LogicInterface {
 
     @Override
     public void setLine(Line selectedLine, boolean isOpponent) {
-        this.setLine(selectedLine.getStartPoint(),selectedLine.getStartPoint(), isOpponent);
+        this.setLine(selectedLine.getStartPoint(),selectedLine.getEndPoint(), isOpponent);
     }
 
     @Override

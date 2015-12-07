@@ -6,6 +6,9 @@ import GameObjects.Map;
 import Interfaces.ObserverInterface;
 import Interfaces.OpponentInterface;
 import Interfaces.SubjectInterface;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -47,13 +50,23 @@ public class AIController implements OpponentInterface,SubjectInterface
 
     @Override
     public void makeMove() {
+        Line tempLine = null;
         
         // hier macht die AI einen pseudozug!!
+        int x = new Random().nextInt(9);
+        int y = new Random().nextInt(9);
         
-        Line tempLine = new Line(0,0,0,1);
+        boolean rechts = new Random().nextBoolean();
         
-        this.observer.makeMove(tempLine, true);
+        if(rechts)
+        {
+            tempLine = new Line(x,y,x + 1, y);
+        }
+        else
+        {
+            tempLine = new Line(x,y,x, y+1);
+        }
+        
+         this.observer.makeMove(tempLine, true);
     }
-
-
 }

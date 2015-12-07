@@ -73,4 +73,8 @@ public class Line
         
         return true;
     }
+
+    public  boolean isOwned() {
+        return this.owner != null;
+    }
 }

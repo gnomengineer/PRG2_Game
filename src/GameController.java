@@ -59,7 +59,7 @@ public class GameController implements ObserverInterface {
         boolean validMove = gameLogic.isValidLine(selectedLine, isOpponent);
         
         if(validMove){
-            //gameLogic.setLine(selectedLine, isOpponent);
+            gameLogic.setLine(selectedLine, isOpponent);
             gameView.drawLine(selectedLine, isOpponent);
         }
     }
