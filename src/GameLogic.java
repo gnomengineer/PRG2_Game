@@ -115,4 +115,14 @@ public class GameLogic implements LogicInterface {
         Line line = map.getLine(selectedLine.getStartPoint(), selectedLine.getEndPoint());
         return line.getOwner() == null;
     }
+
+    @Override
+    public int getPlayerState() {
+        return localFigur.getPoints();
+    }
+
+    @Override
+    public int getOpponentState() {
+        return opponentFigur.getPoints();
+    }
 }

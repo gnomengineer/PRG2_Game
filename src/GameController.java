@@ -62,6 +62,11 @@ public class GameController implements ObserverInterface {
             gameLogic.setLine(selectedLine, isOpponent);
             gameView.drawLine(selectedLine, isOpponent);
         }
+        
+        // todo verbessern
+        this.gameView.updatePlayerState(gameLogic.getPlayerState());
+        this.gameView.updateOpponentState(gameLogic.getOpponentState());
+
     }
 
     @Override

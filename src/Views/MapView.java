@@ -119,6 +119,7 @@ public class MapView extends JPanel {
     public void drawLine(Line line, Boolean isOpponent){
         
         LineView line2d = new LineView(line.getStartPoint().getX()*space, line.getStartPoint().getY()*space, line.getEndPoint().getX()*space, line.getEndPoint().getY()*space);
+        
         for(int i=0; i<squaresview.length; i++)
         {
             for(int y=0; y<squaresview.length; y++){

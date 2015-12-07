@@ -13,4 +13,8 @@ public interface LogicInterface {
 
     public void setLine(Line selectedLine, boolean isOpponent);
     public boolean isValidLine(Line selectedLine, boolean isOpponent);
+
+    public int getPlayerState();
+
+    public int getOpponentState();
 }
