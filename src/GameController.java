@@ -1,4 +1,5 @@
 
+import ArtificialIntelligence.AIController;
 import GameObjects.Line;
 import java.awt.Event;
 import java.awt.event.ActionEvent;
@@ -20,22 +21,21 @@ public class GameController implements ObserverInterface {
         this.gameOptionsView = gameOptionsView;
     }
     
-    public void StartControlling(){
+    public void startControlling(){
         ((SubjectInterface)gameOptionsView).registerObserver(this);
-        
         gameOptionsView.startOptionsView();
     }
-    
-    private void startGameSession()
-    {
-        gameView.startGameView(10,10);
-    }
-    
+  
     private void startGamePreparation() {
-        //Temp for Chief of Gui for testing
-        gameView.startGameView(20, 30);
-        // do something if needed
-        //gameLogic.initializeGame(gameOptionsView.getFieldHeight(), gameOptionsView.getFieldWidth());
+        int mapHeight = 10;
+        int mapWidth = 10;
+        
+        gameLogic.initializeGame(mapHeight, mapWidth, new AIController());
+        gameView.startGameView(6, 6);
+        
+        this.gameView.drawLine(new Line(1,1,1,2), true);
+        this.gameView.drawLine(new Line(3,3,4,3), false);
+
     }
 
     @Override
@@ -45,8 +45,6 @@ public class GameController implements ObserverInterface {
 
     @Override
     public void submitOptions() {
-        //DO SOMETHING
-        
-        gameView.startGameView(10,10);
+        startGamePreparation();
     }
 }
