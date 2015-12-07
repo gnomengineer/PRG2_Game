@@ -1,3 +1,5 @@
+package Views;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,6 +13,7 @@ import javax.swing.*;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 /**
  *
  * @author Martin
@@ -20,6 +23,8 @@ public class MapView extends JPanel {
     private int mWidth;
     private int mHeight;
     private static int space=40;
+    private ArrayList<LineView> linesOpponent;
+    private ArrayList<LineView> linesPlayer;
 
     public static int getSpace() {
         return space;
@@ -31,7 +36,9 @@ public class MapView extends JPanel {
     Graphics2D graphicsPoints;
     Graphics2D graphicstest;
     SquareView[][] squaresview;
-   
+    Line2D.Double lineToDraw=new Line2D.Double(10, 10, 20, 20);
+    
+    
     /**
      * Create MapView with specified size
      * @param mWidth
@@ -41,14 +48,17 @@ public class MapView extends JPanel {
         this.mWidth = mWidth;
         this.mHeight= mHeight;
         this.squaresview = new SquareView[mHeight][mWidth];
-        
+        linesOpponent = new ArrayList<>();
+        linesPlayer = new ArrayList<>();
         setup();
         
     }
     
     public void setup(){
         setPreferredSize(new Dimension(mHeight*space+5, mWidth*space+5));
-        
+        generateField();
+        initPoints();
+        ;
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e){
@@ -67,15 +77,15 @@ public class MapView extends JPanel {
         graphicsPoints =(Graphics2D) g.create();
         graphicsPlayer.setColor(Color.red);
         graphicsOpponent.setColor(Color.blue);
-        generateField();
-        //drawField();
-        drawLine(new Line(1, 1, 1, 2), true);
-        drawLine(new Line(1, 1, 2, 1), false);
-        drawLine(new Line(8,8,9,8),true);
-        initPoints();
+        
+        for(Line2D.Double line : linesPlayer){
+            graphicsPlayer.draw(line);
+        }
+        for(Line2D.Double line: linesOpponent){
+            graphicsPlayer.draw(line);
+        }        
+
         drawPoints();
-        
-        
     }
     
     public void drawLine(int x, int y){
@@ -85,10 +95,7 @@ public class MapView extends JPanel {
             for(int z=0; z<squaresview.length; z++){
                 SquareView square= squaresview[i][z];
                 if(square.contains(point)){
-                    Line2D.Double tmp = square.getLine(point);
-                    graphicsOpponent.draw(tmp);
-                    graphicsOpponent.drawRect(10, 10, 50, 50);
-                    graphicsOpponent.setBackground(Color.yellow);
+                    linesPlayer.add(square.getLine(point));
                     this.repaint();
                 }
             }
@@ -104,34 +111,38 @@ public class MapView extends JPanel {
                 
                if(square.getLineTop().equals(line2d)){
                    if(isOpponent){
-                       graphicsOpponent.draw(square.getLineTop());
+                       linesOpponent.add(square.getLineTop());
+                       
                    }
                    else{
-                       graphicsPlayer.draw(square.getLineTop());
+                       linesPlayer.add(square.getLineTop());
+                      
                    }
                }
                else if(square.getLineRight().equals(line2d)){
                    if(isOpponent){
-                       graphicsOpponent.draw(square.getLineRight());
+                       linesOpponent.add(square.getLineRight());
+                       
                    }
                    else{
-                       graphicsPlayer.draw(square.getLineRight());
+                       linesPlayer.add(square.getLineRight());
+                       
                    }
                }
                else if(square.getLineBot().equals(line2d)){
                    if(isOpponent){
-                       graphicsOpponent.draw(square.getLineBot());
+                       linesOpponent.add(square.getLineBot());
                    }
                    else{
-                       graphicsPlayer.draw(square.getLineBot());
+                       linesPlayer.add(square.getLineBot());
                    }
                }
                else if(square.getLineLeft().equals(line2d)){
                    if(isOpponent){
-                       graphicsOpponent.draw(square.getLineLeft());
+                       linesOpponent.add(square.getLineLeft());
                    }
                    else{
-                       graphicsPlayer.draw(square.getLineLeft());
+                       linesPlayer.add(square.getLineLeft());
                    }
                    
                }
@@ -149,29 +160,42 @@ public class MapView extends JPanel {
             {
                 
                 Point2D.Double pTopLeft = new Point2D.Double(i*space,y*space);
-                Point2D.Double pTopRight = new Point2D.Double(i*space,(y+1)*space);
-                Point2D.Double pBotLeft = new Point2D.Double((i+1)*space,y*space);
+                Point2D.Double pTopRight = new Point2D.Double((i+1)*space,y*space);
+                Point2D.Double pBotLeft = new Point2D.Double(i*space,(y+1)*space);
                 Point2D.Double pBotRight = new Point2D.Double((i+1)*space,(y+1)*space);                
                 SquareView s = new SquareView();
                 if(i == 0)
-                {
-                    s.setLineTop(new LineView(pTopLeft,pTopRight));
-                }
-                else
-                {
-                    s.setLineTop((squaresview[i-1][y]).getLineBot());
-                }
-                if(y == 0)
                 {
                     s.setLineLeft(new LineView(pTopLeft,pBotLeft));
                 }
                 else
                 {
-                    s.setLineLeft(squaresview[i][y-1].getLineRight());
+                    s.setLineLeft((squaresview[i-1][y]).getLineRight());
                 }
-                s.setLineRight(new LineView(pTopRight,pBotRight));
+                if(y == 0)
+                {
+                    s.setLineTop(new LineView(pTopLeft,pTopRight));
+                }
+                else
+                {
+                    s.setLineTop(squaresview[i][y-1].getLineBot());
+                }
                 s.setLineBot(new LineView(pBotLeft,pBotRight));
+                s.setLineRight(new LineView(pTopRight,pBotRight));
                 squaresview[i][y] = s;
+            }
+        }
+    }
+    
+    public void outputSquares(){
+        for(int i=0; i<squaresview.length; i++)
+        {
+            for(int y=0; y<squaresview.length; y++){
+                SquareView square= squaresview[i][y]; 
+               System.out.println(square.getLineBot().toString());
+               System.out.println(square.getLineTop().toString());
+               System.out.println(square.getLineLeft().toString());
+               System.out.println(square.getLineRight().toString());
             }
         }
     }

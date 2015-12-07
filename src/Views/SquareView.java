@@ -1,3 +1,5 @@
+package Views;
+
 
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
@@ -103,7 +105,16 @@ public class SquareView {
     }
         
      public boolean contains(Point2D.Double point){
-        if((point.getX() > lineTop.getX1()) && (point.getY() < lineBot.getY2())){
+         double pointX = point.getX();
+         double pointY = point.getY();
+         System.out.println(lineTop);
+         System.out.println(lineLeft);
+         double lineTopX1 = lineTop.getX1();
+         double lineTopX2 = lineTop.getX2();
+         double lineLeftY1 = lineLeft.getY1();
+         double lineLeftY2 = lineLeft.getY2();
+                 
+        if( ( (pointX > lineTopX1) && (pointX < lineTopX2) ) && ((pointY > lineLeftY1) && (pointY < lineLeftY2)))  {
             System.out.println("Linetop X: "+lineTop.getX1());
             System.out.println("Linetop Y: " + lineTop.getY1());
             System.out.println("Linebot X: " + lineBot.getX2());
