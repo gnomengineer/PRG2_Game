@@ -19,10 +19,10 @@ public class OpponentFactory {
             case AIMode:
                 return new AIController();
             case MultiplayerClientMode:
-                return new NetworkController();
+                return new NetworkController(1,"");
             case MultiplayerServerMode:
                 //@TODO implement different network controller for server mode
-                return new NetworkController();
+                return new NetworkController(1,"");
             default:
                 throw new UnsupportedOperationException("wrong type given");
         }

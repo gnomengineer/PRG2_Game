@@ -10,8 +10,9 @@ import Interfaces.SubjectInterface;
  * @author Andre
  */
 public class NetworkController implements OpponentInterface,SubjectInterface{
-
-    public NetworkController(){
+    
+    
+    public NetworkController(int port, String hostname){
         
     }
     
