@@ -83,7 +83,7 @@ public class MapView extends JPanel {
             graphicsPlayer.draw(line);
         }
         for(Line2D.Double line: linesOpponent){
-            graphicsPlayer.draw(line);
+            graphicsOpponent.draw(line);
         }        
 
         drawPoints();
