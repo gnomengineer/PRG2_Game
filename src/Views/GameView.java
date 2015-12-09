@@ -10,6 +10,9 @@ import Interfaces.ObserverInterface;
 import Interfaces.SubjectInterface;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.geom.Point2D;
 import javax.swing.*;
 import static javax.swing.JFrame.*;
 
@@ -40,7 +43,7 @@ public class GameView implements GameViewInterface, SubjectInterface {
     JLabel jLabelScoreOpponent;
     JLabel jLabelScoreOwnPoints;
     JLabel jLabelScoreOpponentPoints;
-    
+    ObserverInterface observer;
   
     public GameView(){
         jMBGameView= new JMenuBar();      
@@ -110,8 +113,29 @@ public class GameView implements GameViewInterface, SubjectInterface {
     @Override
     public void startGameView(int width, int height) {
         map1= new MapView(width, height);
+        
+        map1.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mousePressed(MouseEvent e){
+                Point2D.Double point = new Point2D.Double(e.getX(),e.getY());               
+                LineView line = map1.getLineViewByPoint(point);
+                
+                if(line != null && observer != null){
+                    observer.makeMove(convertToLine(line), false);
+                }
+            }
+        });
+        
         jPanelCenter.add(map1);
         jFrameGameView.setVisible(true);
+    }
+    
+    private Line convertToLine(LineView lineView){
+        int space = MapView.getSpace();
+        
+        Line line = new Line((int)(lineView.x1 / space), (int)(lineView.y1 / space),(int)(lineView.x2 / space),(int)(lineView.y2 / space));
+
+        return line;
     }
 
     @Override
@@ -144,11 +168,13 @@ public class GameView implements GameViewInterface, SubjectInterface {
     @Override //Drawline wird nur von Opponent genutzt, Boolen also überflüssig?
     public void drawLine(Line line, boolean isOpponent) {
         map1.drawLine(line, isOpponent);
+        //map1.repaint(); 
+        
     }
 
     @Override
     public void registerObserver(ObserverInterface observer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.observer = observer;
     }
     
     @Override

@@ -15,6 +15,6 @@ public class Starter{
                                         
         GameController controller = new GameController(new GameOptionsView(), new GameView(), new GameLogic());
         
-        controller.StartControlling();
+        controller.startControlling();
     }
 }

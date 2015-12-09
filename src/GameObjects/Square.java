@@ -109,4 +109,22 @@ public class Square
     {
         return leftLine.getOwner() != null && topLine.getOwner() != null && rightLine.getOwner() != null && botLine.getOwner() != null;
     }
+
+    public void setOwner(Figur owner) {
+        this.owner = owner;
+    }
+    
+    public boolean isOwned()
+    {
+        return this.owner != null;
+    }
+
+    public boolean isTaken() {
+        if(this.leftLine.isOwned() && this.rightLine.isOwned() && this.topLine.isOwned() && this.botLine.isOwned())
+        {
+            return true;
+        }
+        
+        return false;
+    }
 }
