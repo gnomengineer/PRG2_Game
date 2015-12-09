@@ -13,6 +13,8 @@ public interface OpponentInterface
     
     /**
      * Opponent wird notifiziert, dass er nun am Zug ist
+     * 
+     * WIRKLICH NÖTIG!!!
      */
     void makeMove();    
 }

@@ -13,17 +13,16 @@ import java.net.Socket;
  * @author Daniel
  */
 public class Client extends Socket implements Runnable{
-    private Socket client;
     
     public Client(int port, String addr) throws IOException{
-        client = new Socket(addr, port);
+        super(addr, port);
     }
     
     @Override
     public void run() {
         while(true){
-            try(OutputStream out = client.getOutputStream();
-                    InputStream in = client.getInputStream()){
+            try(OutputStream out = getOutputStream();
+                    InputStream in = getInputStream()){
                 //do stuff
             } catch (IOException ioe){
                 //@TODO make a logger
