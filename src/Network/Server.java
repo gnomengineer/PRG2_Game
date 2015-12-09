@@ -11,10 +11,10 @@ import java.net.Socket;
  * @author Daniel
  */
 public class Server extends ServerSocket implements Runnable{
-    private static final int PORT = 1337;
     
-    public Server(InetAddress addr) throws IOException{
-        super(PORT,0,addr);
+    
+    public Server(int port) throws IOException{
+        super(port);
     }
 
     @Override
@@ -22,7 +22,7 @@ public class Server extends ServerSocket implements Runnable{
         while(true){
             try{
                 Socket clientSocket = accept();
-                new Thread(new Client(clientSocket)).start();
+                //new Thread(new Client(clientSocket)).start();
             } catch (IOException ioe){
                 //@TODO make a logger
                 System.err.println("ERROR: " + ioe.getMessage());

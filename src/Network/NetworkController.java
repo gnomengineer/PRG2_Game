@@ -4,16 +4,23 @@ import GameObjects.Line;
 import Interfaces.ObserverInterface;
 import Interfaces.OpponentInterface;
 import Interfaces.SubjectInterface;
+import java.io.IOException;
+import java.net.InetAddress;
 
 /**
  *
  * @author Andre
  */
 public class NetworkController implements OpponentInterface,SubjectInterface{
+    Object network = null;
+    private static final int PORT = 1337;
     
+    public NetworkController(String hostname) throws IOException{
+        network = new Client(PORT, hostname);
+    }
     
-    public NetworkController(int port, String hostname){
-        
+    public NetworkController() throws IOException{
+        network = new Server(PORT);
     }
     
     @Override

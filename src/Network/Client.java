@@ -3,6 +3,7 @@ package Network;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.InetAddress;
 import java.net.Socket;
 
 
@@ -11,21 +12,23 @@ import java.net.Socket;
  *
  * @author Daniel
  */
-public class Client implements Runnable{
+public class Client extends Socket implements Runnable{
     private Socket client;
     
-    public Client(Socket socket){
-        client = socket;
+    public Client(int port, String addr) throws IOException{
+        client = new Socket(addr, port);
     }
     
     @Override
     public void run() {
-        try(OutputStream out = client.getOutputStream();
-                InputStream in = client.getInputStream()){
-            //do stuff
-        } catch (IOException ioe){
-            //@TODO make a logger
-            System.err.println("ERROR " + ioe.getMessage());
+        while(true){
+            try(OutputStream out = client.getOutputStream();
+                    InputStream in = client.getInputStream()){
+                //do stuff
+            } catch (IOException ioe){
+                //@TODO make a logger
+                System.err.println("ERROR " + ioe.getMessage());
+            }    
         }
     }
 
