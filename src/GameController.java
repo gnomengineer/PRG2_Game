@@ -3,6 +3,7 @@ import ArtificialIntelligence.AIController;
 import Enums.GameModeEnum;
 import FactorySet.OpponentFactory;
 import GameObjects.Line;
+import GameObjects.Map;
 import java.awt.Event;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -42,15 +43,21 @@ public class GameController implements ObserverInterface {
             gameMode= gameOptionsView.getGameMode();
         }
         
+        Map map = new Map(mapHeight, mapWidth);
+        
+        
         // via Factory erstellen, da ich als Controller den konkretten Opponent nicht kennen will!!
-        OpponentInterface opponent =  factory.createOpponent(gameMode,gameLogic.getMap());
+        OpponentInterface opponent =  factory.createOpponent(gameMode,map);
         
         // damit Controller zu den Spielzügen informiert wird!!
         ((SubjectInterface)opponent).registerObserver(this);
         
         // Logic & View initiieren!!        
-        gameLogic.initializeGame(mapHeight, mapWidth, opponent);
+        //gameLogic.initializeGame(mapHeight, mapWidth, opponent);
+        
+        gameLogic.initializeGame(map, opponent);
         gameView.startGameView(mapWidth, mapWidth);
+        
     }
 
     @Override
