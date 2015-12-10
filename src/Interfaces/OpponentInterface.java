@@ -8,13 +8,17 @@ import Enums.MessageTypeEnum;
  */
 public interface OpponentInterface 
 {
-    void sendGameInfo(Line selectedLine);
-    void sendGameInfo(MessageTypeEnum msg);
-    
     /**
-     * Opponent wird notifiziert, dass er nun am Zug ist
      * 
-     * WIRKLICH NÖTIG!!!
+     * sendet die gewählte Linie dem Opponent.
+     * 
+     * @param selectedLine - gewählte Linie
      */
-    void makeMove();    
+    void sendGameInfo(Line selectedLine);
+
+    /**
+     * Opponent wird notifiziert, dass er nun am Zug ist.
+     * 
+    */
+    void setOpponentTurn();    
 }

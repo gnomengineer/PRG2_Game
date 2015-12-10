@@ -60,7 +60,7 @@ public class GameLogic implements LogicInterface {
                 //nochmals einen Zug, juhee 
                 if(nextFigur == opponentFigur)
                 {
-                    opponent.makeMove();
+                    opponent.setOpponentTurn();
                 }
             }
             else
@@ -72,7 +72,7 @@ public class GameLogic implements LogicInterface {
                 else
                 {
                     nextFigur = opponentFigur;
-                    opponent.makeMove();
+                    opponent.setOpponentTurn();
                 }
             }
                 

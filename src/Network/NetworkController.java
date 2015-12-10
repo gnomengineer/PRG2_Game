@@ -6,14 +6,16 @@ import Interfaces.OpponentInterface;
 import Interfaces.SubjectInterface;
 import java.io.IOException;
 import java.net.InetAddress;
+import Interfaces.NetworkInterface;
 
 /**
  *
  * @author Andre
  */
 public class NetworkController implements OpponentInterface,SubjectInterface{
-    Object network = null;
+    NetworkInterface network = null;
     private static final int PORT = 1337;
+    ObserverInterface observer = null;
     
     public NetworkController(String hostname) throws IOException{
         network = new Client(PORT, hostname);
@@ -25,26 +27,21 @@ public class NetworkController implements OpponentInterface,SubjectInterface{
     
     @Override
     public void sendGameInfo(Line selectedLine) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void sendGameInfo(MessageTypeEnum msg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        network.setLine(selectedLine);
     }
 
     @Override
     public void registerObserver(ObserverInterface observer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.observer = observer;
     }
 
     @Override
     public void notifyObserver() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.observer.makeMove(network.getLine(), true);
     }
 
     @Override
-    public void makeMove() {
+    public void setOpponentTurn() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

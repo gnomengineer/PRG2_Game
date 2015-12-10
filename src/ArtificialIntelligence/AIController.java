@@ -34,11 +34,6 @@ public class AIController implements OpponentInterface,SubjectInterface
     }
 
     @Override
-    public void sendGameInfo(MessageTypeEnum msg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void registerObserver(ObserverInterface observer) {
         this.observer = observer;
     }
@@ -49,7 +44,7 @@ public class AIController implements OpponentInterface,SubjectInterface
     }
 
     @Override
-    public void makeMove() {
+    public void setOpponentTurn() {
         Line tempLine = null;
         
         // hier macht die AI einen pseudozug!!
