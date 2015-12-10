@@ -1,6 +1,7 @@
 package GameObjects;
 
 import java.awt.List;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import static java.util.stream.Collectors.toList;
@@ -10,7 +11,7 @@ import java.util.stream.Stream;
  *
  * @author Andre
  */
-public class Map 
+public class Map implements Serializable
 {
     private Square[][] squares;
     private final int columns;

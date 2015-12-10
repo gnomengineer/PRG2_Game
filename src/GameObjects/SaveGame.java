@@ -3,6 +3,7 @@ package GameObjects;
 
 import GameObjects.Figur;
 import GameObjects.Map;
+import java.io.Serializable;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,7 +15,7 @@ import GameObjects.Map;
  *
  * @author Andre
  */
-public class SaveGame {
+public class SaveGame implements Serializable {
     Map map = null;
     Figur player = null;
     Figur opponent = null;

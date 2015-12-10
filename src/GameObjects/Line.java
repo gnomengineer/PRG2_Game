@@ -1,10 +1,12 @@
 package GameObjects;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Andre
  */
-public class Line 
+public class Line implements Serializable
 {
     private Point startPoint;
     private Point endPoint;

@@ -1,11 +1,13 @@
 package GameObjects;
 
+import java.io.Serializable;
+
 
 /**
  *
  * @author Andre
  */
-public class Figur {
+public class Figur implements Serializable {
     private int points;
     private final boolean isOpponent;
     

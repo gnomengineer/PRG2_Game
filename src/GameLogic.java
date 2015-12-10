@@ -161,4 +161,19 @@ public class GameLogic implements LogicInterface {
             this.nextFigur = localFigur;
         }
     }
+
+    @Override
+    public Figur getLocalFigur() {
+        return localFigur;
+    }
+
+    @Override
+    public Figur getOpponentFigure() {
+        return  opponentFigur;
+    }
+
+    @Override
+    public boolean IsOpponentContinuing() {
+        return nextFigur.isOpponent();
+    }
 }
