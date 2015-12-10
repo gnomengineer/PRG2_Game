@@ -43,6 +43,11 @@ public class GameLogic implements LogicInterface {
         //Todo
         tempBoolAddedPoints = false;
         
+        if(!isOpponent)
+        {
+            opponent.sendLine(new Line(startPoint, endPoint));
+        }
+        
         Line line = this.map.getLine(startPoint, endPoint);
         
         if(line.getOwner() == null){

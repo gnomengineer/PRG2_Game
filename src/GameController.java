@@ -84,11 +84,13 @@ public class GameController implements ObserverInterface {
 
     @Override
     public void saveOptions() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    
+        
     }
 
     @Override
     public void openOptions(String path) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        
     }
 }
