@@ -12,16 +12,15 @@ import Interfaces.NetworkInterface;
  */
 public class NetworkController implements OpponentInterface,SubjectInterface{
     NetworkInterface network = null;
-    private static final int PORT = 1337;
     ObserverInterface observer = null;
     
-    public NetworkController(String hostname) throws IOException{
-        network = new Client(PORT, hostname);
+    public NetworkController(int port, String hostname) throws IOException{
+        network = new Client(port, hostname);
         new Thread((Client)network).start();
     }
     
-    public NetworkController() throws IOException{
-        network = new Server(PORT);
+    public NetworkController(int port) throws IOException{
+        network = new Server(port);
         new Thread((Server)network).start();
     }
     

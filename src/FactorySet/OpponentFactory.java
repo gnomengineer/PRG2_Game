@@ -16,21 +16,21 @@ public class OpponentFactory {
         
     }
     
-    public OpponentInterface createOpponent(GameModeEnum type, Map map){
+    public OpponentInterface createOpponent(GameModeEnum type, Map map, int port, String addr){
         
             switch(type){
                 case AIMode:
                     return new AIController(map);
                 case MultiplayerClientMode:
                     try{
-                        return new NetworkController("");
+                        return new NetworkController(port, addr);
                     } catch (IOException ioe){
                         System.err.println("ERROR: " + ioe.getMessage());
                     }
                 case MultiplayerServerMode:
                     try{
                         //@TODO implement different network controller for server mode
-                        return new NetworkController("");
+                        return new NetworkController(port);
                     } catch (IOException ioe){
                         System.err.println("ERROR: " + ioe.getMessage());
                     }

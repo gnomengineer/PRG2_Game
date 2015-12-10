@@ -47,7 +47,8 @@ public class GameController implements ObserverInterface {
         
         
         // via Factory erstellen, da ich als Controller den konkretten Opponent nicht kennen will!!
-        OpponentInterface opponent =  factory.createOpponent(gameMode,map);
+        //@TODO set parameter list correct!
+        OpponentInterface opponent =  factory.createOpponent(gameMode,map,0,"");
         
         // damit Controller zu den Spielzügen informiert wird!!
         ((SubjectInterface)opponent).registerObserver(this);
