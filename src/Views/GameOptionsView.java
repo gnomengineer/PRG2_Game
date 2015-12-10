@@ -189,10 +189,5 @@ public class GameOptionsView implements GameOptionsViewInterface, SubjectInterfa
     public void registerObserver(ObserverInterface observer) {
         this.observer = observer;
     }
-
-    @Override
-    public void notifyObserver() {
-        // nothing todo
-    }
     
 }

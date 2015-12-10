@@ -153,16 +153,6 @@ public class GameView implements GameViewInterface, SubjectInterface {
     }
 
     @Override
-    public void registerLineActionListener(ActionListener actionListener) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String getLastDrawnLine() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void drawLine(Line line, boolean isOpponent) {
         map1.drawLine(line, isOpponent);
         //map1.repaint(); 
@@ -171,10 +161,5 @@ public class GameView implements GameViewInterface, SubjectInterface {
     @Override
     public void registerObserver(ObserverInterface observer) {
         this.observer = observer;
-    }
-    
-    @Override
-    public void notifyObserver() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

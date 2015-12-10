@@ -15,7 +15,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 /**
- *
+ * Does display the Map.
  * @author Martin
  */
 public class MapView extends JPanel {
@@ -29,8 +29,8 @@ public class MapView extends JPanel {
     public static int getSpace() {
         return space;
     }
+    
     Rectangle2D.Double[][] points;
-   
     Graphics2D graphicsOpponent;
     Graphics2D graphicsPlayer;
     Graphics2D graphicsPoints;
@@ -54,11 +54,15 @@ public class MapView extends JPanel {
         
     }
     
+    /**
+     * Setup GUI Components
+     */
     public void setup(){
         setPreferredSize(new Dimension(mHeight*space+5, mWidth*space+5));
         generateField();
         initPoints();
-        ;
+        //Test purpose only
+        /*
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e){
@@ -68,81 +72,81 @@ public class MapView extends JPanel {
             }
         });
         //Create Mouselistener
-        
+        */
     }
          @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        graphicsOpponent = (Graphics2D) g.create();
+        
+        //Graphics Player
         graphicsPlayer = (Graphics2D) g.create();
-        graphicsPoints =(Graphics2D) g.create();
         graphicsPlayer.setColor(Color.red);
+        
+        //Graphics Oponent
+        graphicsOpponent = (Graphics2D) g.create();
         graphicsOpponent.setColor(Color.blue);
         
+        //Graphics Point
+        graphicsPoints =(Graphics2D) g.create();
+        
+        //DrawLines Player and Opponent
         for(Line2D.Double line : linesPlayer){
             graphicsPlayer.draw(line);
         }
         for(Line2D.Double line: linesOpponent){
             graphicsOpponent.draw(line);
-        }        
-
+        }    
+        
+        //Draw Points
         drawPoints();
     }
-    
+    /* Test purpose only
     public void drawLine(int x, int y){
         Point2D.Double point = new Point2D.Double(x,y);
-        
         LineView line = getLineViewByPoint(point);
         linesPlayer.add(line);
-        
         this.repaint();
     }
+    */
     
     public LineView getLineViewByPoint(Point2D.Double point){
         LineView line = null;
-        
         for(int i=0; i<squaresview.length; i++)
         {
             for(int z=0; z<squaresview.length; z++){
                 SquareView square= squaresview[i][z];
                 if(square.contains(point)){
-                    
                     line = square.getLine(point);
-                    
                 }
             }
         }
-        
         return line;
     }
-    
+    /**
+     * Does draw the Line
+     * @param line line to draw
+     * @param isOpponent defines which Player draws
+     */
     public void drawLine(Line line, Boolean isOpponent){
-        
         LineView line2d = new LineView(line.getStartPoint().getX()*space, line.getStartPoint().getY()*space, line.getEndPoint().getX()*space, line.getEndPoint().getY()*space);
-        
         for(int i=0; i<squaresview.length; i++)
         {
             for(int y=0; y<squaresview.length; y++){
-                SquareView square= squaresview[i][y];
-                
+               SquareView square= squaresview[i][y];
                if(square.getLineTop().equals(line2d)){
                    if(isOpponent){
-                       linesOpponent.add(square.getLineTop());
-                       
+                       linesOpponent.add(square.getLineTop()); 
                    }
                    else{
-                       linesPlayer.add(square.getLineTop());
-                      
+                       linesPlayer.add(square.getLineTop()); 
                    }
                }
                else if(square.getLineRight().equals(line2d)){
                    if(isOpponent){
                        linesOpponent.add(square.getLineRight());
-                       
                    }
                    else{
                        linesPlayer.add(square.getLineRight());
-                       
                    }
                }
                else if(square.getLineBot().equals(line2d)){
@@ -160,39 +164,35 @@ public class MapView extends JPanel {
                    else{
                        linesPlayer.add(square.getLineLeft());
                    }
-                   
                }
             }
         }
         this.repaint();
     }
     
-    
+    /**
+     * Does generate the Field
+     */
     public void generateField(){
         for(int i = 0; i < mWidth; i++)
         {
             for(int y = 0; y < mHeight; y++)
-            {
-                
+            {   
                 Point2D.Double pTopLeft = new Point2D.Double(i*space,y*space);
                 Point2D.Double pTopRight = new Point2D.Double((i+1)*space,y*space);
                 Point2D.Double pBotLeft = new Point2D.Double(i*space,(y+1)*space);
                 Point2D.Double pBotRight = new Point2D.Double((i+1)*space,(y+1)*space);                
                 SquareView s = new SquareView();
-                if(i == 0)
-                {
+                if(i == 0){
                     s.setLineLeft(new LineView(pTopLeft,pBotLeft));
                 }
-                else
-                {
+                else{
                     s.setLineLeft((squaresview[i-1][y]).getLineRight());
                 }
-                if(y == 0)
-                {
+                if(y == 0){
                     s.setLineTop(new LineView(pTopLeft,pTopRight));
                 }
-                else
-                {
+                else{
                     s.setLineTop(squaresview[i][y-1].getLineBot());
                 }
                 s.setLineBot(new LineView(pBotLeft,pBotRight));
@@ -202,9 +202,11 @@ public class MapView extends JPanel {
         }
     }
     
+    /*
+    Test purpose only. 
+    */
     public void outputSquares(){
-        for(int i=0; i<squaresview.length; i++)
-        {
+        for(int i=0; i<squaresview.length; i++){
             for(int y=0; y<squaresview.length; y++){
                 SquareView square= squaresview[i][y]; 
                System.out.println(square.getLineBot().toString());
@@ -214,6 +216,7 @@ public class MapView extends JPanel {
             }
         }
     }
+//Test purpose only
 /*
     public void drawField(){
         for(SquareView squarex[] : squaresview){
@@ -226,6 +229,8 @@ public class MapView extends JPanel {
         }
     }
 */
+    
+    
     private void initPoints(){
         int ycoordinates=0;
         int xcoordinates=0;

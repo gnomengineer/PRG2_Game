@@ -10,18 +10,6 @@ import java.awt.event.ActionListener;
  * @author Andre
  */
 public interface GameViewInterface {
-
-    /**
-     * Die gestzte Linie 
-     * @return 
-     */
-    String getLastDrawnLine();
-        
-     /**
-     * ActionListener registieren
-     * @param actionListener 
-     */
-    void registerLineActionListener(ActionListener actionListener);
     
     /**
      * Spiel anhand Information aufbauen
