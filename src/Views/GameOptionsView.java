@@ -15,8 +15,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.*;
 import static javax.swing.JFrame.*;
 import Interfaces.GameOptionsViewInterface;
@@ -27,8 +25,9 @@ import java.awt.event.ItemListener;
 
 
 /**
- *
- * @author metterlin
+ * GUI for setting options in Dots & Boxes.
+ * Informs Controller about the settings made. 
+ * @author Martin Etterlin
  */
 public class GameOptionsView implements GameOptionsViewInterface, SubjectInterface {
 
@@ -75,7 +74,9 @@ public class GameOptionsView implements GameOptionsViewInterface, SubjectInterfa
      
         setup();
     }
- 
+    /**
+     * Sets up GUI Components
+     */
     private void setup(){
         //jButton
         jBtnSubmit.addActionListener(event ->
@@ -88,7 +89,6 @@ public class GameOptionsView implements GameOptionsViewInterface, SubjectInterfa
         jFrameOptions.setPreferredSize(size);
         jFrameOptions.add(jPanelOptions);
         jFrameOptions.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
         
         //jPanel Options
         jPanelOptions.setLayout(new BorderLayout());
@@ -125,7 +125,6 @@ public class GameOptionsView implements GameOptionsViewInterface, SubjectInterfa
         jTxtIpAddress.setEditable(false);
         jTxtPort.setEditable(false);
         
-        
         //Slider X
         jSliderWidth.setMajorTickSpacing(5);
         jSliderWidth.setMinorTickSpacing(1);
@@ -156,14 +155,7 @@ public class GameOptionsView implements GameOptionsViewInterface, SubjectInterfa
         jPanelField.add(jLabelFieldSize);
         jPanelField.add(jSliderWidth);
         jPanelField.add(jSliderHeight);
-             
     }
-    
-/** via observer.submitOption(); auslösen
-    @Override
-    public void registerOptionActionListener(ActionListener actionListener) {
-        jBtnSubmit.addActionListener(actionListener);
-    }*/
 
     @Override
     public String getIPAddress() {
@@ -190,8 +182,10 @@ public class GameOptionsView implements GameOptionsViewInterface, SubjectInterfa
         if(jRadioSingle.isSelected()){
             return GameModeEnum.AIMode;
         }
+        else if(jRadioMultiServer.isSelected()){
+            return GameModeEnum.MultiplayerServerMode;
+        }
         else {
-            //@TODO differ between client and server mode
             return GameModeEnum.MultiplayerClientMode;
         }
     }
