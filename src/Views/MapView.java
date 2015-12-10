@@ -22,7 +22,7 @@ public class MapView extends JPanel {
     private int angle = 0;
     private int mWidth;
     private int mHeight;
-    private static int space=40;
+    private static int space=60;
     private ArrayList<LineView> linesOpponent;
     private ArrayList<LineView> linesPlayer;
 
@@ -36,7 +36,7 @@ public class MapView extends JPanel {
     Graphics2D graphicsPoints;
     Graphics2D graphicstest;
     SquareView[][] squaresview;
-    Line2D.Double lineToDraw=new Line2D.Double(10, 10, 20, 20);
+    
     
     
     /**
@@ -50,6 +50,8 @@ public class MapView extends JPanel {
         this.squaresview = new SquareView[mWidth][mHeight];
         linesOpponent = new ArrayList<>();
         linesPlayer = new ArrayList<>();
+        setBackground(Color.WHITE);
+        
         setup();
         
     }
@@ -81,13 +83,16 @@ public class MapView extends JPanel {
         //Graphics Player
         graphicsPlayer = (Graphics2D) g.create();
         graphicsPlayer.setColor(Color.red);
+        graphicsPlayer.setStroke(new BasicStroke(5));
         
         //Graphics Oponent
         graphicsOpponent = (Graphics2D) g.create();
         graphicsOpponent.setColor(Color.blue);
+        graphicsOpponent.setStroke(new BasicStroke(5));
         
         //Graphics Point
         graphicsPoints =(Graphics2D) g.create();
+        graphicsPoints.setColor(Color.BLACK);
         
         //DrawLines Player and Opponent
         for(Line2D.Double line : linesPlayer){
