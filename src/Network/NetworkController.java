@@ -36,11 +36,6 @@ public class NetworkController implements OpponentInterface,SubjectInterface{
     }
 
     @Override
-    public void notifyObserver() {
-        this.observer.makeMove(network.getLine(), true);
-    }
-
-    @Override
     public void setOpponentTurn() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
