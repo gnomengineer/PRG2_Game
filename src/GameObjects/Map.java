@@ -148,4 +148,8 @@ public class Map
        
        return filterSquare;
     }
+
+    public ArrayList<Line> getLines() {
+        return this.uniquelines;
+    }
 }
