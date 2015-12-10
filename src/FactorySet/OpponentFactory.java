@@ -3,6 +3,7 @@ package FactorySet;
 import Enums.GameModeEnum;
 import Interfaces.OpponentInterface;
 import ArtificialIntelligence.AIController;
+import GameObjects.Map;
 import Network.NetworkController;
 import java.io.IOException;
 /**
@@ -15,11 +16,11 @@ public class OpponentFactory {
         
     }
     
-    public OpponentInterface createOpponent(GameModeEnum type){
+    public OpponentInterface createOpponent(GameModeEnum type, Map map){
         
             switch(type){
                 case AIMode:
-                    return new AIController();
+                    return new AIController(map);
                 case MultiplayerClientMode:
                     try{
                         return new NetworkController("");
