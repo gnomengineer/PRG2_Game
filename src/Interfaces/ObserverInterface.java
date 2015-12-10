@@ -17,4 +17,8 @@ public interface ObserverInterface{
      * TODO: evtl. umbennen - Controller informieren, dass die Einstellungen übernommen werden können
      */
     void submitOptions();
+    
+    void saveOptions();
+    
+    void openOptions(String path);
 }
