@@ -1,6 +1,7 @@
 package Network;
 
 import GameObjects.Line;
+import Interfaces.NetworkInterface;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
@@ -10,20 +11,12 @@ import java.net.ServerSocket;
  *
  * @author Daniel
  */
-public class Server extends ServerSocket implements Runnable{
+public class Server extends ServerSocket implements Runnable, NetworkInterface{
     Client client = null;
+    private Line line = null;
     
     public Server(int port) throws IOException{
         super(port);
-    }
-
-    public void sendPackage(Line line){
-        try{
-            PrintWriter output = new PrintWriter(client.getOutputStream());
-            //output.
-        } catch (IOException ioe) {
-            
-        }
     }
     
     @Override
@@ -31,11 +24,26 @@ public class Server extends ServerSocket implements Runnable{
         while(true){
             try{
                 client = (Client)accept();
+                new Thread(client).start();
             } catch (IOException ioe){
                 //@TODO make a logger
                 System.err.println("ERROR: " + ioe.getMessage());
             }
         }
+    }
+
+    /**
+     * @return the line
+     */
+    public Line getLine() {
+        return line;
+    }
+
+    /**
+     * @param line the line to set
+     */
+    public void setLine(Line line) {
+        this.line = line;
     }
 
     
