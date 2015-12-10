@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 public class Logger{    
     /**
-     * logs an exception to .
+     * logs an exception to file 'DotsAndBoxes.log' .
      * 
      * @param type
      * @param ex 
@@ -32,6 +32,14 @@ public class Logger{
         }
     }
     
+    /**
+     * handles the file IO Streams.
+     * opens a FileWriter from a new File object targeting the file called
+     * 'DotsAndBoxes.log'
+     * 
+     * @param type
+     * @param ex 
+     */
     private static void printMessage(String type, Exception ex){
         try(FileWriter logfile = new FileWriter(new File("DotsAndBoxes.log"))){
             logfile.write(type + ": " + ex.getClass() + " - " + ex.getMessage());
