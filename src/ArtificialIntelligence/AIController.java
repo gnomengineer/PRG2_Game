@@ -35,7 +35,7 @@ public class AIController implements OpponentInterface,SubjectInterface
     }
 
     @Override
-    public void sendGameInfo(Line selectedLine) {
+    public void sendLine(Line selectedLine) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

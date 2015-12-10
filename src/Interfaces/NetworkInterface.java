@@ -14,4 +14,5 @@ import GameObjects.Line;
 public interface NetworkInterface {
     public void setLine(Line selectedLine);
     public Line getLine();
+    public void setObserver(ObserverInterface observer);
 }

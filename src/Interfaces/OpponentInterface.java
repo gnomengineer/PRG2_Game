@@ -3,21 +3,22 @@ package Interfaces;
 import GameObjects.Line;
 import Enums.MessageTypeEnum;
 /**
- *
+ * Interface between AI, Network and GameController.
+ * 
  * @author Andre, Daniel
  */
 public interface OpponentInterface 
 {
     /**
      * 
-     * sendet die gewählte Linie dem Opponent.
+     * sends the line object to the opponent.
      * 
      * @param selectedLine - gewählte Linie
      */
-    void sendGameInfo(Line selectedLine);
+    void sendLine(Line selectedLine);
 
     /**
-     * Opponent wird notifiziert, dass er nun am Zug ist.
+     * notifies Opponent about its turn.
      * 
     */
     void setOpponentTurn();    

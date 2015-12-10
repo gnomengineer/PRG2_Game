@@ -1,16 +1,14 @@
 package Network;
-import Enums.MessageTypeEnum;
 import GameObjects.Line;
 import Interfaces.ObserverInterface;
 import Interfaces.OpponentInterface;
 import Interfaces.SubjectInterface;
 import java.io.IOException;
-import java.net.InetAddress;
 import Interfaces.NetworkInterface;
 
 /**
  *
- * @author Andre
+ * @author Daniel
  */
 public class NetworkController implements OpponentInterface,SubjectInterface{
     NetworkInterface network = null;
@@ -19,20 +17,23 @@ public class NetworkController implements OpponentInterface,SubjectInterface{
     
     public NetworkController(String hostname) throws IOException{
         network = new Client(PORT, hostname);
+        new Thread((Client)network).start();
     }
     
     public NetworkController() throws IOException{
         network = new Server(PORT);
+        new Thread((Server)network).start();
     }
     
     @Override
-    public void sendGameInfo(Line selectedLine) {
+    public void sendLine(Line selectedLine) {
         network.setLine(selectedLine);
     }
 
     @Override
     public void registerObserver(ObserverInterface observer) {
         this.observer = observer;
+        network.setObserver(observer);
     }
 
     @Override
@@ -42,7 +43,7 @@ public class NetworkController implements OpponentInterface,SubjectInterface{
 
     @Override
     public void setOpponentTurn() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.err.println("WARNING: not used methode - setOpponentTurn() ");
     }
 
 }
