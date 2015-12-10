@@ -48,11 +48,6 @@ public class AIController implements OpponentInterface,SubjectInterface
     }
 
     @Override
-    public void notifyObserver() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void setOpponentTurn() {
         
         //java.util.Map<Line,Integer> hashMap = new HashMap<Line, Integer>();
