@@ -123,6 +123,7 @@ public class GameOptionsView implements GameOptionsViewInterface, SubjectInterfa
         jSliderWidth.setPaintLabels(true);
         jSliderWidth.setFont(font);
         jSliderWidth.setSnapToTicks(true);
+        jSliderWidth.setValue(5);
         
         //Slider Y
         jSliderHeight.setMajorTickSpacing(5);
@@ -131,6 +132,7 @@ public class GameOptionsView implements GameOptionsViewInterface, SubjectInterfa
         jSliderHeight.setPaintLabels(true);
         jSliderHeight.setFont(font);
         jSliderHeight.setSnapToTicks(true);
+        jSliderHeight.setValue(5);
         
         //JPanel GameMode
         jPanelGameMode.setLayout(new GridLayout(0,1));
