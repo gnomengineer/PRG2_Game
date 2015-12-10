@@ -32,6 +32,7 @@ public class GameView implements GameViewInterface, SubjectInterface {
     JMenuItem jMIAbout;
     JMenuItem jMISave;
     JMenuItem jMIClose;
+    JMenuItem jMIOpen;
     
     //JPanel
     JPanel jPanelCenter;
@@ -46,6 +47,11 @@ public class GameView implements GameViewInterface, SubjectInterface {
     JLabel jLabelScoreOpponentPoints;
     ObserverInterface observer;
     
+    //JFilechooser
+    JFileChooser jFChooser;
+    String openFileDirecotry;
+    String saveFileDirectory;
+    
     //Div
     Dimension size;
     MapView map1;
@@ -59,6 +65,7 @@ public class GameView implements GameViewInterface, SubjectInterface {
         jMIAbout = new JMenuItem("About");
         jMISave = new JMenuItem("Save");
         jMIClose = new JMenuItem("Close");
+        jMIOpen = new JMenuItem("Open");
         size = new Dimension(800, 800);
         jPanelCenter=new JPanel();
         jPanelScoreView=new JPanel();
@@ -88,10 +95,28 @@ public class GameView implements GameViewInterface, SubjectInterface {
         jMBGameView.add(jMHelp);
         
         //Menu
+        jMGame.add(jMIOpen);
         jMGame.add(jMISave);
         jMGame.add(jMIClose);
         jMHelp.add(jMIRules);
         jMHelp.add(jMIAbout);
+        
+        
+        jMISave.addActionListener((event)->{
+                if(jFChooser.showSaveDialog(null)==JFileChooser.APPROVE_OPTION){
+                    saveFileDirectory=jFChooser.getCurrentDirectory().toString();
+                }
+                observer.saveOptions();
+                //Parameter openFileDirectory kann noch mitgegeben werden
+        });
+        
+        jMIOpen.addActionListener((event) -> {
+            if(jFChooser.showOpenDialog(null)==JFileChooser.APPROVE_OPTION){
+                openFileDirecotry= jFChooser.getSelectedFile().toString();
+            }
+            observer.openOptions(openFileDirecotry);
+        });
+        
         
         //jPanelCenter
         jPanelCenter.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -108,6 +133,9 @@ public class GameView implements GameViewInterface, SubjectInterface {
         jPanelScoreView.add(jLabelScoreOwnPoints);
         jPanelScoreView.add(jLabelScoreOpponent);
         jPanelScoreView.add(jLabelScoreOpponentPoints); 
+        
+        //jFileChooser
+        jFChooser = new JFileChooser();
     }
 
     
