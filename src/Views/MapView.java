@@ -202,9 +202,9 @@ public class MapView extends JPanel {
         }
     }
     
+    
+    //Test purpose only. 
     /*
-    Test purpose only. 
-    */
     public void outputSquares(){
         for(int i=0; i<squaresview.length; i++){
             for(int y=0; y<squaresview.length; y++){
@@ -216,6 +216,7 @@ public class MapView extends JPanel {
             }
         }
     }
+    */
 //Test purpose only
 /*
     public void drawField(){
