@@ -9,6 +9,9 @@ import Interfaces.ObserverInterface;
 import Interfaces.OpponentInterface;
 import Interfaces.SubjectInterface;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.SortedMap;
@@ -45,56 +48,47 @@ public class AIController implements OpponentInterface,SubjectInterface
     }
 
     @Override
-    public void notifyObserver() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void setOpponentTurn() {
         
-        HashMap<Line,Integer> hashMap = new HashMap<Line,Integer>();
+        //java.util.Map<Line,Integer> hashMap = new HashMap<Line, Integer>();
+        ArrayList<LinePriority> lines = new ArrayList<LinePriority>();
         
         for(int row=0;row < map.getHeight();row++)
         {
             for(int col=0;col<map.getWidth();col++)
             {
                 Square s = map.getSquares()[row][col];
-                if(!s.getTopLine().isOwned())
+                for(Line l : s.getLines())
+                if(!l.isOwned())
                 {
-                    
-                }
-                if(!s.getRightLine().isOwned())
-                {
-                    
-                }
-                if(!s.getBotLine().isOwned())
-                {
-                    
-                }
-                if(!s.getLeftLine().isOwned())
-                {
-                    
+                    int level = s.getNumberOfTakenLines();
+                    int priority = 0;
+                    if(level == 3)
+                    {
+                        priority = 1;
+                    }
+                    if(level == 0)
+                    {
+                        priority = 2;
+                    }
+                    if(level == 1)
+                    {
+                        priority = 3;
+                    }
+                    if(level == 2)
+                    {
+                        priority = 4;
+                    }
+                    lines.add(new LinePriority(l,priority));
                 }
             }
         }
-
-        Line tempLine = null;
         
-        // hier macht die AI einen pseudozug!!
-        int x = new Random().nextInt(9);
-        int y = new Random().nextInt(9);
+        Collections.shuffle(lines);
+        Collections.sort(lines);
         
-        boolean rechts = new Random().nextBoolean();
+        Line l = lines.get(0).getLine();
         
-        if(rechts)
-        {
-            tempLine = new Line(x,y,x + 1, y);
-        }
-        else
-        {
-            tempLine = new Line(x,y,x, y+1);
-        }
-        
-         this.observer.makeMove(tempLine, true);
+        this.observer.makeMove(l, true);
     }
 }

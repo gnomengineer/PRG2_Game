@@ -1,8 +1,6 @@
 package Views;
 
 
-import Enums.GameModeEnum;
-import Enums.MessageTypeEnum;
 import Interfaces.GameViewInterface;
 import Enums.MessageTypeEnum;
 import GameObjects.Line;
@@ -18,12 +16,15 @@ import static javax.swing.JFrame.*;
 
 
 /**
- *
- * @author Andre
+ * GUI for Displaying Game. Does show Score stats of Player and Map.
+ * Informs Observer which Line was clicked and sends LineToDraw to MapView
+ * @author Martin Etterlin
  */
 public class GameView implements GameViewInterface, SubjectInterface {
     //Frame
     JFrame jFrameGameView;
+    
+    //MenuBar
     JMenuBar jMBGameView;
     JMenu jMGame;
     JMenu jMHelp;
@@ -31,19 +32,23 @@ public class GameView implements GameViewInterface, SubjectInterface {
     JMenuItem jMIAbout;
     JMenuItem jMISave;
     JMenuItem jMIClose;
-    Dimension size;
-    MapView map1;
     
+    //JPanel
     JPanel jPanelCenter;
     JPanel jPanelScoreView;
     JPanel jPanelWest;
     
+    //JLabel
     JLabel jLabelScore;
     JLabel jLabelScoreOwn;
     JLabel jLabelScoreOpponent;
     JLabel jLabelScoreOwnPoints;
     JLabel jLabelScoreOpponentPoints;
     ObserverInterface observer;
+    
+    //Div
+    Dimension size;
+    MapView map1;
   
     public GameView(){
         jMBGameView= new JMenuBar();      
@@ -63,13 +68,12 @@ public class GameView implements GameViewInterface, SubjectInterface {
         jLabelScoreOpponent = new JLabel ("Opponent Points:  ");
         jLabelScoreOwnPoints = new JLabel("0");
         jLabelScoreOpponentPoints = new JLabel("0");
-        
-            
-        
         setup();
         
     }
-    
+    /**
+     * Sets up GUI Components for Game.
+     */
     private void setup(){
         jFrameGameView.setSize(size);
         jFrameGameView.setPreferredSize(size);
@@ -77,7 +81,6 @@ public class GameView implements GameViewInterface, SubjectInterface {
         jFrameGameView.setDefaultCloseOperation(EXIT_ON_CLOSE);
         jFrameGameView.add(jPanelCenter,BorderLayout.CENTER); 
         jFrameGameView.add(jPanelWest, BorderLayout.WEST);
-        
         
         //Menubar
         jFrameGameView.setJMenuBar(jMBGameView);
@@ -104,22 +107,18 @@ public class GameView implements GameViewInterface, SubjectInterface {
         jPanelScoreView.add(jLabelScoreOwn);
         jPanelScoreView.add(jLabelScoreOwnPoints);
         jPanelScoreView.add(jLabelScoreOpponent);
-        jPanelScoreView.add(jLabelScoreOpponentPoints);
-        
-        
+        jPanelScoreView.add(jLabelScoreOpponentPoints); 
     }
 
     
     @Override
     public void startGameView(int width, int height) {
         map1= new MapView(width, height);
-        
         map1.addMouseListener(new MouseAdapter(){
             @Override
             public void mousePressed(MouseEvent e){
                 Point2D.Double point = new Point2D.Double(e.getX(),e.getY());               
                 LineView line = map1.getLineViewByPoint(point);
-                
                 if(line != null && observer != null){
                     observer.makeMove(convertToLine(line), false);
                 }
@@ -132,9 +131,7 @@ public class GameView implements GameViewInterface, SubjectInterface {
     
     private Line convertToLine(LineView lineView){
         int space = MapView.getSpace();
-        
         Line line = new Line((int)(lineView.x1 / space), (int)(lineView.y1 / space),(int)(lineView.x2 / space),(int)(lineView.y2 / space));
-
         return line;
     }
 
@@ -156,29 +153,13 @@ public class GameView implements GameViewInterface, SubjectInterface {
     }
 
     @Override
-    public void registerLineActionListener(ActionListener actionListener) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String getLastDrawnLine() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override //Drawline wird nur von Opponent genutzt, Boolen also überflüssig?
     public void drawLine(Line line, boolean isOpponent) {
         map1.drawLine(line, isOpponent);
         //map1.repaint(); 
-        
     }
 
     @Override
     public void registerObserver(ObserverInterface observer) {
         this.observer = observer;
-    }
-    
-    @Override
-    public void notifyObserver() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

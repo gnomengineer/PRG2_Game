@@ -29,6 +29,14 @@ public class GameLogic implements LogicInterface {
        localFigur = new Figur(false);
        opponentFigur = new Figur(true);
     }
+    
+    public void initializeGame(Map map, OpponentInterface opponent){
+        this.map = map;
+        this.opponent = opponent;
+
+        localFigur = new Figur(false);
+        opponentFigur = new Figur(true);
+    }
 
     @Override
     public void setLine(Point startPoint, Point endPoint, boolean isOpponent) {

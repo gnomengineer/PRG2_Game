@@ -20,4 +20,6 @@ public interface LogicInterface {
     public int getOpponentState();
 
     public Map getMap();
+
+    public void initializeGame(Map map, OpponentInterface opponent);
 }

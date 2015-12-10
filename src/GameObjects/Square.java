@@ -128,6 +128,16 @@ public class Square
         return false;
     }
     
+    public Line[] getLines()
+    {
+        Line[] lines = new Line[4];
+        lines[0] = this.topLine;
+        lines[1] = this.rightLine;
+        lines[2] = this.botLine;
+        lines[3] = this.leftLine;
+        return lines;
+    }
+    
     public int getNumberOfTakenLines()
     {
         int takenLines = 0;

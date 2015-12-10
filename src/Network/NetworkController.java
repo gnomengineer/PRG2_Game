@@ -37,11 +37,6 @@ public class NetworkController implements OpponentInterface,SubjectInterface{
     }
 
     @Override
-    public void notifyObserver() {
-        this.observer.makeMove(network.getLine(), true);
-    }
-
-    @Override
     public void setOpponentTurn() {
         System.err.println("WARNING: not used methode - setOpponentTurn() ");
     }
