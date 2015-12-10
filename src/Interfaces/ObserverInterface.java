@@ -18,7 +18,7 @@ public interface ObserverInterface{
      */
     void submitOptions();
     
-    void saveOptions();
-    
     void openOptions(String path);
+
+    public void saveOptions(String saveFileDirectory);
 }

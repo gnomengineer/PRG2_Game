@@ -11,8 +11,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
+import java.io.File;
 import javax.swing.*;
 import static javax.swing.JFrame.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 /**
@@ -77,6 +79,10 @@ public class GameView implements GameViewInterface, SubjectInterface {
         jLabelScoreOpponentPoints = new JLabel("0");
         setup();
         
+        jFChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Dots And Box", "fdab", "fdab");
+        jFChooser.setFileFilter(filter);
+        jFChooser.setSelectedFile(new File("saveGame.fdab"));
     }
     /**
      * Sets up GUI Components for Game.
@@ -104,9 +110,9 @@ public class GameView implements GameViewInterface, SubjectInterface {
         
         jMISave.addActionListener((event)->{
                 if(jFChooser.showSaveDialog(null)==JFileChooser.APPROVE_OPTION){
-                    saveFileDirectory=jFChooser.getCurrentDirectory().toString();
+                    saveFileDirectory=jFChooser.getSelectedFile().getAbsolutePath();
                 }
-                observer.saveOptions();
+                observer.saveOptions(saveFileDirectory);
                 //Parameter openFileDirectory kann noch mitgegeben werden
         });
         
@@ -141,6 +147,11 @@ public class GameView implements GameViewInterface, SubjectInterface {
     
     @Override
     public void startGameView(int width, int height) {
+        if(map1 != null)
+        {
+            jPanelCenter.remove(map1);
+        }
+        
         map1= new MapView(width, height);
         map1.addMouseListener(new MouseAdapter(){
             @Override
@@ -175,6 +186,14 @@ public class GameView implements GameViewInterface, SubjectInterface {
 
     @Override
     public void showMessage(String message, MessageTypeEnum messageType) {
+        
+        if(messageType == MessageTypeEnum.Information){
+            JOptionPane.showMessageDialog(jFrameGameView, message);
+        }
+        else if(messageType == MessageTypeEnum.Error){
+            JOptionPane.showMessageDialog(jFrameGameView, message, "Fehler", JOptionPane.WARNING_MESSAGE);
+        }
+        
         // siehe MessageType
         // warning und information als MessageBox anzeigen, restart und end kannst du das spielfeld zurücksetzen
         // jedoch noch nicht ganz klar, was... evtl. restart heisst, das das Spiel von vorne beginnt, alle grafikobjekte reseten

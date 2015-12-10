@@ -2,6 +2,7 @@
 import GameObjects.SaveGame;
 import ArtificialIntelligence.AIController;
 import Enums.GameModeEnum;
+import Enums.MessageTypeEnum;
 import FactorySet.OpponentFactory;
 import GameObjects.Line;
 import GameObjects.Map;
@@ -14,6 +15,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 /**
@@ -90,23 +93,26 @@ public class GameController implements ObserverInterface {
     }
 
     @Override
-    public void saveOptions() {
+    public void saveOptions(String saveFileDirectory) {
+        //Check Filepath
         SaveGame saveGame = new SaveGame(gameLogic.getMap(), gameLogic.getLocalFigur(), gameLogic.getOpponentFigure(), gameLogic.IsOpponentContinuing());             
         
-        try(ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("javaObjects.txt"))){
+        try(ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(saveFileDirectory))){
             objectOutputStream.writeObject(saveGame);
             objectOutputStream.flush();
             objectOutputStream.close();
+            
+            gameView.showMessage("Der Spielstand wurde erfolgreich gespeichert.", MessageTypeEnum.Information);
 
         }catch(Exception e)
         {
-            
+            gameView.showMessage("Der Spielstand konnte nicht gespeichert werden. Bitte wenden Sie sich an den Administator.", MessageTypeEnum.Error);
         }
     }
 
     @Override
     public void openOptions(String path) {
-        try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("javaObjects.txt"))){
+        try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(path))){
             
             SaveGame saveGame = (SaveGame) objectInputStream.readObject();
 
@@ -118,8 +124,11 @@ public class GameController implements ObserverInterface {
 
             gameLogic.loadGame(saveGame);
             objectInputStream.close();
-        }catch(Exception e){
             
+            gameView.showMessage("Der Spielstand wurde erfolgreich geladen.", MessageTypeEnum.Information);
+
+        }catch(Exception e){
+            gameView.showMessage("Der Spielstand konnte nicht geladen werden. Bitte wenden Sie sich an den Administator.", MessageTypeEnum.Error);
         }
     }
     
