@@ -63,7 +63,7 @@ public class GameController implements ObserverInterface {
         //gameLogic.initializeGame(mapHeight, mapWidth, opponent);
         
         gameLogic.initializeGame(map, opponent);
-        gameView.startGameView(mapWidth, mapWidth);
+        gameView.startGameView(mapWidth, mapHeight);
         
     }
 
