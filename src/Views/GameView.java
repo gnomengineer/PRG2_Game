@@ -55,7 +55,7 @@ public class GameView implements GameViewInterface, SubjectInterface {
     //Div
     Dimension size;
     MapView map1;
-  
+    
     public GameView(){
         jMBGameView= new JMenuBar();      
         jFrameGameView = new JFrame("Dots and Boxes");
@@ -75,6 +75,7 @@ public class GameView implements GameViewInterface, SubjectInterface {
         jLabelScoreOpponent = new JLabel ("Opponent Points:  ");
         jLabelScoreOwnPoints = new JLabel("0");
         jLabelScoreOpponentPoints = new JLabel("0");
+        jFChooser = new JFileChooser();
         setup();
         
     }
@@ -132,10 +133,8 @@ public class GameView implements GameViewInterface, SubjectInterface {
         jPanelScoreView.add(jLabelScoreOwn);
         jPanelScoreView.add(jLabelScoreOwnPoints);
         jPanelScoreView.add(jLabelScoreOpponent);
-        jPanelScoreView.add(jLabelScoreOpponentPoints); 
+        jPanelScoreView.add(jLabelScoreOpponentPoints);
         
-        //jFileChooser
-        jFChooser = new JFileChooser();
     }
 
     
@@ -175,6 +174,21 @@ public class GameView implements GameViewInterface, SubjectInterface {
 
     @Override
     public void showMessage(String message, MessageTypeEnum messageType) {
+        if(messageType.equals(MessageTypeEnum.Information)){
+            JOptionPane.showMessageDialog(jPanelCenter, message, "Info", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if(messageType.equals(MessageTypeEnum.Warning)){
+            JOptionPane.showMessageDialog(jPanelCenter, message, "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        else if(messageType.equals(MessageTypeEnum.Restart)){
+            JOptionPane.showMessageDialog(jPanelCenter, message, "Restart", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if(messageType.equals(messageType.End)){
+            JOptionPane.showMessageDialog(jPanelCenter, message, "End", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if(messageType.equals(messageType.Error)){
+            JOptionPane.showMessageDialog(jPanelCenter, message, "Error", JOptionPane.ERROR_MESSAGE);
+        }
         // siehe MessageType
         // warning und information als MessageBox anzeigen, restart und end kannst du das spielfeld zurücksetzen
         // jedoch noch nicht ganz klar, was... evtl. restart heisst, das das Spiel von vorne beginnt, alle grafikobjekte reseten

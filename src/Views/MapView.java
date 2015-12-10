@@ -97,14 +97,11 @@ public class MapView extends JPanel {
             graphicsOpponent.draw(line);
         } 
         
-         for(int i=0; i<=mWidth;i++){
-            for(int y=0; y<=mHeight; y++){
-                graphicsPoints.draw(points[i][y]);
-                graphicsPoints.fill(points[i][y]);
-            }
-        }
-        //drawField();
         //Draw Points
+        drawPoints();
+         
+        //drawField();
+        
         
     }
     /* Test purpose only
