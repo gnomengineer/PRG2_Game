@@ -1,3 +1,5 @@
+package GameObjects;
+
 
 import GameObjects.Figur;
 import GameObjects.Map;
@@ -12,13 +14,16 @@ import GameObjects.Map;
  *
  * @author Andre
  */
-public class GameSave {
+public class SaveGame {
     Map map = null;
     Figur player = null;
     Figur opponent = null;
     boolean isOpponentContining = false;
     
-    public GameSave(Map map, Figur player, Figur opponent, boolean isOpponentContining)   
+    public SaveGame()
+    {} 
+    
+    public SaveGame(Map map, Figur player, Figur opponent, boolean isOpponentContining)   
     {
         this.map = map;
         this.player =player;

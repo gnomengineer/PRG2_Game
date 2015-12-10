@@ -1,4 +1,5 @@
 
+import GameObjects.SaveGame;
 import ArtificialIntelligence.AIController;
 import Enums.GameModeEnum;
 import FactorySet.OpponentFactory;
@@ -8,6 +9,11 @@ import java.awt.Event;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Interfaces.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 /**
  *
@@ -84,13 +90,40 @@ public class GameController implements ObserverInterface {
 
     @Override
     public void saveOptions() {
-                    
+        //Setup SaveGame
+        SaveGame saveGame = new SaveGame();
         
+        try(ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("javaObjects.txt"))){
+            objectOutputStream.writeObject(saveGame);
+            objectOutputStream.flush();
+            objectOutputStream.close();
+
+        }catch(Exception e)
+        {
+            
+        }
     }
 
     @Override
     public void openOptions(String path) {
-        
-        
+        try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("javaObjects.txt"))){
+            SaveGame saveGame = (SaveGame) objectInputStream.readObject();
+            drawMap(saveGame.getMap());
+            gameView.updateOpponentState(saveGame.getOpponent().getPoints());
+            gameView.updatePlayerState(saveGame.getPlayer().getPoints());
+
+            gameLogic.loadGame(saveGame);
+            
+            objectInputStream.close();
+        }catch(Exception e){
+            
+        }
+    }
+    
+    private void drawMap(Map map)
+    {
+        if(map != null){
+            map.getLines().forEach(l -> gameView.drawLine(l,l.getOwner().isOpponent()));
+        }
     }
 }

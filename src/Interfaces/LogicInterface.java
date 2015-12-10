@@ -1,5 +1,6 @@
 package Interfaces;
 
+import GameObjects.SaveGame;
 import GameObjects.Line;
 import GameObjects.Map;
 import GameObjects.Point;
@@ -22,4 +23,6 @@ public interface LogicInterface {
     public Map getMap();
 
     public void initializeGame(Map map, OpponentInterface opponent);
+
+    public void loadGame(SaveGame saveGame);
 }

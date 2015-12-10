@@ -3,6 +3,7 @@ import GameObjects.Figur;
 import GameObjects.Line;
 import GameObjects.Map;
 import GameObjects.Point;
+import GameObjects.SaveGame;
 import GameObjects.Square;
 import Interfaces.LogicInterface;
 import Interfaces.OpponentInterface;
@@ -143,5 +144,21 @@ public class GameLogic implements LogicInterface {
     public Map getMap()
     {
         return this.map;
+    }
+
+    @Override
+    public void loadGame(SaveGame saveGame) {
+        this.map = saveGame.getMap();
+        this.localFigur = saveGame.getPlayer();
+        this.opponentFigur = saveGame.getOpponent();
+        
+        if(saveGame.IsOpponentContining())
+        {
+            this.nextFigur = opponentFigur;
+            opponent.setOpponentTurn();
+        }
+        else{
+            this.nextFigur = localFigur;
+        }
     }
 }
