@@ -111,7 +111,7 @@ public class GameLogic implements LogicInterface {
     }
 
     @Override
-    public boolean isValidLine(Line selectedLine, boolean isOpponent) {
+    public boolean isValidLine(Line selectedLine) {
         Line line = map.getLine(selectedLine.getStartPoint(), selectedLine.getEndPoint());
         return line.getOwner() == null;
     }
@@ -124,5 +124,11 @@ public class GameLogic implements LogicInterface {
     @Override
     public int getOpponentState() {
         return opponentFigur.getPoints();
+    }
+
+    @Override
+    public Map getMap()
+    {
+        return this.map;
     }
 }

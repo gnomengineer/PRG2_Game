@@ -43,7 +43,7 @@ public class GameController implements ObserverInterface {
         }
         
         // via Factory erstellen, da ich als Controller den konkretten Opponent nicht kennen will!!
-        OpponentInterface opponent =  factory.createOpponent(gameMode);
+        OpponentInterface opponent =  factory.createOpponent(gameMode,gameLogic.getMap());
         
         // damit Controller zu den Spielzügen informiert wird!!
         ((SubjectInterface)opponent).registerObserver(this);
@@ -56,7 +56,7 @@ public class GameController implements ObserverInterface {
     @Override
     public void makeMove(Line selectedLine, boolean isOpponent) {
         //DO SOMETHING
-        boolean validMove = gameLogic.isValidLine(selectedLine, isOpponent);
+        boolean validMove = gameLogic.isValidLine(selectedLine);
         
         if(validMove){
             gameLogic.setLine(selectedLine, isOpponent);
