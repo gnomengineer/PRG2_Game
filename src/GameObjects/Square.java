@@ -127,4 +127,26 @@ public class Square
         
         return false;
     }
+    
+    public int getNumberOfTakenLines()
+    {
+        int takenLines = 0;
+        if(this.rightLine.isOwned())
+        {
+            takenLines++;
+        }
+        if(this.leftLine.isOwned())
+        {
+            takenLines++;
+        }
+        if(this.topLine.isOwned())
+        {
+            takenLines++;
+        }
+        if(this.botLine.isOwned())
+        {
+            takenLines++;
+        }
+        return takenLines;        
+    }
 }
