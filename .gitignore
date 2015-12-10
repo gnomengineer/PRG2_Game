@@ -9,3 +9,4 @@ doc/*.toc
 /nbproject/private/
 /dist/
 /build/
+src/*.log

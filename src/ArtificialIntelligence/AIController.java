@@ -59,7 +59,7 @@ public class AIController implements OpponentInterface,SubjectInterface
         {
             for(int col=0;col<map.getWidth();col++)
             {
-                Square s = map.getSquares()[row][col];
+                Square s = map.getSquares()[col][row];
                 for(Line l : s.getLines())
                 if(!l.isOwned())
                 {
