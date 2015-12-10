@@ -83,8 +83,7 @@ public class GameView implements GameViewInterface, SubjectInterface {
      * Sets up GUI Components for Game.
      */
     private void setup(){
-        jFrameGameView.setSize(size);
-        jFrameGameView.setPreferredSize(size);
+        
         jFrameGameView.setLayout(new BorderLayout());
         jFrameGameView.setDefaultCloseOperation(EXIT_ON_CLOSE);
         jFrameGameView.add(jPanelCenter,BorderLayout.CENTER); 
@@ -153,6 +152,7 @@ public class GameView implements GameViewInterface, SubjectInterface {
         });
         
         jPanelCenter.add(map1);
+        jFrameGameView.pack();
         jFrameGameView.setVisible(true);
     }
     
