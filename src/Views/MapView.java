@@ -16,7 +16,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 /**
  * Does display the Map.
- * @author Martin
+ * @author Martin Etterlin
  */
 public class MapView extends JPanel {
     private int angle = 0;

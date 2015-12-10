@@ -13,7 +13,7 @@ import java.awt.geom.Rectangle2D;
 
 /**
  *
- * @author Martin
+ * @author Martin Etterlin
  */
 public class SquareView {
     

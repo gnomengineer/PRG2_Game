@@ -72,6 +72,7 @@ public class GameOptionsView implements GameOptionsViewInterface, SubjectInterfa
         jBtnSubmit.addActionListener(event ->
         { 
             observer.submitOptions();
+            jFrameOptions.setVisible(false);
         });
         
         //jFrame
