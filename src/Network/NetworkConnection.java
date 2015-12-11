@@ -64,9 +64,9 @@ public class NetworkConnection implements Runnable, NetworkInterface {
         } catch (IOException ioe){
             //@TODO make a logger
             System.out.println("ERROR: " + ioe.getMessage());
-        } catch (ClassNotFoundException cex){
+        } /*catch (ClassNotFoundException cex){
             System.out.println("ERROR: " + cex.getMessage());
-        }
+        }*/
     }
     
     @Override
