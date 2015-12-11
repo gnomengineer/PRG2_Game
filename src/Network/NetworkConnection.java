@@ -29,9 +29,8 @@ public class NetworkConnection implements Runnable, NetworkInterface {
     }
     
     public void start(){
-        //Thread t = new Thread(this);
-        //t.start();
-        run();
+        Thread t = new Thread(this);
+        t.start();
     }
     
     /**
@@ -50,10 +49,8 @@ public class NetworkConnection implements Runnable, NetworkInterface {
                 ObjectInputStream reader = new ObjectInputStream(in);
                 Line data = (Line)reader.readObject();
                 observer.makeMove(data, true);
-            } catch (IOException ioe){
+            } catch (Exception ioe){
                 System.out.println("ERROR: " + ioe.getMessage());
-            } catch (ClassNotFoundException cne){
-                System.out.println("ERROR: " + cne.getMessage());
             }
         } 
     }
@@ -67,6 +64,7 @@ public class NetworkConnection implements Runnable, NetworkInterface {
             OutputStream out = socket.getOutputStream();
             ObjectOutputStream writer = new ObjectOutputStream(out);
             writer.writeObject(selectedLine);
+            writer.flush();
         } catch (IOException ioe){
             System.out.println("ERROR: " + ioe.getMessage());
         }
