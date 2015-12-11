@@ -6,14 +6,16 @@ import GameObjects.Point;
 import GameObjects.SaveGame;
 import GameObjects.Square;
 import Interfaces.LogicInterface;
+import Interfaces.ObserverInterface;
 import Interfaces.OpponentInterface;
+import Interfaces.SubjectInterface;
 import java.util.ArrayList;
 
 /**
  *
  * @author Andre
  */
-public class GameLogic implements LogicInterface {
+public class GameLogic implements LogicInterface, SubjectInterface {
     
     private Map map;
     private OpponentInterface opponent;
@@ -21,6 +23,7 @@ public class GameLogic implements LogicInterface {
     private Figur opponentFigur;
     private Figur nextFigur;
     private boolean tempBoolAddedPoints;
+    private ObserverInterface observer;
     
     @Override
     public void initializeGame(int height, int width, OpponentInterface opponent) {
@@ -82,11 +85,13 @@ public class GameLogic implements LogicInterface {
                 if(isOpponent)
                 {
                     nextFigur = localFigur;
+                    this.observer.setPlayerTurn(false);
                 }
                 else
                 {
                     nextFigur = opponentFigur;
                     opponent.setOpponentTurn();
+                    this.observer.setPlayerTurn(true);
                 }
             }
                 
@@ -160,5 +165,25 @@ public class GameLogic implements LogicInterface {
         else{
             this.nextFigur = localFigur;
         }
+    }
+
+    @Override
+    public Figur getLocalFigur() {
+        return localFigur;
+    }
+
+    @Override
+    public Figur getOpponentFigure() {
+        return  opponentFigur;
+    }
+
+    @Override
+    public boolean IsOpponentContinuing() {
+        return nextFigur.isOpponent();
+    }
+
+    @Override
+    public void registerObserver(ObserverInterface observer) {
+        this.observer = observer;
     }
 }

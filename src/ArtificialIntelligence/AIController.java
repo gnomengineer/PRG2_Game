@@ -27,12 +27,7 @@ import jdk.nashorn.internal.runtime.Debug;
 public class AIController implements OpponentInterface,SubjectInterface
 {
     private Map map;
-    private ObserverInterface observer;
-    ArrayList<Square> squaresWith0Lines;
-    ArrayList<Square> squaresWith1Line;
-    ArrayList<Square> squaresWith2Lines;
-    ArrayList<Square> squaresWith3Lines;
-    
+    private ObserverInterface observer;   
         
     public AIController(Map map)
     {
@@ -59,7 +54,7 @@ public class AIController implements OpponentInterface,SubjectInterface
         {
             for(int col=0;col<map.getWidth();col++)
             {
-                Square s = map.getSquares()[row][col];
+                Square s = map.getSquares()[col][row];
                 for(Line l : s.getLines())
                 if(!l.isOwned())
                 {

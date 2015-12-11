@@ -13,7 +13,7 @@ import java.awt.geom.Rectangle2D;
 
 /**
  *
- * @author Martin
+ * @author Martin Etterlin
  */
 public class SquareView {
     
@@ -107,18 +107,12 @@ public class SquareView {
      public boolean contains(Point2D.Double point){
          double pointX = point.getX();
          double pointY = point.getY();
-         System.out.println(lineTop);
-         System.out.println(lineLeft);
          double lineTopX1 = lineTop.getX1();
          double lineTopX2 = lineTop.getX2();
          double lineLeftY1 = lineLeft.getY1();
          double lineLeftY2 = lineLeft.getY2();
                  
         if( ( (pointX > lineTopX1) && (pointX < lineTopX2) ) && ((pointY > lineLeftY1) && (pointY < lineLeftY2)))  {
-            System.out.println("Linetop X: "+lineTop.getX1());
-            System.out.println("Linetop Y: " + lineTop.getY1());
-            System.out.println("Linebot X: " + lineBot.getX2());
-            System.out.println("Linebot Y: " + lineBot.getY2());
             return true;
         }
         else{

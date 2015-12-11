@@ -1,10 +1,12 @@
 package GameObjects;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Andre
  */
-public class Square 
+public class Square implements Serializable
 {
     private Line topLine;
     private Line botLine;

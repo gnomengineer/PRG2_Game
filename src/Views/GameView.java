@@ -11,8 +11,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
+import java.io.File;
 import javax.swing.*;
 import static javax.swing.JFrame.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 /**
@@ -32,6 +34,7 @@ public class GameView implements GameViewInterface, SubjectInterface {
     JMenuItem jMIAbout;
     JMenuItem jMISave;
     JMenuItem jMIClose;
+    JMenuItem jMIOpen;
     
     //JPanel
     JPanel jPanelCenter;
@@ -46,10 +49,15 @@ public class GameView implements GameViewInterface, SubjectInterface {
     JLabel jLabelScoreOpponentPoints;
     ObserverInterface observer;
     
+    //JFilechooser
+    JFileChooser jFChooser;
+    String openFileDirecotry;
+    String saveFileDirectory;
+    
     //Div
     Dimension size;
     MapView map1;
-  
+    
     public GameView(){
         jMBGameView= new JMenuBar();      
         jFrameGameView = new JFrame("Dots and Boxes");
@@ -59,6 +67,7 @@ public class GameView implements GameViewInterface, SubjectInterface {
         jMIAbout = new JMenuItem("About");
         jMISave = new JMenuItem("Save");
         jMIClose = new JMenuItem("Close");
+        jMIOpen = new JMenuItem("Open");
         size = new Dimension(800, 800);
         jPanelCenter=new JPanel();
         jPanelScoreView=new JPanel();
@@ -68,15 +77,19 @@ public class GameView implements GameViewInterface, SubjectInterface {
         jLabelScoreOpponent = new JLabel ("Opponent Points:  ");
         jLabelScoreOwnPoints = new JLabel("0");
         jLabelScoreOpponentPoints = new JLabel("0");
+        jFChooser = new JFileChooser();
         setup();
         
+        jFChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Dots And Box", "fdab", "fdab");
+        jFChooser.setFileFilter(filter);
+        jFChooser.setSelectedFile(new File("saveGame.fdab"));
     }
     /**
      * Sets up GUI Components for Game.
      */
     private void setup(){
-        jFrameGameView.setSize(size);
-        jFrameGameView.setPreferredSize(size);
+        
         jFrameGameView.setLayout(new BorderLayout());
         jFrameGameView.setDefaultCloseOperation(EXIT_ON_CLOSE);
         jFrameGameView.add(jPanelCenter,BorderLayout.CENTER); 
@@ -88,10 +101,31 @@ public class GameView implements GameViewInterface, SubjectInterface {
         jMBGameView.add(jMHelp);
         
         //Menu
+        jMGame.add(jMIOpen);
         jMGame.add(jMISave);
         jMGame.add(jMIClose);
         jMHelp.add(jMIRules);
         jMHelp.add(jMIAbout);
+        
+        jMISave.addActionListener((event)->{
+                if(jFChooser.showSaveDialog(null)==JFileChooser.APPROVE_OPTION){
+                    saveFileDirectory=jFChooser.getSelectedFile().getAbsolutePath();
+                }
+                observer.saveGame(saveFileDirectory);
+                //Parameter openFileDirectory kann noch mitgegeben werden
+        });
+        
+        jMIOpen.addActionListener((event) -> {
+            if(jFChooser.showOpenDialog(null)==JFileChooser.APPROVE_OPTION){
+                openFileDirecotry= jFChooser.getSelectedFile().toString();
+            }
+            observer.openGame(openFileDirecotry);
+        });
+        
+        jMIClose.addActionListener((event)->{
+            System.exit(NORMAL);
+        });
+        
         
         //jPanelCenter
         jPanelCenter.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -107,12 +141,18 @@ public class GameView implements GameViewInterface, SubjectInterface {
         jPanelScoreView.add(jLabelScoreOwn);
         jPanelScoreView.add(jLabelScoreOwnPoints);
         jPanelScoreView.add(jLabelScoreOpponent);
-        jPanelScoreView.add(jLabelScoreOpponentPoints); 
+        jPanelScoreView.add(jLabelScoreOpponentPoints);
+        
     }
 
     
     @Override
     public void startGameView(int width, int height) {
+        if(map1 != null)
+        {
+            jPanelCenter.remove(map1);
+        }
+        
         map1= new MapView(width, height);
         map1.addMouseListener(new MouseAdapter(){
             @Override
@@ -126,6 +166,7 @@ public class GameView implements GameViewInterface, SubjectInterface {
         });
         
         jPanelCenter.add(map1);
+        jFrameGameView.pack();
         jFrameGameView.setVisible(true);
     }
     
@@ -147,6 +188,21 @@ public class GameView implements GameViewInterface, SubjectInterface {
 
     @Override
     public void showMessage(String message, MessageTypeEnum messageType) {
+        if(messageType.equals(MessageTypeEnum.Information)){
+            JOptionPane.showMessageDialog(jPanelCenter, message, "Info", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if(messageType.equals(MessageTypeEnum.Warning)){
+            JOptionPane.showMessageDialog(jPanelCenter, message, "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        else if(messageType.equals(MessageTypeEnum.Restart)){
+            JOptionPane.showMessageDialog(jPanelCenter, message, "Restart", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if(messageType.equals(messageType.End)){
+            JOptionPane.showMessageDialog(jPanelCenter, message, "End", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if(messageType.equals(messageType.Error)){
+            JOptionPane.showMessageDialog(jPanelCenter, message, "Error", JOptionPane.ERROR_MESSAGE);
+        }
         // siehe MessageType
         // warning und information als MessageBox anzeigen, restart und end kannst du das spielfeld zurücksetzen
         // jedoch noch nicht ganz klar, was... evtl. restart heisst, das das Spiel von vorne beginnt, alle grafikobjekte reseten
@@ -161,5 +217,16 @@ public class GameView implements GameViewInterface, SubjectInterface {
     @Override
     public void registerObserver(ObserverInterface observer) {
         this.observer = observer;
+    }
+
+    @Override
+    public void updatePlayerTurn(boolean isOpponent) {
+        if(isOpponent){
+            jLabelScoreOpponent.setBackground(Color.YELLOW);
+        }
+        else{
+            jLabelScoreOwn.setBackground(Color.YELLOW);
+        }
+       
     }
 }

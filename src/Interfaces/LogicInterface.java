@@ -1,5 +1,6 @@
 package Interfaces;
 
+import GameObjects.Figur;
 import GameObjects.SaveGame;
 import GameObjects.Line;
 import GameObjects.Map;
@@ -25,4 +26,10 @@ public interface LogicInterface {
     public void initializeGame(Map map, OpponentInterface opponent);
 
     public void loadGame(SaveGame saveGame);
+
+    public Figur getLocalFigur();
+
+    public Figur getOpponentFigure();
+
+    public boolean IsOpponentContinuing();
 }

@@ -12,7 +12,7 @@ import java.awt.geom.Point2D;
 
 /**
  *
- * @author Martin
+ * @author Martin Etterlin
  */
 public class SquareAoIView {
     

@@ -18,7 +18,9 @@ public interface ObserverInterface{
      */
     void submitOptions();
     
-    void saveOptions();
+    void openGame(String path);
+
+    void saveGame(String saveFileDirectory);
     
-    void openOptions(String path);
+    void setPlayerTurn(boolean isOpponent);
 }

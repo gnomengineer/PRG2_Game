@@ -43,4 +43,6 @@ public interface GameViewInterface {
      * @param messageType typ der nachricht 
      */
     void showMessage(String message, MessageTypeEnum messageType);
+    
+    void updatePlayerTurn(boolean isOpponent);
 }

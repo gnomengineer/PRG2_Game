@@ -2,9 +2,11 @@
 import GameObjects.SaveGame;
 import ArtificialIntelligence.AIController;
 import Enums.GameModeEnum;
+import Enums.MessageTypeEnum;
 import FactorySet.OpponentFactory;
 import GameObjects.Line;
 import GameObjects.Map;
+import GameObjects.Point;
 import java.awt.Event;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +15,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 /**
@@ -33,6 +37,7 @@ public class GameController implements ObserverInterface {
     public void startControlling(){
         ((SubjectInterface)gameOptionsView).registerObserver(this);
         ((SubjectInterface)gameView).registerObserver(this);
+        ((SubjectInterface)gameLogic).registerObserver(this);
 
         gameOptionsView.startOptionsView();
     }
@@ -59,11 +64,13 @@ public class GameController implements ObserverInterface {
         // damit Controller zu den Spielzügen informiert wird!!
         ((SubjectInterface)opponent).registerObserver(this);
         
+
+        
         // Logic & View initiieren!!        
         //gameLogic.initializeGame(mapHeight, mapWidth, opponent);
         
         gameLogic.initializeGame(map, opponent);
-        gameView.startGameView(mapWidth, mapWidth);
+        gameView.startGameView(mapWidth, mapHeight);
         
     }
 
@@ -89,41 +96,54 @@ public class GameController implements ObserverInterface {
     }
 
     @Override
-    public void saveOptions() {
-        //Setup SaveGame
-        SaveGame saveGame = new SaveGame();
+    public void saveGame(String saveFileDirectory) {
+        //Check Filepath
+        SaveGame saveGame = new SaveGame(gameLogic.getMap(), gameLogic.getLocalFigur(), gameLogic.getOpponentFigure(), gameLogic.IsOpponentContinuing());             
         
-        try(ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("javaObjects.txt"))){
+        try(ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(saveFileDirectory))){
             objectOutputStream.writeObject(saveGame);
             objectOutputStream.flush();
             objectOutputStream.close();
+            
+            gameView.showMessage("Der Spielstand wurde erfolgreich gespeichert.", MessageTypeEnum.Information);
 
         }catch(Exception e)
         {
-            
+            gameView.showMessage("Der Spielstand konnte nicht gespeichert werden. Bitte wenden Sie sich an den Administator.", MessageTypeEnum.Error);
         }
     }
 
     @Override
-    public void openOptions(String path) {
-        try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("javaObjects.txt"))){
+    public void openGame(String path) {
+        try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(path))){
+            
             SaveGame saveGame = (SaveGame) objectInputStream.readObject();
+
+            gameView.startGameView(saveGame.getMap().getWidth(),saveGame.getMap().getHeight());
+            
             drawMap(saveGame.getMap());
             gameView.updateOpponentState(saveGame.getOpponent().getPoints());
             gameView.updatePlayerState(saveGame.getPlayer().getPoints());
 
             gameLogic.loadGame(saveGame);
-            
             objectInputStream.close();
-        }catch(Exception e){
             
+            gameView.showMessage("Der Spielstand wurde erfolgreich geladen.", MessageTypeEnum.Information);
+
+        }catch(Exception e){
+            gameView.showMessage("Der Spielstand konnte nicht geladen werden. Bitte wenden Sie sich an den Administator.", MessageTypeEnum.Error);
         }
     }
     
     private void drawMap(Map map)
     {
         if(map != null){
-            map.getLines().forEach(l -> gameView.drawLine(l,l.getOwner().isOpponent()));
+            map.getLines().stream().filter(l -> l.getOwner() != null).forEach(l -> gameView.drawLine(l,l.getOwner().isOpponent()));
         }
+    }
+
+    @Override
+    public void setPlayerTurn(boolean isOpponent) {
+       gameView.updatePlayerTurn(isOpponent);
     }
 }
