@@ -143,6 +143,12 @@ public class GameView implements GameViewInterface, SubjectInterface {
         jPanelScoreView.add(jLabelScoreOpponent);
         jPanelScoreView.add(jLabelScoreOpponentPoints);
         
+        //jLabel
+        jLabelScoreOpponent.setForeground(Color.blue);
+        jLabelScoreOwn.setForeground(Color.red);
+        jLabelScoreOpponentPoints.setForeground(Color.blue);
+        jLabelScoreOwnPoints.setForeground(Color.red);
+        
     }
 
     
@@ -222,10 +228,15 @@ public class GameView implements GameViewInterface, SubjectInterface {
     @Override
     public void updatePlayerTurn(boolean isOpponent) {
         if(isOpponent){
-            jLabelScoreOpponent.setBackground(Color.YELLOW);
+            jLabelScoreOpponent.setOpaque(true);
+            jLabelScoreOpponent.setBackground(Color.yellow);
+            jLabelScoreOwn.setOpaque(false);
         }
         else{
-            jLabelScoreOwn.setBackground(Color.YELLOW);
+            jLabelScoreOwn.setOpaque(true);
+            jLabelScoreOwn.setBackground(Color.yellow);
+            jLabelScoreOpponent.setOpaque(false);
+            jFrameGameView.repaint();
         }
        
     }
