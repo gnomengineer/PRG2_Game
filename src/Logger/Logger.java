@@ -29,6 +29,12 @@ public class Logger{
         }
     }
     
+    /**
+     * logs an exception to system console with given msg.
+     * 
+     * @param type
+     * @param msg 
+     */
     public static void logToConsole(MessageTypeEnum type, String msg){
         Exception ex = new Exception(msg);
         
@@ -36,7 +42,8 @@ public class Logger{
     }
     
     /**
-     * logs an exception to 
+     * logs an exception to system console with given exception.
+     * 
      * @param type
      * @param ex 
      */
@@ -60,6 +67,7 @@ public class Logger{
         logger.write(System.getProperty("line.separator"));
         if(type == MessageTypeEnum.Debug){
             logger.write("" + ex.getStackTrace());
+            logger.write(System.getProperty("line.separator"));
         }
         logger.flush();
         logger.close();

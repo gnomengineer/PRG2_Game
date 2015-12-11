@@ -3,7 +3,9 @@ package FactorySet;
 import Enums.GameModeEnum;
 import Interfaces.OpponentInterface;
 import ArtificialIntelligence.AIController;
+import Enums.MessageTypeEnum;
 import GameObjects.Map;
+import Logger.Logger;
 import Network.NetworkController;
 import java.io.IOException;
 /**
@@ -25,14 +27,13 @@ public class OpponentFactory {
                     try{
                         return new NetworkController(port, addr);
                     } catch (IOException ioe){
-                        System.err.println("ERROR: " + ioe.getMessage());
+                        Logger.logToConsole(MessageTypeEnum.Error, ioe);
                     }
                 case MultiplayerServerMode:
                     try{
-                        //@TODO implement different network controller for server mode
                         return new NetworkController(port);
                     } catch (IOException ioe){
-                        System.err.println("ERROR: " + ioe.getMessage());
+                        Logger.logToConsole(MessageTypeEnum.Error, ioe);
                     }
                 default:
                     throw new UnsupportedOperationException("wrong type given");

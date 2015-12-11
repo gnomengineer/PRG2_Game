@@ -25,10 +25,18 @@ public class NetworkConnection implements Runnable, NetworkInterface {
         
     }
     
+    /**
+     * Sets the socket for this class.
+     * 
+     * @param s 
+     */
     public void setSocket(Socket s){
         this.socket = s;
     }
     
+    /**
+     * starts the Thread.
+     */
     public void start(){
         Thread t = new Thread(this);
         t.start();
@@ -36,13 +44,14 @@ public class NetworkConnection implements Runnable, NetworkInterface {
     
     /**
      * run method.
-     * sends and receives objects from Server-Client-connection
+     * listens on the InputStream and reads the line object. informs the observer
+     * about a new line object.
      */
     @Override
     public void run(){
         while(true){
             if(socket == null || !socket.isConnected()){
-                System.out.println("ERROR: not connected");
+                Logger.logToConsole(MessageTypeEnum.Warning, "not connected");
                 break;
             }
             try{
@@ -52,14 +61,21 @@ public class NetworkConnection implements Runnable, NetworkInterface {
                 Logger.logToConsole(MessageTypeEnum.Debug, "object received");
                 observer.makeMove(data, true);
             } catch (Exception ioe){
-                System.out.println("ERROR: " + ioe.getMessage());
+                Logger.logToConsole(MessageTypeEnum.Error, ioe);
             }
         } 
     }
     
+    /**
+     * sends the Line object to the network opponent.
+     * logs an IOException if an error with the stream occured or warning
+     * if not correctly connected.
+     * 
+     * @param selectedLine 
+     */
     public void sendDataStream(Line selectedLine){
         if(socket == null || !socket.isConnected()){
-            System.out.println("ERROR: not connected");
+            Logger.logToConsole(MessageTypeEnum.Warning, "not connected");
             return;
         }
         try{
@@ -69,7 +85,7 @@ public class NetworkConnection implements Runnable, NetworkInterface {
             Logger.logToConsole(MessageTypeEnum.Debug, "object written");
             writer.flush();
         } catch (IOException ioe){
-            System.out.println("ERROR: " + ioe.getMessage());
+            Logger.logToConsole(MessageTypeEnum.Error, ioe);
         }
     }
 

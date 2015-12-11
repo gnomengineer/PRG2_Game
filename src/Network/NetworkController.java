@@ -1,10 +1,11 @@
 package Network;
+import Enums.MessageTypeEnum;
 import GameObjects.Line;
 import Interfaces.ObserverInterface;
 import Interfaces.OpponentInterface;
 import Interfaces.SubjectInterface;
 import java.io.IOException;
-import Interfaces.NetworkInterface;
+import Logger.Logger;
 
 /**
  *
@@ -35,7 +36,7 @@ public class NetworkController implements OpponentInterface,SubjectInterface{
 
     @Override
     public void setOpponentTurn() {
-        System.err.println("WARNING: not used methode - setOpponentTurn() ");
+        Logger.logToConsole(MessageTypeEnum.Information, "Not used method - set OpponentTurn()");
     }
 
 }

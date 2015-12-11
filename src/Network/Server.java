@@ -18,27 +18,9 @@ public class Server extends NetworkConnection implements Runnable{
     public Server(int port) throws IOException{
         server = new ServerSocket(port);
         
+        //@TODO freezes gui on server side!
         Socket socket = server.accept();
         setSocket(socket);
         start();
-        //Thread t = new Thread(this);
-        //t.start();
     }
-    
-    /**
-     * starts the server accept method and threads the received client.
-     * starting a new Thread 
-     *
-    @Override
-    public void run() {
-        try{
-            Logger.logToConsole(MessageTypeEnum.Debug, "server start");
-            Socket socket = server.accept();
-            setSocket(socket);
-            start();
-        } catch (IOException ioe){
-            //@TODO make a logger
-            System.err.println("ERROR: " + ioe.getMessage());
-        }
-    }*/
 }
