@@ -27,12 +27,7 @@ import jdk.nashorn.internal.runtime.Debug;
 public class AIController implements OpponentInterface,SubjectInterface
 {
     private Map map;
-    private ObserverInterface observer;
-    ArrayList<Square> squaresWith0Lines;
-    ArrayList<Square> squaresWith1Line;
-    ArrayList<Square> squaresWith2Lines;
-    ArrayList<Square> squaresWith3Lines;
-    
+    private ObserverInterface observer;   
         
     public AIController(Map map)
     {
