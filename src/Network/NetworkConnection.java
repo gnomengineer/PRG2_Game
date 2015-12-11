@@ -9,6 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import javax.management.ObjectInstance;
 
 /**
  *
@@ -39,44 +40,36 @@ public class NetworkConnection implements Runnable, NetworkInterface {
      */
     @Override
     public void run(){
-        try(OutputStream out = socket.getOutputStream();
-                InputStream in = socket.getInputStream();
-                //ObjectOutputStream writer = new ObjectOutputStream(out);
-                //ObjectInputStream reader = new ObjectInputStream(in)
-            ){
-            int i = 0;
-            while(true){
-                System.out.println(socket.getLocalAddress() + " " + i++);
-                /*
-                if(line != null){
-                    writer.writeObject(line);
-                }
-                Line data = (Line)reader.readObject();
-                if(line.equals(data)){
-                    observer.makeMove(data, true);
-                }
-                writer.flush();
-                */
-                out.write(i);
-                System.out.println("received: " + in.read());
-                out.flush();
+        while(true){
+            if(socket == null || !socket.isConnected()){
+                System.out.println("ERROR: not connected");
+                break;
             }
-        } catch (IOException ioe){
-            //@TODO make a logger
-            System.out.println("ERROR: " + ioe.getMessage());
-        } /*catch (ClassNotFoundException cex){
-            System.out.println("ERROR: " + cex.getMessage());
-        }*/
+            try{
+                InputStream in = socket.getInputStream();
+                ObjectInputStream reader = new ObjectInputStream(in);
+                Line data = (Line)reader.readObject();
+                observer.makeMove(data, true);
+            } catch (IOException ioe){
+                System.out.println("ERROR: " + ioe.getMessage());
+            } catch (ClassNotFoundException cne){
+                System.out.println("ERROR: " + cne.getMessage());
+            }
+        } 
     }
     
-    @Override
-    public void setLine(Line selectedLine) {
-        this.line = selectedLine;
-    }
-
-    @Override
-    public Line getLine() {
-        return line;
+    public void sendDataStream(Line selectedLine){
+        if(socket == null || !socket.isConnected()){
+            System.out.println("ERROR: not connected");
+            return;
+        }
+        try{
+            OutputStream out = socket.getOutputStream();
+            ObjectOutputStream writer = new ObjectOutputStream(out);
+            writer.writeObject(selectedLine);
+        } catch (IOException ioe){
+            System.out.println("ERROR: " + ioe.getMessage());
+        }
     }
 
     /**

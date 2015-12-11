@@ -24,7 +24,7 @@ public class NetworkController implements OpponentInterface,SubjectInterface{
     
     @Override
     public void sendLine(Line selectedLine) {
-        network.setLine(selectedLine);
+        network.sendDataStream(selectedLine);
     }
 
     @Override

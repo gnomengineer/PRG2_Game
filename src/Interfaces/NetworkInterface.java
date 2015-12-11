@@ -5,14 +5,13 @@
  */
 package Interfaces;
 
-import GameObjects.Line;
+import java.net.Socket;
 
 /**
  *
  * @author Daniel
  */
 public interface NetworkInterface {
-    public void setLine(Line selectedLine);
-    public Line getLine();
+    public void setSocket(Socket s);
     public void setObserver(ObserverInterface observer);
 }
