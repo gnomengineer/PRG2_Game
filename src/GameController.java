@@ -71,6 +71,12 @@ public class GameController implements ObserverInterface {
         //gameLogic.initializeGame(mapHeight, mapWidth, opponent);
         
         gameLogic.initializeGame(map, opponent);
+        
+        if(gameMode == GameModeEnum.MultiplayerServerMode)
+        {
+            gameLogic.setStartTurn(true);
+        }
+        
         gameView.startGameView(mapWidth, mapHeight);
         
     }

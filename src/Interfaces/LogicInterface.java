@@ -32,4 +32,7 @@ public interface LogicInterface {
     public Figur getOpponentFigure();
 
     public boolean IsOpponentContinuing();
+    
+    public void setStartTurn(boolean isOpponent);
+    
 }

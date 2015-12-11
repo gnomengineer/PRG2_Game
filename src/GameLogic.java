@@ -191,4 +191,16 @@ public class GameLogic implements LogicInterface, SubjectInterface {
     public void registerObserver(ObserverInterface observer) {
         this.observer = observer;
     }
+
+    @Override
+    public void setStartTurn(boolean isOpponent) {
+        if(isOpponent)
+        {
+            this.nextFigur = opponentFigur;
+        }
+        else
+        {
+            this.nextFigur = localFigur;
+        }
+    }
 }
