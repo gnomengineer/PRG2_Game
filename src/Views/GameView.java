@@ -111,7 +111,7 @@ public class GameView implements GameViewInterface, SubjectInterface {
                 if(jFChooser.showSaveDialog(null)==JFileChooser.APPROVE_OPTION){
                     saveFileDirectory=jFChooser.getSelectedFile().getAbsolutePath();
                 }
-                observer.saveOptions(saveFileDirectory);
+                observer.saveGame(saveFileDirectory);
                 //Parameter openFileDirectory kann noch mitgegeben werden
         });
         
@@ -119,7 +119,7 @@ public class GameView implements GameViewInterface, SubjectInterface {
             if(jFChooser.showOpenDialog(null)==JFileChooser.APPROVE_OPTION){
                 openFileDirecotry= jFChooser.getSelectedFile().toString();
             }
-            observer.openOptions(openFileDirecotry);
+            observer.openGame(openFileDirecotry);
         });
         
         jMIClose.addActionListener((event)->{

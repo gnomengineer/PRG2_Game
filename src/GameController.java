@@ -37,6 +37,7 @@ public class GameController implements ObserverInterface {
     public void startControlling(){
         ((SubjectInterface)gameOptionsView).registerObserver(this);
         ((SubjectInterface)gameView).registerObserver(this);
+        ((SubjectInterface)gameLogic).registerObserver(this);
 
         gameOptionsView.startOptionsView();
     }
@@ -62,6 +63,8 @@ public class GameController implements ObserverInterface {
         
         // damit Controller zu den Spielzügen informiert wird!!
         ((SubjectInterface)opponent).registerObserver(this);
+        
+
         
         // Logic & View initiieren!!        
         //gameLogic.initializeGame(mapHeight, mapWidth, opponent);
@@ -93,7 +96,7 @@ public class GameController implements ObserverInterface {
     }
 
     @Override
-    public void saveOptions(String saveFileDirectory) {
+    public void saveGame(String saveFileDirectory) {
         //Check Filepath
         SaveGame saveGame = new SaveGame(gameLogic.getMap(), gameLogic.getLocalFigur(), gameLogic.getOpponentFigure(), gameLogic.IsOpponentContinuing());             
         
@@ -111,7 +114,7 @@ public class GameController implements ObserverInterface {
     }
 
     @Override
-    public void openOptions(String path) {
+    public void openGame(String path) {
         try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(path))){
             
             SaveGame saveGame = (SaveGame) objectInputStream.readObject();
@@ -137,5 +140,10 @@ public class GameController implements ObserverInterface {
         if(map != null){
             map.getLines().stream().filter(l -> l.getOwner() != null).forEach(l -> gameView.drawLine(l,l.getOwner().isOpponent()));
         }
+    }
+
+    @Override
+    public void setPlayerTurn(boolean isOpponent) {
+       gameView.updatePlayerTurn(isOpponent);
     }
 }
