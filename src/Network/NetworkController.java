@@ -16,12 +16,10 @@ public class NetworkController implements OpponentInterface,SubjectInterface{
     
     public NetworkController(int port, String hostname) throws IOException{
         network = new Client(port, hostname);
-        new Thread((Client)network).start();
     }
     
     public NetworkController(int port) throws IOException{
         network = new Server(port);
-        new Thread((Server)network).start();
     }
     
     @Override
