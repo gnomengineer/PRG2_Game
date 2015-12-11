@@ -67,7 +67,7 @@ public class GameLogic implements LogicInterface, SubjectInterface {
                 if(s.isTaken() && !s.isOwned())
                 {
                     setOwner(s, isOpponent);
-                    observer.setOwnedSquare(s.getBotLine().getStartPoint().getX(), s.getBotLine().getStartPoint().getY(), isOpponent);
+                    observer.setOwnedSquare(s.getTopLine().getStartPoint().getX(), s.getTopLine().getStartPoint().getY(), isOpponent);
                     tempBoolAddedPoints = true;
                 }
             });
