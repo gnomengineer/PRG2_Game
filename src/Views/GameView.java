@@ -257,5 +257,6 @@ public class GameView implements GameViewInterface, SubjectInterface {
 
     @Override
     public void drawSquare(int x1, int y1, boolean isOpponent) {
+        map1.drawSquare(x1, y1, isOpponent);
     }
 }

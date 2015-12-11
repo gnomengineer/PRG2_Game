@@ -25,6 +25,8 @@ public class MapView extends JPanel {
     private static int space=60;
     private ArrayList<LineView> linesOpponent;
     private ArrayList<LineView> linesPlayer;
+    private ArrayList<SquareView> squaresOpponent;
+    private ArrayList<SquareView> squaresPlayer;
 
     public static int getSpace() {
         return space;
@@ -51,6 +53,8 @@ public class MapView extends JPanel {
         linesOpponent = new ArrayList<>();
         linesPlayer = new ArrayList<>();
         setBackground(Color.WHITE);
+        squaresOpponent = new ArrayList<>();
+        squaresPlayer = new ArrayList<>();
         
         setup();
         
@@ -103,6 +107,14 @@ public class MapView extends JPanel {
         } 
         
         //Draw Points
+        
+        for(SquareView square: squaresOpponent){
+            graphicsOpponent.fillRect((int)square.getLineTop().getX1(), (int)square.getLineTop().getY1(), space, space);
+            
+        }
+        for(SquareView square: squaresPlayer){
+            graphicsPlayer.fillRect((int)square.getLineTop().getX1(), (int)square.getLineTop().getY1(), space, space);
+        }
         drawPoints();
          
         //drawField();
@@ -266,5 +278,25 @@ public class MapView extends JPanel {
             }
         }
         
+    }
+    
+    public void drawSquare(int x , int y , boolean isOpponent){
+        x=x*space;
+        y=y*space;
+        for(SquareView squarex[] : squaresview){
+            for(SquareView square : squarex){
+                int squareX=(int) square.getLineTop().getP1().getX();
+                int squareY=(int) square.getLineTop().getP1().getY();
+                if(x== squareX && y== squareY){
+                    if(isOpponent){
+                        squaresOpponent.add(square);
+                    }
+                    else{
+                        squaresPlayer.add(square);
+                    }
+                }
+            }
+        }
+        repaint();
     }
 }
