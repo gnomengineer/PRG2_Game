@@ -41,11 +41,13 @@ public class NetworkConnection implements Runnable, NetworkInterface {
     public void run(){
         try(OutputStream out = socket.getOutputStream();
                 InputStream in = socket.getInputStream();
-                ObjectOutputStream writer = new ObjectOutputStream(out);
-                ObjectInputStream reader = new ObjectInputStream(in)){
+                //ObjectOutputStream writer = new ObjectOutputStream(out);
+                //ObjectInputStream reader = new ObjectInputStream(in)
+            ){
             int i = 0;
             while(true){
                 System.out.println(socket.getLocalAddress() + " " + i++);
+                /*
                 if(line != null){
                     writer.writeObject(line);
                 }
@@ -54,6 +56,10 @@ public class NetworkConnection implements Runnable, NetworkInterface {
                     observer.makeMove(data, true);
                 }
                 writer.flush();
+                */
+                out.write(i);
+                System.out.println("received: " + in.read());
+                out.flush();
             }
         } catch (IOException ioe){
             //@TODO make a logger
