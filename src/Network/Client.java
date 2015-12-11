@@ -1,5 +1,7 @@
 package Network;
 
+import Enums.MessageTypeEnum;
+import Logger.Logger;
 import java.io.IOException;
 import java.net.Socket;
 
@@ -12,11 +14,10 @@ import java.net.Socket;
 public class Client extends NetworkConnection {
     
     public Client(int port, String addr) throws IOException{
-        System.out.println("TEST 0");
+        Logger.logToConsole(MessageTypeEnum.Debug, "client start");
         Socket socket = new Socket(addr, port);
         
         setSocket(socket);
-        System.out.println("TEST 1");
         start();
     }
 

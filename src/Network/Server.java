@@ -1,8 +1,10 @@
 package Network;
 
+import Enums.MessageTypeEnum;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import Logger.Logger;
 
 
 /**
@@ -27,6 +29,7 @@ public class Server extends NetworkConnection implements Runnable{
     @Override
     public void run() {
         try{
+            Logger.logToConsole(MessageTypeEnum.Debug, "server start");
             Socket socket = server.accept();
             setSocket(socket);
             start();

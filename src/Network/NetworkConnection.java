@@ -1,15 +1,16 @@
 package Network;
 
+import Enums.MessageTypeEnum;
 import GameObjects.Line;
 import Interfaces.NetworkInterface;
 import Interfaces.ObserverInterface;
+import Logger.Logger;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-import javax.management.ObjectInstance;
 
 /**
  *
@@ -48,7 +49,7 @@ public class NetworkConnection implements Runnable, NetworkInterface {
                 InputStream in = socket.getInputStream();
                 ObjectInputStream reader = new ObjectInputStream(in);
                 Line data = (Line)reader.readObject();
-                System.out.println("TEST ADJFKASDJFKAJSF");
+                Logger.logToConsole(MessageTypeEnum.Debug, "object received");
                 observer.makeMove(data, true);
             } catch (Exception ioe){
                 System.out.println("ERROR: " + ioe.getMessage());
@@ -65,6 +66,7 @@ public class NetworkConnection implements Runnable, NetworkInterface {
             OutputStream out = socket.getOutputStream();
             ObjectOutputStream writer = new ObjectOutputStream(out);
             writer.writeObject(selectedLine);
+            Logger.logToConsole(MessageTypeEnum.Debug, "object written");
             writer.flush();
         } catch (IOException ioe){
             System.out.println("ERROR: " + ioe.getMessage());
