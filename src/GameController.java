@@ -81,7 +81,7 @@ public class GameController implements ObserverInterface {
     @Override
     public void makeMove(Line selectedLine, boolean isOpponent) {
         //DO SOMETHING
-        boolean validMove = gameLogic.isValidLine(selectedLine);
+        boolean validMove = gameLogic.isValidLine(selectedLine,isOpponent);
         
         if(validMove){
             gameLogic.setLine(selectedLine, isOpponent);

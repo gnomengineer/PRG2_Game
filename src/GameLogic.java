@@ -135,9 +135,14 @@ public class GameLogic implements LogicInterface, SubjectInterface {
     }
 
     @Override
-    public boolean isValidLine(Line selectedLine) {
+    public boolean isValidLine(Line selectedLine,boolean isOpponent) {
+        
+        if(this.nextFigur == null || isOpponent != this.nextFigur.isOpponent())
+        {            
+            return false;            
+        }
         Line line = map.getLine(selectedLine.getStartPoint(), selectedLine.getEndPoint());
-        return line.getOwner() == null;
+        return line.getOwner() == null;        
     }
 
     @Override
