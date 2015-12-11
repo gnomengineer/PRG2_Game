@@ -11,7 +11,7 @@ import Interfaces.NetworkInterface;
  * @author Daniel
  */
 public class NetworkController implements OpponentInterface,SubjectInterface{
-    NetworkInterface network = null;
+    NetworkConnection network = null;
     ObserverInterface observer = null;
     
     public NetworkController(int port, String hostname) throws IOException{
