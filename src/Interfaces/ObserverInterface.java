@@ -1,6 +1,7 @@
 package Interfaces;
 
 import GameObjects.Line;
+import GameObjects.Square;
 /**
  *
  * @author Daniel
@@ -23,4 +24,8 @@ public interface ObserverInterface{
     void saveGame(String saveFileDirectory);
     
     void setPlayerTurn(boolean isOpponent);
+
+    void gameEnds();
+    
+    void setOwnedSquare(int x1, int y1, boolean isOpponent);
 }

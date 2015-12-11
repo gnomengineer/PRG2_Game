@@ -7,6 +7,7 @@ import FactorySet.OpponentFactory;
 import GameObjects.Line;
 import GameObjects.Map;
 import GameObjects.Point;
+import GameObjects.Square;
 import java.awt.Event;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -145,5 +146,15 @@ public class GameController implements ObserverInterface {
     @Override
     public void setPlayerTurn(boolean isOpponent) {
        gameView.updatePlayerTurn(isOpponent);
+    }
+
+    @Override
+    public void gameEnds() {
+        gameView.showMessage("Spiel isch fertig, alter", MessageTypeEnum.End);
+    }
+
+    @Override
+    public void setOwnedSquare(int x1, int y1, boolean isOpponent) {
+        gameView.drawSquare(x1, y1, isOpponent);
     }
 }

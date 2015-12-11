@@ -153,4 +153,9 @@ public class Map implements Serializable
     public ArrayList<Line> getLines() {
         return this.uniquelines;
     }
+    
+    public boolean mapIsFull(){
+        boolean isFull = uniquelines.stream().allMatch(l -> l.isOwned() == true);
+        return isFull;
+    }
 }

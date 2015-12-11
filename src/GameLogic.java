@@ -67,11 +67,16 @@ public class GameLogic implements LogicInterface, SubjectInterface {
                 if(s.isTaken() && !s.isOwned())
                 {
                     setOwner(s, isOpponent);
-                    
+                    observer.setOwnedSquare(s.getBotLine().getStartPoint().getX(), s.getBotLine().getStartPoint().getY(), isOpponent);
                     tempBoolAddedPoints = true;
                 }
             });
             
+             if(map.mapIsFull()){
+                    observer.gameEnds();
+                    return;
+             }
+             
             if(tempBoolAddedPoints)
             {
                 //nochmals einen Zug, juhee 

@@ -45,4 +45,6 @@ public interface GameViewInterface {
     void showMessage(String message, MessageTypeEnum messageType);
     
     void updatePlayerTurn(boolean isOpponent);
+    
+    void drawSquare(int x1, int y1, boolean isOpponent);
 }
