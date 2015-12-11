@@ -48,6 +48,7 @@ public class NetworkConnection implements Runnable, NetworkInterface {
                 InputStream in = socket.getInputStream();
                 ObjectInputStream reader = new ObjectInputStream(in);
                 Line data = (Line)reader.readObject();
+                System.out.println("TEST ADJFKASDJFKAJSF");
                 observer.makeMove(data, true);
             } catch (Exception ioe){
                 System.out.println("ERROR: " + ioe.getMessage());
