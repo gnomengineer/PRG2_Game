@@ -57,15 +57,12 @@ public class GameController implements ObserverInterface {
         
         Map map = new Map(mapHeight, mapWidth);
         
-        
         // via Factory erstellen, da ich als Controller den konkretten Opponent nicht kennen will!!
         //@TODO set parameter list correct!
-        OpponentInterface opponent =  factory.createOpponent(gameMode,map,0,"");
+        OpponentInterface opponent =  factory.createOpponent(gameMode,map, Integer.parseInt(gameOptionsView.getPortNumber()), gameOptionsView.getIPAddress());
         
         // damit Controller zu den Spielzügen informiert wird!!
         ((SubjectInterface)opponent).registerObserver(this);
-        
-
         
         // Logic & View initiieren!!        
         //gameLogic.initializeGame(mapHeight, mapWidth, opponent);
