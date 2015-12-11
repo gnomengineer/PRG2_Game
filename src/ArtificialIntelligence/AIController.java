@@ -29,8 +29,7 @@ public class AIController implements OpponentInterface,SubjectInterface
     private Map map;
     private ObserverInterface observer;   
         
-    public AIController(Map map)
-    {
+    public AIController(Map map) {
         this.map = map;
     }
 
