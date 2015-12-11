@@ -33,8 +33,8 @@ public class GameOptionsView implements GameOptionsViewInterface, SubjectInterfa
     JLabel jLabely;
     ButtonGroup bGrpRadioButtons;
     JRadioButton jRadioSingle;
-    JRadioButton jRadioMultiClient;
-    JRadioButton jRadioMultiServer;
+    JRadioButton jRMultiServer;
+    JRadioButton jRMultiClient;
     JSlider jSliderWidth;
     JSlider jSliderHeight;
     JButton jBtnSubmit; 
@@ -50,8 +50,8 @@ public class GameOptionsView implements GameOptionsViewInterface, SubjectInterfa
         jLabelFieldSize= new JLabel("Field Size");
         bGrpRadioButtons = new ButtonGroup();
         jRadioSingle = new JRadioButton("SinglePlayer");
-        jRadioMultiClient= new JRadioButton("MultiPlayer Client");
-        jRadioMultiServer = new JRadioButton("Multiplayer Server");
+        jRMultiServer= new JRadioButton("MultiPlayer Server");
+        jRMultiClient = new JRadioButton("Multiplayer Client");
         jPanelGameMode = new JPanel();
         jPanelField = new JPanel();
         jSliderWidth = new JSlider(0, 20, 10);
@@ -93,10 +93,10 @@ public class GameOptionsView implements GameOptionsViewInterface, SubjectInterfa
                
         //Radio Buttons
         jRadioSingle.setSelected(true);
-        jRadioMultiClient.addItemListener(new ItemListener() {
+        jRMultiServer.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                if(jRadioMultiClient.isSelected()){
+                if(jRMultiServer.isSelected()){
                     jTxtPort.setEditable(true);
                 }
                 else{
@@ -105,10 +105,10 @@ public class GameOptionsView implements GameOptionsViewInterface, SubjectInterfa
                 }
             }
         });
-        jRadioMultiServer.addItemListener(new ItemListener() {
+        jRMultiClient.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                if(jRadioMultiServer.isSelected()){
+                if(jRMultiClient.isSelected()){
                     jTxtIpAddress.setEditable(true); 
                     jTxtPort.setEditable(true);
                 }
@@ -121,8 +121,8 @@ public class GameOptionsView implements GameOptionsViewInterface, SubjectInterfa
         
         //Radio Buttons Group
         bGrpRadioButtons.add(jRadioSingle);
-        bGrpRadioButtons.add(jRadioMultiClient);
-        bGrpRadioButtons.add(jRadioMultiServer);
+        bGrpRadioButtons.add(jRMultiServer);
+        bGrpRadioButtons.add(jRMultiClient);
         
         //TxtFields
         jTxtIpAddress.setEditable(false);
@@ -150,8 +150,8 @@ public class GameOptionsView implements GameOptionsViewInterface, SubjectInterfa
         jPanelGameMode.setLayout(new GridLayout(0,1));
         jPanelGameMode.add(jLabelGameMode);
         jPanelGameMode.add(jRadioSingle);
-        jPanelGameMode.add(jRadioMultiClient);
-        jPanelGameMode.add(jRadioMultiServer);
+        jPanelGameMode.add(jRMultiServer);
+        jPanelGameMode.add(jRMultiClient);
         jPanelGameMode.add(jTxtIpAddress);
         jPanelGameMode.add(jTxtPort);
          
@@ -187,7 +187,7 @@ public class GameOptionsView implements GameOptionsViewInterface, SubjectInterfa
         if(jRadioSingle.isSelected()){
             return GameModeEnum.AIMode;
         }
-        else if(jRadioMultiServer.isSelected()){
+        else if(jRMultiClient.isSelected()){
             return GameModeEnum.MultiplayerServerMode;
         }
         else {
