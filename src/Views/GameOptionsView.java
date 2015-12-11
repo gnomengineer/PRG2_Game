@@ -188,10 +188,10 @@ public class GameOptionsView implements GameOptionsViewInterface, SubjectInterfa
             return GameModeEnum.AIMode;
         }
         else if(jRMultiClient.isSelected()){
-            return GameModeEnum.MultiplayerServerMode;
+            return GameModeEnum.MultiplayerClientMode;
         }
         else {
-            return GameModeEnum.MultiplayerClientMode;
+            return GameModeEnum.MultiplayerServerMode;
         }
     }
 
