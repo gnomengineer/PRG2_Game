@@ -59,7 +59,7 @@ public class GameOptionsView implements GameOptionsViewInterface, SubjectInterfa
         jBtnSubmit = new  JButton("Submit");
         jPanelSubmit = new JPanel();
         jTxtIpAddress= new JTextField("IP Address");
-        jTxtPort = new JTextField("Port");
+        jTxtPort = new JTextField("30024");
         font = new Font("Serif", Font.ITALIC,10);
      
         setup();
@@ -93,6 +93,18 @@ public class GameOptionsView implements GameOptionsViewInterface, SubjectInterfa
                
         //Radio Buttons
         jRadioSingle.setSelected(true);
+        jRadioMultiClient.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if(jRadioMultiClient.isSelected()){
+                    jTxtPort.setEditable(true);
+                }
+                else{
+                    jTxtIpAddress.setEditable(false);
+                    jTxtPort.setEditable(false);
+                }
+            }
+        });
         jRadioMultiServer.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
