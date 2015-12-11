@@ -25,20 +25,22 @@ public class GameLogic implements LogicInterface, SubjectInterface {
     private boolean tempBoolAddedPoints;
     private ObserverInterface observer;
     
-    @Override
-    public void initializeGame(int height, int width, OpponentInterface opponent) {
+    //@Override
+    /*public void initializeGame(int height, int width, OpponentInterface opponent) {
        this.map = new Map(height, width);
        this.opponent = opponent;
        
        localFigur = new Figur(false);
        opponentFigur = new Figur(true);
-    }
+    }*/
     
     public void initializeGame(Map map, OpponentInterface opponent){
         this.map = map;
         this.opponent = opponent;
 
         localFigur = new Figur(false);
+        nextFigur = localFigur;
+        
         opponentFigur = new Figur(true);
     }
 
@@ -137,10 +139,11 @@ public class GameLogic implements LogicInterface, SubjectInterface {
     @Override
     public boolean isValidLine(Line selectedLine,boolean isOpponent) {
         
-        /*if(this.nextFigur == null || isOpponent != this.nextFigur.isOpponent())
-        {            
-            return false;            
-        }*/
+        if(this.nextFigur == null || isOpponent != this.nextFigur.isOpponent()){
+                    
+           return false;            
+        }
+    
         Line line = map.getLine(selectedLine.getStartPoint(), selectedLine.getEndPoint());
         return line.getOwner() == null;        
     }
