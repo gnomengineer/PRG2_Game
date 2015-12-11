@@ -218,4 +218,9 @@ public class GameView implements GameViewInterface, SubjectInterface {
     public void registerObserver(ObserverInterface observer) {
         this.observer = observer;
     }
+
+    @Override
+    public void updatePlayerTurn(boolean isOpponent) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
