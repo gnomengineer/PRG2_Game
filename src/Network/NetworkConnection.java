@@ -28,8 +28,9 @@ public class NetworkConnection implements Runnable, NetworkInterface {
     }
     
     public void start(){
-        Thread t = new Thread(this);
-        t.start();
+        //Thread t = new Thread(this);
+        //t.start();
+        run();
     }
     
     /**
