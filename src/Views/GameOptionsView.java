@@ -68,19 +68,30 @@ public class GameOptionsView implements GameOptionsViewInterface, SubjectInterfa
      * Sets up GUI Components
      */
     private void setup(){
-        //jButton
-        jBtnSubmit.addActionListener(event ->
-        { 
-            observer.submitOptions();
-            jFrameOptions.setVisible(false);
-        });
-        
         //jFrame
         jFrameOptions.setSize(size);
         jFrameOptions.setPreferredSize(size);
         jFrameOptions.add(jPanelOptions);
         jFrameOptions.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
+        confJPanel();
+        confRadioButtons();
+        confSlider();
+        
+        //TxtFields
+        jTxtIpAddress.setEditable(false);
+        jTxtPort.setEditable(false);
+        
+         //jButton
+        jBtnSubmit.addActionListener(event ->
+        { 
+            observer.submitOptions();
+            jFrameOptions.setVisible(false);
+        });
+    }
+    
+    //Private method to configure JPanels
+    private void confJPanel(){
         //jPanel Options
         jPanelOptions.setLayout(new BorderLayout());
         jPanelOptions.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -88,9 +99,28 @@ public class GameOptionsView implements GameOptionsViewInterface, SubjectInterfa
         jPanelOptions.add(jPanelGameMode, BorderLayout.CENTER);
         jPanelOptions.add(jPanelSubmit, BorderLayout.SOUTH);
         
+         //JPanel GameMode
+        jPanelGameMode.setLayout(new GridLayout(0,1));
+        jPanelGameMode.add(jLabelGameMode);
+        jPanelGameMode.add(jRadioSingle);
+        jPanelGameMode.add(jRMultiServer);
+        jPanelGameMode.add(jRMultiClient);
+        jPanelGameMode.add(jTxtIpAddress);
+        jPanelGameMode.add(jTxtPort);
+         
+        //JPanel Field
+        jPanelField.setLayout(new GridLayout(3,0));
+        jPanelField.add(jLabelFieldSize);
+        jPanelField.add(jSliderWidth);
+        jPanelField.add(jSliderHeight);
+        
+        
         //Setup JPanel Submit
         jPanelSubmit.add(jBtnSubmit);
-               
+    }
+    
+    //Private method to configure RadioButtons
+    private void confRadioButtons(){
         //Radio Buttons
         jRadioSingle.setSelected(true);
         jRMultiServer.addItemListener(new ItemListener() {
@@ -123,11 +153,10 @@ public class GameOptionsView implements GameOptionsViewInterface, SubjectInterfa
         bGrpRadioButtons.add(jRadioSingle);
         bGrpRadioButtons.add(jRMultiServer);
         bGrpRadioButtons.add(jRMultiClient);
-        
-        //TxtFields
-        jTxtIpAddress.setEditable(false);
-        jTxtPort.setEditable(false);
-        
+    }
+    
+    //Private method to configure Sliders
+    private void confSlider(){
         //Slider X
         jSliderWidth.setMajorTickSpacing(5);
         jSliderWidth.setMinorTickSpacing(1);
@@ -146,22 +175,9 @@ public class GameOptionsView implements GameOptionsViewInterface, SubjectInterfa
         jSliderHeight.setSnapToTicks(true);
         jSliderHeight.setValue(5);
         
-        //JPanel GameMode
-        jPanelGameMode.setLayout(new GridLayout(0,1));
-        jPanelGameMode.add(jLabelGameMode);
-        jPanelGameMode.add(jRadioSingle);
-        jPanelGameMode.add(jRMultiServer);
-        jPanelGameMode.add(jRMultiClient);
-        jPanelGameMode.add(jTxtIpAddress);
-        jPanelGameMode.add(jTxtPort);
-         
-        //JPanel Field
-        jPanelField.setLayout(new GridLayout(3,0));
-        jPanelField.add(jLabelFieldSize);
-        jPanelField.add(jSliderWidth);
-        jPanelField.add(jSliderHeight);
     }
-
+    
+    
     @Override
     public String getIPAddress() {
         return jTxtIpAddress.getText();
@@ -204,5 +220,4 @@ public class GameOptionsView implements GameOptionsViewInterface, SubjectInterfa
     public void registerObserver(ObserverInterface observer) {
         this.observer = observer;
     }
-    
 }

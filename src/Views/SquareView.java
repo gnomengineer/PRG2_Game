@@ -5,14 +5,8 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- *
+ * A Square Object does have 4 Lines and for each Line a AOI(Area of Interest).
  * @author Martin Etterlin
  */
 public class SquareView {
@@ -25,9 +19,12 @@ public class SquareView {
     LineView lineBot;
     LineView lineLeft;
     LineView lineRight;
-
-    public void getCorrespondingLine(){
-        
+    
+    public void SquareView(){
+        lineTop=null;
+        lineLeft=null;
+        lineBot=null;
+        lineRight=null;
     }
     
     public LineView getLineTop() {
@@ -68,7 +65,6 @@ public class SquareView {
         Point2D.Double p2 = (Point2D.Double)lineRight.getP2();
         Point2D.Double p3= new Point2D.Double(lineRight.getX1() - (MapView.getSpace() /2), lineRight.getY1() + (MapView.getSpace()/2));
         aoiRight=new SquareAoIView(p1, p2, p3);
-        
     }
 
     public void setLineTop(LineView lineTop) {
@@ -79,14 +75,11 @@ public class SquareView {
         aoiTop=new SquareAoIView(p1, p2, p3);
     }
     
-    public void SquareView(){
-        lineTop=null;
-        lineLeft=null;
-        lineBot=null;
-        lineRight=null;
-        
-    }
-    
+    /**
+     * Returns the line associated to the point
+     * @param point
+     * @return 
+     */
     public LineView getLine(Point2D.Double point){
         
           if(pointInTriangle(point, aoiTop.getP1(), aoiTop.getP2(), aoiTop.getP3())){
@@ -101,10 +94,14 @@ public class SquareView {
           else{
               return lineRight;
           }
-          
     }
-        
-     public boolean contains(Point2D.Double point){
+    
+    /**
+     * Return true if specified Point is inside this square.
+     * @param point
+     * @return 
+     */
+    public boolean contains(Point2D.Double point){
          double pointX = point.getX();
          double pointY = point.getY();
          double lineTopX1 = lineTop.getX1();
@@ -120,12 +117,15 @@ public class SquareView {
         }
     }
     
-    
-     
-     private boolean pointInTriangle (Point2D.Double p, Point2D.Double p1, Point2D.Double p2, Point2D.Double p3)
-    {
-        boolean b1, b2, b3;
-
+    /**
+     * Returns true if p is inside the triangle p1, p2, p3
+     * @param p point to check
+     * @param p1 point 1 of triangle
+     * @param p2 point 2 of triangle
+     * @param p3 point 3 of triangle
+     * @return 
+     */ 
+    private boolean pointInTriangle (Point2D.Double p, Point2D.Double p1, Point2D.Double p2, Point2D.Double p3){
         double alpha = ((p2.y - p3.y)*(p.x - p3.x) + (p3.x - p2.x)*(p.y - p3.y)) /
         ((p2.y - p3.y)*(p1.x - p3.x) + (p3.x - p2.x)*(p1.y - p3.y));
         double beta = ((p3.y - p1.y)*(p.x - p3.x) + (p1.x - p3.x)*(p.y - p3.y)) /
@@ -136,36 +136,5 @@ public class SquareView {
         return true;
         }
         return false;
-    }
-    /*
-    private double sign (Point2D.Double p1, Point2D.Double p2, Point2D.Double p3)
-    {
-        return (p1.y - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y);
-    }
-
-    private boolean pointInTriangle (Point2D.Double pt, Point2D.Double v1, Point2D.Double v2, Point2D.Double v3)
-    {
-        boolean b1, b2, b3;
-
-        b1 = sign(pt, v1, v2) < 0.0d;
-        b2 = sign(pt, v2, v3) < 0.0d;
-        b3 = sign(pt, v3, v1) < 0.0d;
-
-        return ((b1 == b2) && (b2 == b3));
-    }
-    
-    */
-    
-    
-   
- 
-
-    
-    public void fill(){
-        
-                
-    }
-    
-            
-    
+    }    
 }

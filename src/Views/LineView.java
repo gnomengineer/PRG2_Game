@@ -3,7 +3,6 @@ package Views;
 
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
-import java.util.Objects;
 
 
 /**
@@ -12,8 +11,6 @@ import java.util.Objects;
  * @author Martin
  */
 public class LineView extends Line2D.Double{
-    
-
 
     public LineView() {
     }
