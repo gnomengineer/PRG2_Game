@@ -11,7 +11,7 @@ import GameObjects.Point;
  * @author Andre
  */
 public interface LogicInterface {
-    void initializeGame(int height, int width, OpponentInterface opponent);
+    //void initializeGame(int height, int width, OpponentInterface opponent);
     void setLine(Point startPoint, Point endPoint, boolean isOpponent);
 
     public void setLine(Line selectedLine, boolean isOpponent);

@@ -4,14 +4,9 @@ package Views;
 import GameObjects.Point;
 import java.awt.geom.Point2D;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
- *
+ * Does describe the Area of Interest for a Line. Each square does have 4 AOI,and each AOI does lead to one Line. 
  * @author Martin Etterlin
  */
 public class SquareAoIView {
@@ -24,10 +19,6 @@ public class SquareAoIView {
         this.p1 = p1;
         this.p2 = p2;
         this.p3 = p3;
-    }
-    
-    public void doesContainPoint(Point point){
-        
     }
 
     public Point2D.Double getP1() {

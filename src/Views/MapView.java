@@ -7,8 +7,6 @@ package Views;
  */
 import GameObjects.Line;
 import java.awt.*;
-import java.awt.event.*;
-import java.awt.geom.AffineTransform;
 import javax.swing.*;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
@@ -25,10 +23,8 @@ public class MapView extends JPanel {
     private static int space=60;
     private ArrayList<LineView> linesOpponent;
     private ArrayList<LineView> linesPlayer;
-
-    public static int getSpace() {
-        return space;
-    }
+    private ArrayList<SquareView> squaresOpponent;
+    private ArrayList<SquareView> squaresPlayer;
     
     Rectangle2D.Double[][] points;
     Graphics2D graphicsOpponent;
@@ -36,7 +32,6 @@ public class MapView extends JPanel {
     Graphics2D graphicsPoints;
     Graphics2D graphicstest;
     SquareView[][] squaresview;
-    
     
     
     /**
@@ -51,30 +46,16 @@ public class MapView extends JPanel {
         linesOpponent = new ArrayList<>();
         linesPlayer = new ArrayList<>();
         setBackground(Color.WHITE);
-        
+        squaresOpponent = new ArrayList<>();
+        squaresPlayer = new ArrayList<>();
         setup();
-        
     }
     
-    /**
-     * Setup GUI Components
-     */
-    public void setup(){
+    //Private method to Setup GUI Components
+    private void setup(){
         setPreferredSize(new Dimension(mWidth*space+5, mHeight*space+5));
         generateField();
         initPoints();
-        //Test purpose only
-        /*
-        this.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e){
-                //ist nur zum testen
-                //drawLine(e.getX(), e.getY());
-                System.out.println("MousePressed on: "+ e.getX()+" : " + e.getY());
-            }
-        });
-        //Create Mouselistener
-        */
     }
          @Override
     protected void paintComponent(Graphics g) {
@@ -103,21 +84,21 @@ public class MapView extends JPanel {
         } 
         
         //Draw Points
-        drawPoints();
-         
-        //drawField();
-        
-        
+        for(SquareView square: squaresOpponent){
+            graphicsOpponent.fillRect((int)square.getLineTop().getX1(), (int)square.getLineTop().getY1(), space, space);
+            
+        }
+        for(SquareView square: squaresPlayer){
+            graphicsPlayer.fillRect((int)square.getLineTop().getX1(), (int)square.getLineTop().getY1(), space, space);
+        }
+        drawPoints();        
     }
-    /* Test purpose only
-    public void drawLine(int x, int y){
-        Point2D.Double point = new Point2D.Double(x,y);
-        LineView line = getLineViewByPoint(point);
-        linesPlayer.add(line);
-        this.repaint();
-    }
-    */
-    
+
+    /**
+     * Returns Line by Point selected with MousClick
+     * @param point
+     * @return
+     */
     public LineView getLineViewByPoint(Point2D.Double point){
         LineView line = null;
         for(int i=0; i<mWidth; i++)
@@ -131,11 +112,13 @@ public class MapView extends JPanel {
         }
         return line;
     }
+    
     /**
-     * Does draw the Line
+     * Draws the Line
      * @param line line to draw
      * @param isOpponent defines which Player draws
      */
+    
     public void drawLine(Line line, Boolean isOpponent){
         LineView line2d = new LineView(line.getStartPoint().getX()*space, line.getStartPoint().getY()*space, line.getEndPoint().getX()*space, line.getEndPoint().getY()*space);
         for(int i=0; i<mWidth; i++)
@@ -179,10 +162,8 @@ public class MapView extends JPanel {
         this.repaint();
     }
     
-    /**
-     * Does generate the Field
-     */
-    public void generateField(){
+    //Private method to generate the Field
+    private void generateField(){
         for(int i = 0; i < mWidth; i++)
         {
             for(int y = 0; y < mHeight; y++)
@@ -211,35 +192,7 @@ public class MapView extends JPanel {
         }
     }
     
-    
-    //Test purpose only. 
-    /*
-    public void outputSquares(){
-        for(int i=0; i<squaresview.length; i++){
-            for(int y=0; y<squaresview.length; y++){
-                SquareView square= squaresview[i][y]; 
-               System.out.println(square.getLineBot().toString());
-               System.out.println(square.getLineTop().toString());
-               System.out.println(square.getLineLeft().toString());
-               System.out.println(square.getLineRight().toString());
-            }
-        }
-    }
-    */
-
-    public void drawField(){
-        for(SquareView squarex[] : squaresview){
-            for(SquareView square : squarex){
-                graphicsOpponent.draw(square.getLineBot());
-                graphicsOpponent.draw(square.getLineLeft());
-                graphicsOpponent.draw(square.getLineRight());
-                graphicsOpponent.draw(square.getLineTop());
-            }
-        }
-    }
-
-    
-    
+    //Private method to create the points
     private void initPoints(){
         int ycoordinates=0;
         int xcoordinates=0;
@@ -251,13 +204,10 @@ public class MapView extends JPanel {
             }
             ycoordinates=0;
             xcoordinates=xcoordinates+space;
-           
         } 
     }
     
-    /**
-     * Draw Points
-     */
+    //Private method to draw Points
     private void drawPoints(){
         for(int i=0; i<=mWidth;i++){
             for(int y=0; y<=mHeight; y++){
@@ -266,5 +216,40 @@ public class MapView extends JPanel {
             }
         }
         
+    }
+    
+    /**
+     * Does generate the filled square to draw if a Player took a Square
+     * @param x coordinate of the leftupper point of the square
+     * @param y coordinate of the leftupper point of the square
+     * @param isOpponent 
+     */
+    
+    public void drawSquare(int x , int y , boolean isOpponent){
+        x=x*space;
+        y=y*space;
+        for(SquareView squarex[] : squaresview){
+            for(SquareView square : squarex){
+                int squareX=(int) square.getLineTop().getP1().getX();
+                int squareY=(int) square.getLineTop().getP1().getY();
+                if(x== squareX && y== squareY){
+                    if(isOpponent){
+                        squaresOpponent.add(square);
+                    }
+                    else{
+                        squaresPlayer.add(square);
+                    }
+                }
+            }
+        }
+        repaint();
+    }
+    
+    /**
+     * Retuns the space between two points
+     * @return 
+     */
+    public static int getSpace() {
+        return space;
     }
 }

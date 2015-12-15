@@ -40,6 +40,7 @@ public class GameView implements GameViewInterface, SubjectInterface {
     JPanel jPanelCenter;
     JPanel jPanelScoreView;
     JPanel jPanelWest;
+    JPanel jPanelTurnView;
     
     //JLabel
     JLabel jLabelScore;
@@ -47,6 +48,7 @@ public class GameView implements GameViewInterface, SubjectInterface {
     JLabel jLabelScoreOpponent;
     JLabel jLabelScoreOwnPoints;
     JLabel jLabelScoreOpponentPoints;
+    JLabel jLabelTurn;
     ObserverInterface observer;
     
     //JFilechooser
@@ -54,9 +56,11 @@ public class GameView implements GameViewInterface, SubjectInterface {
     String openFileDirecotry;
     String saveFileDirectory;
     
-    //Div
-    Dimension size;
+    //Map
     MapView map1;
+    
+    //Fonts
+    Font fontScore;
     
     public GameView(){
         jMBGameView= new JMenuBar();      
@@ -68,22 +72,19 @@ public class GameView implements GameViewInterface, SubjectInterface {
         jMISave = new JMenuItem("Save");
         jMIClose = new JMenuItem("Close");
         jMIOpen = new JMenuItem("Open");
-        size = new Dimension(800, 800);
         jPanelCenter=new JPanel();
         jPanelScoreView=new JPanel();
         jPanelWest = new JPanel();
+        jPanelTurnView=new JPanel();
         jLabelScore=new JLabel("Score");
         jLabelScoreOwn = new JLabel("Your Points:");
         jLabelScoreOpponent = new JLabel ("Opponent Points:  ");
         jLabelScoreOwnPoints = new JLabel("0");
         jLabelScoreOpponentPoints = new JLabel("0");
+        jLabelTurn= new JLabel("Turn");
         jFChooser = new JFileChooser();
+        fontScore = new Font("Calibri", Font.BOLD, 20);
         setup();
-        
-        jFChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Dots And Box", "fdab", "fdab");
-        jFChooser.setFileFilter(filter);
-        jFChooser.setSelectedFile(new File("saveGame.fdab"));
     }
     /**
      * Sets up GUI Components for Game.
@@ -94,12 +95,20 @@ public class GameView implements GameViewInterface, SubjectInterface {
         jFrameGameView.setDefaultCloseOperation(EXIT_ON_CLOSE);
         jFrameGameView.add(jPanelCenter,BorderLayout.CENTER); 
         jFrameGameView.add(jPanelWest, BorderLayout.WEST);
+        jFrameGameView.add(jPanelTurnView, BorderLayout.NORTH);
+        
+        confMenu();
+        confJPanels();
+        confJLabels();
+        confJFileChooser();
+    }
+    //Private method to configure Menu
+    private void confMenu(){
         
         //Menubar
         jFrameGameView.setJMenuBar(jMBGameView);
         jMBGameView.add(jMGame);
         jMBGameView.add(jMHelp);
-        
         //Menu
         jMGame.add(jMIOpen);
         jMGame.add(jMISave);
@@ -133,47 +142,71 @@ public class GameView implements GameViewInterface, SubjectInterface {
         jMIAbout.addActionListener((event) -> {
           JOptionPane.showMessageDialog(null, "Author: \nBläsi\nSamuel Degelo\nHairy Föhn\nMartin Etterlin", "About", JOptionPane.INFORMATION_MESSAGE);
         });
-        
-        
-        
-        
-        
-        
-        
-        
+    }
+    
+    //Private method to configure JPanels
+    private void confJPanels(){
         //jPanelCenter
         jPanelCenter.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         jPanelCenter.setLayout(new FlowLayout() );
         
         //jPanelWest
-        jPanelWest.setLayout(new FlowLayout());
-        jPanelWest.add(jPanelScoreView);
-        jPanelWest.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        jPanelWest.setLayout(new FlowLayout() );
+        jPanelWest.setBorder(BorderFactory.createEmptyBorder(20 , 20, 20, 20));
+        jPanelWest.add(jPanelScoreView);;
+        
+        //jPanelTurnView
+        jPanelTurnView.add(jLabelTurn);
+        
         
         //jPanelScoreView
-        jPanelScoreView.setLayout(new GridLayout(2,2));
-        jPanelScoreView.add(jLabelScoreOwn);
-        jPanelScoreView.add(jLabelScoreOwnPoints);
-        jPanelScoreView.add(jLabelScoreOpponent);
-        jPanelScoreView.add(jLabelScoreOpponentPoints);
-        
+        jPanelScoreView.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx=0;
+        gbc.gridy=0;
+        gbc.anchor = GridBagConstraints.LINE_START;
+        jPanelScoreView.add(jLabelScoreOwn,gbc);
+        gbc.gridx++;
+        jPanelScoreView.add(jLabelScoreOwnPoints,gbc);
+        gbc.gridy++;
+        gbc.gridx--;
+        jPanelScoreView.add(jLabelScoreOpponent, gbc);
+        gbc.gridx++;
+        jPanelScoreView.add(jLabelScoreOpponentPoints, gbc);
+    }
+    
+    //Private method to configure JLabels
+    private void confJLabels(){
         //jLabel
         jLabelScoreOpponent.setForeground(Color.blue);
         jLabelScoreOwn.setForeground(Color.red);
         jLabelScoreOpponentPoints.setForeground(Color.blue);
         jLabelScoreOwnPoints.setForeground(Color.red);
-        
+        jLabelScoreOpponent.setFont(fontScore);
+        jLabelScoreOpponentPoints.setFont(fontScore);
+        jLabelScoreOwn.setFont(fontScore);
+        jLabelScoreOwnPoints.setFont(fontScore);
     }
-
+    
+    //Private method to configure fileChooser
+    private void confJFileChooser(){
+        //jFChosser
+        jFChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Dots And Box", "fdab", "fdab");
+        jFChooser.setFileFilter(filter);
+        jFChooser.setSelectedFile(new File("saveGame.fdab"));
+    }
+    
     
     @Override
     public void startGameView(int width, int height) {
+        //Removes map if already exists to initialize a new one
         if(map1 != null)
         {
             jPanelCenter.remove(map1);
         }
-        
         map1= new MapView(width, height);
+        //Adding MouseListener which returns Line to observer 
         map1.addMouseListener(new MouseAdapter(){
             @Override
             public void mousePressed(MouseEvent e){
@@ -184,12 +217,12 @@ public class GameView implements GameViewInterface, SubjectInterface {
                 }
             }
         });
-        
         jPanelCenter.add(map1);
         jFrameGameView.pack();
         jFrameGameView.setVisible(true);
     }
     
+    //private method to convert GUI/View Line into Business Logic Line
     private Line convertToLine(LineView lineView){
         int space = MapView.getSpace();
         Line line = new Line((int)(lineView.x1 / space), (int)(lineView.y1 / space),(int)(lineView.x2 / space),(int)(lineView.y2 / space));
@@ -231,7 +264,6 @@ public class GameView implements GameViewInterface, SubjectInterface {
     @Override
     public void drawLine(Line line, boolean isOpponent) {
         map1.drawLine(line, isOpponent);
-        //map1.repaint(); 
     }
 
     @Override
@@ -242,20 +274,15 @@ public class GameView implements GameViewInterface, SubjectInterface {
     @Override
     public void updatePlayerTurn(boolean isOpponent) {
         if(isOpponent){
-            jLabelScoreOpponent.setOpaque(true);
-            jLabelScoreOpponent.setBackground(Color.yellow);
-            jLabelScoreOwn.setOpaque(false);
+            jLabelTurn.setText("Opponent turn!");
         }
         else{
-            jLabelScoreOwn.setOpaque(true);
-            jLabelScoreOwn.setBackground(Color.yellow);
-            jLabelScoreOpponent.setOpaque(false);
-            jFrameGameView.repaint();
-        }
-       
+            jLabelTurn.setText("Your turn!");
+        } 
     }
 
     @Override
     public void drawSquare(int x1, int y1, boolean isOpponent) {
+        map1.drawSquare(x1, y1, isOpponent);
     }
 }
