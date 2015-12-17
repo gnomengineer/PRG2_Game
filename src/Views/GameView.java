@@ -140,7 +140,7 @@ public class GameView implements GameViewInterface, SubjectInterface {
           JOptionPane.showMessageDialog(null, "1st RULE: You do not talk about Dots & Boxes\n2nd RULE: You DO NOT talk about Dots & Boxes.\n3rd RULE: If someone says \"stop\" or goes limp, taps out the fight is over.\n4th RULE: Only two guys to a fight.\n5th RULE: One fight at a time.\n6th RULE: No shirts, no shoes.\n7th RULE: Fights will go on as long as they have to.\n8th RULE: If this is your first night at Dots & Boxes, you HAVE to fight.", "Rules" ,JOptionPane.INFORMATION_MESSAGE);
         });
         jMIAbout.addActionListener((event) -> {
-          JOptionPane.showMessageDialog(null, "Author: \nBläsi\nSamuel Degelo\nHairy Föhn\nMartin Etterlin", "About", JOptionPane.INFORMATION_MESSAGE);
+          JOptionPane.showMessageDialog(null, "Author: \nBläsi\nSamuel Degelo\nDaniel Föhn\nMartin Etterlin", "About", JOptionPane.INFORMATION_MESSAGE);
         });
     }
     
@@ -157,7 +157,7 @@ public class GameView implements GameViewInterface, SubjectInterface {
         jPanelWest.add(jLabelTurn);
         
         //jLabelTurn
-        jLabelTurn.setFont(new Font("Default", Font.BOLD, 25));
+        jLabelTurn.setFont(fontScore);
         jLabelTurn.setForeground(Color.RED);
         
         //jPanelScoreView
