@@ -346,7 +346,7 @@ startOptionsView()
     <coordinates>
       <x>80</x>
       <y>488</y>
-      <w>80</w>
+      <w>88</w>
       <h>88</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
@@ -358,10 +358,10 @@ implements</panel_attributes>
     <coordinates>
       <x>72</x>
       <y>96</y>
-      <w>72</w>
+      <w>80</w>
       <h>96</h>
     </coordinates>
-    <panel_attributes>lt=&lt;.
+    <panel_attributes>lt=&lt;&lt;.
 implemets</panel_attributes>
     <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
   </element>
