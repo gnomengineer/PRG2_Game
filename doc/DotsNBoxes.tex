@@ -109,8 +109,24 @@
 		\subsection{Sequenzdiagramm}	
 		
 		\subsection{Klassendiagramm}
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=.8\textwidth]{classdiagram.png}
+				\caption{class diagram}
+			\end{figure}
 			\subsubsection{Class Details}
-			%short information on what the classes from the class diagramm do.
+				\begin{description}
+					\item[GameController] Der GameController ist für den Datenfluss zwischen GameLogik, View und Netzwerk zuständig.
+					\item[GameLogic] Die GameLogic beinhaltet die Regeln von Dots \& Boxes. Sie überprüft die Spielzüge auf ihre Validität und setzt wer als nächster den Zug macht. Sie verwendet zur Datenmodelierung die Klassen \textit{Map, Figur, Squares, Lines} und \textit{Point}
+					\item[LogikInterface] definiert die Schnittstelle zwischen GameLogic und GameController
+					\item[OpponentFactory] Die OpponentFactory verwendet das Factory Pattern und erstellt eine Klasse basierend auf dem OpponentInterface. Sie erstellt ein Objekt der Klasse NetworkController oder AI
+					\item[OpponentInterface] definiert die Schnittstelle zwischen Network/AI und GameController
+					\item[AI] Die AI Klasse beinhaltet die ganze Computerspielerlogik.
+					\item[GameOptionsView] Die GameOptionsView stellt das GUI zur Eingabe der Optionen dar.
+					\item[GameView] Die GameView stellt das Spiel UI dar. Sie verwendet die Klassen \textit{MapView,SquareView} und \textit{LineView} um das Spiel korrekt darzustellen.
+					\item[GameViewInterface] definiert die Schnittstelle zwischen GameController und GameView dar.
+					\item[GameOptionsViewInterface] definiert die Schnittstelle zwischen GameController und GameOptionsView dar.
+				\end{description}
 			
 	\clearpage
 	\section*{Appendix}
