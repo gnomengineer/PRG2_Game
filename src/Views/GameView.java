@@ -151,13 +151,14 @@ public class GameView implements GameViewInterface, SubjectInterface {
         jPanelCenter.setLayout(new FlowLayout() );
         
         //jPanelWest
-        jPanelWest.setLayout(new FlowLayout() );
+        jPanelWest.setLayout(new GridLayout(2,0));
         jPanelWest.setBorder(BorderFactory.createEmptyBorder(20 , 20, 20, 20));
-        jPanelWest.add(jPanelScoreView);;
+        jPanelWest.add(jPanelScoreView);
+        jPanelWest.add(jLabelTurn);
         
-        //jPanelTurnView
-        jPanelTurnView.add(jLabelTurn);
-        
+        //jLabelTurn
+        jLabelTurn.setFont(new Font("Default", Font.BOLD, 25));
+        jLabelTurn.setForeground(Color.RED);
         
         //jPanelScoreView
         jPanelScoreView.setLayout(new GridBagLayout());
@@ -275,9 +276,11 @@ public class GameView implements GameViewInterface, SubjectInterface {
     public void updatePlayerTurn(boolean isOpponent) {
         if(isOpponent){
             jLabelTurn.setText("Opponent turn!");
+            jLabelTurn.setForeground(Color.BLUE);
         }
         else{
             jLabelTurn.setText("Your turn!");
+            jLabelTurn.setForeground(Color.RED);
         } 
     }
 
